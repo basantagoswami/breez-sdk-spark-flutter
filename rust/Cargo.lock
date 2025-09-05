@@ -493,7 +493,7 @@ dependencies = [
 [[package]]
 name = "breez-sdk-common"
 version = "0.1.0"
-source = "git+https://github.com/breez/spark-sdk.git?rev=938ff58a7a20a777a2367e9b78d3ade7aad73366#938ff58a7a20a777a2367e9b78d3ade7aad73366"
+source = "git+https://github.com/breez/spark-sdk.git?rev=bb571702b618d49e2999be9c6547af8557047313#bb571702b618d49e2999be9c6547af8557047313"
 dependencies = [
  "aes",
  "anyhow",
@@ -527,7 +527,7 @@ dependencies = [
 [[package]]
 name = "breez-sdk-spark"
 version = "0.1.0"
-source = "git+https://github.com/breez/spark-sdk.git?rev=938ff58a7a20a777a2367e9b78d3ade7aad73366#938ff58a7a20a777a2367e9b78d3ade7aad73366"
+source = "git+https://github.com/breez/spark-sdk.git?rev=bb571702b618d49e2999be9c6547af8557047313#bb571702b618d49e2999be9c6547af8557047313"
 dependencies = [
  "async-trait",
  "base64",
@@ -2676,7 +2676,7 @@ dependencies = [
 [[package]]
 name = "macros"
 version = "0.1.0"
-source = "git+https://github.com/breez/spark-sdk.git?rev=938ff58a7a20a777a2367e9b78d3ade7aad73366#938ff58a7a20a777a2367e9b78d3ade7aad73366"
+source = "git+https://github.com/breez/spark-sdk.git?rev=bb571702b618d49e2999be9c6547af8557047313#bb571702b618d49e2999be9c6547af8557047313"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -4022,7 +4022,7 @@ dependencies = [
 [[package]]
 name = "spark"
 version = "0.1.0"
-source = "git+https://github.com/breez/spark-sdk.git?rev=938ff58a7a20a777a2367e9b78d3ade7aad73366#938ff58a7a20a777a2367e9b78d3ade7aad73366"
+source = "git+https://github.com/breez/spark-sdk.git?rev=bb571702b618d49e2999be9c6547af8557047313#bb571702b618d49e2999be9c6547af8557047313"
 dependencies = [
  "async-trait",
  "base64",
@@ -4065,7 +4065,7 @@ dependencies = [
 [[package]]
 name = "spark-wallet"
 version = "0.1.0"
-source = "git+https://github.com/breez/spark-sdk.git?rev=938ff58a7a20a777a2367e9b78d3ade7aad73366#938ff58a7a20a777a2367e9b78d3ade7aad73366"
+source = "git+https://github.com/breez/spark-sdk.git?rev=bb571702b618d49e2999be9c6547af8557047313#bb571702b618d49e2999be9c6547af8557047313"
 dependencies = [
  "bitcoin",
  "frost-secp256k1-tr-unofficial",
