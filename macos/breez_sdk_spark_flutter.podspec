@@ -3,13 +3,13 @@
 # Run `pod lib lint breez_sdk_spark_flutter.podspec` to validate before publishing.
 #
 Pod::Spec.new do |spec|
-  spec.name                   = "breez_sdk_spark_flutter"
-  spec.version                = "0.1.3"
-  spec.license                = { :file => '../LICENSE' }
-  spec.summary                = "Swift bindings to the Breez Spark SDK"
-  spec.homepage               = "https://breez.technology"
-  spec.authors                = { "Breez" => "contact@breez.technology" }
-  spec.documentation_url      = "https://sdk-doc-spark.breez.technology"
+  spec.name                = "breez_sdk_spark_flutter"
+  spec.version             = '0.1.4'
+  spec.license             = { :file => '../LICENSE' }
+  spec.summary             = "Swift bindings to the Breez Spark SDK"
+  spec.homepage            = "https://breez.technology"
+  spec.authors             = { "Breez" => "contact@breez.technology" }
+  spec.documentation_url   = "https://sdk-doc-spark.breez.technology"
 
   # This will ensure the source files in Classes/ are included in the native
   # builds of apps using this FFI plugin. Podspec does not support relative
@@ -22,6 +22,9 @@ Pod::Spec.new do |spec|
   spec.platform            = :osx, '10.11'
   spec.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   spec.swift_version       = '5.0'
+
+  # Required frameworks for system-configuration crate
+  spec.osx.frameworks      = 'SystemConfiguration', 'CoreFoundation'
 
   spec.script_phase = {
     :name => 'Build Rust library',

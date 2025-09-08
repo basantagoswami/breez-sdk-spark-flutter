@@ -15,8 +15,8 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated_io.dart';
 import 'sdk.dart';
 import 'sdk_builder.dart';
 
-abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
-  RustLibApiImplPlatform({
+abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSparkLibWire> {
+  BreezSdkSparkLibApiImplPlatform({
     required super.handler,
     required super.wire,
     required super.generalizedFrbRustBinding,
@@ -232,6 +232,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PrepareLnurlPayRequest dco_decode_box_autoadd_prepare_lnurl_pay_request(dynamic raw);
 
   @protected
+  PrepareSendPaymentRequest dco_decode_box_autoadd_prepare_send_payment_request(dynamic raw);
+
+  @protected
   ReceivePaymentRequest dco_decode_box_autoadd_receive_payment_request(dynamic raw);
 
   @protected
@@ -239,6 +242,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   SatsPaymentDetails dco_decode_box_autoadd_sats_payment_details(dynamic raw);
+
+  @protected
+  SendOnchainFeeQuote dco_decode_box_autoadd_send_onchain_fee_quote(dynamic raw);
+
+  @protected
+  SendPaymentOptions dco_decode_box_autoadd_send_payment_options(dynamic raw);
+
+  @protected
+  SendPaymentRequest dco_decode_box_autoadd_send_payment_request(dynamic raw);
 
   @protected
   SilentPaymentAddressDetails dco_decode_box_autoadd_silent_payment_address_details(dynamic raw);
@@ -385,6 +397,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Network dco_decode_network(dynamic raw);
 
   @protected
+  OnchainConfirmationSpeed dco_decode_onchain_confirmation_speed(dynamic raw);
+
+  @protected
   String? dco_decode_opt_String(dynamic raw);
 
   @protected
@@ -407,6 +422,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   PaymentDetails? dco_decode_opt_box_autoadd_payment_details(dynamic raw);
+
+  @protected
+  SendPaymentOptions? dco_decode_opt_box_autoadd_send_payment_options(dynamic raw);
 
   @protected
   SparkAddressPaymentType? dco_decode_opt_box_autoadd_spark_address_payment_type(dynamic raw);
@@ -451,6 +469,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PrepareLnurlPayResponse dco_decode_prepare_lnurl_pay_response(dynamic raw);
 
   @protected
+  PrepareSendPaymentRequest dco_decode_prepare_send_payment_request(dynamic raw);
+
+  @protected
+  PrepareSendPaymentResponse dco_decode_prepare_send_payment_response(dynamic raw);
+
+  @protected
   ReceivePaymentMethod dco_decode_receive_payment_method(dynamic raw);
 
   @protected
@@ -473,6 +497,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   SdkEvent dco_decode_sdk_event(dynamic raw);
+
+  @protected
+  SendOnchainFeeQuote dco_decode_send_onchain_fee_quote(dynamic raw);
+
+  @protected
+  SendOnchainSpeedFeeQuote dco_decode_send_onchain_speed_fee_quote(dynamic raw);
+
+  @protected
+  SendPaymentMethod dco_decode_send_payment_method(dynamic raw);
+
+  @protected
+  SendPaymentOptions dco_decode_send_payment_options(dynamic raw);
+
+  @protected
+  SendPaymentRequest dco_decode_send_payment_request(dynamic raw);
+
+  @protected
+  SendPaymentResponse dco_decode_send_payment_response(dynamic raw);
 
   @protected
   SilentPaymentAddressDetails dco_decode_silent_payment_address_details(dynamic raw);
@@ -739,6 +781,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PrepareLnurlPayRequest sse_decode_box_autoadd_prepare_lnurl_pay_request(SseDeserializer deserializer);
 
   @protected
+  PrepareSendPaymentRequest sse_decode_box_autoadd_prepare_send_payment_request(SseDeserializer deserializer);
+
+  @protected
   ReceivePaymentRequest sse_decode_box_autoadd_receive_payment_request(SseDeserializer deserializer);
 
   @protected
@@ -746,6 +791,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   SatsPaymentDetails sse_decode_box_autoadd_sats_payment_details(SseDeserializer deserializer);
+
+  @protected
+  SendOnchainFeeQuote sse_decode_box_autoadd_send_onchain_fee_quote(SseDeserializer deserializer);
+
+  @protected
+  SendPaymentOptions sse_decode_box_autoadd_send_payment_options(SseDeserializer deserializer);
+
+  @protected
+  SendPaymentRequest sse_decode_box_autoadd_send_payment_request(SseDeserializer deserializer);
 
   @protected
   SilentPaymentAddressDetails sse_decode_box_autoadd_silent_payment_address_details(
@@ -894,6 +948,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   Network sse_decode_network(SseDeserializer deserializer);
 
   @protected
+  OnchainConfirmationSpeed sse_decode_onchain_confirmation_speed(SseDeserializer deserializer);
+
+  @protected
   String? sse_decode_opt_String(SseDeserializer deserializer);
 
   @protected
@@ -916,6 +973,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   PaymentDetails? sse_decode_opt_box_autoadd_payment_details(SseDeserializer deserializer);
+
+  @protected
+  SendPaymentOptions? sse_decode_opt_box_autoadd_send_payment_options(SseDeserializer deserializer);
 
   @protected
   SparkAddressPaymentType? sse_decode_opt_box_autoadd_spark_address_payment_type(
@@ -962,6 +1022,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   PrepareLnurlPayResponse sse_decode_prepare_lnurl_pay_response(SseDeserializer deserializer);
 
   @protected
+  PrepareSendPaymentRequest sse_decode_prepare_send_payment_request(SseDeserializer deserializer);
+
+  @protected
+  PrepareSendPaymentResponse sse_decode_prepare_send_payment_response(SseDeserializer deserializer);
+
+  @protected
   ReceivePaymentMethod sse_decode_receive_payment_method(SseDeserializer deserializer);
 
   @protected
@@ -984,6 +1050,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   SdkEvent sse_decode_sdk_event(SseDeserializer deserializer);
+
+  @protected
+  SendOnchainFeeQuote sse_decode_send_onchain_fee_quote(SseDeserializer deserializer);
+
+  @protected
+  SendOnchainSpeedFeeQuote sse_decode_send_onchain_speed_fee_quote(SseDeserializer deserializer);
+
+  @protected
+  SendPaymentMethod sse_decode_send_payment_method(SseDeserializer deserializer);
+
+  @protected
+  SendPaymentOptions sse_decode_send_payment_options(SseDeserializer deserializer);
+
+  @protected
+  SendPaymentRequest sse_decode_send_payment_request(SseDeserializer deserializer);
+
+  @protected
+  SendPaymentResponse sse_decode_send_payment_response(SseDeserializer deserializer);
 
   @protected
   SilentPaymentAddressDetails sse_decode_silent_payment_address_details(SseDeserializer deserializer);
@@ -1280,6 +1364,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   );
 
   @protected
+  void sse_encode_box_autoadd_prepare_send_payment_request(
+    PrepareSendPaymentRequest self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_receive_payment_request(ReceivePaymentRequest self, SseSerializer serializer);
 
   @protected
@@ -1287,6 +1377,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_box_autoadd_sats_payment_details(SatsPaymentDetails self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_send_onchain_fee_quote(SendOnchainFeeQuote self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_send_payment_options(SendPaymentOptions self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_send_payment_request(SendPaymentRequest self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_silent_payment_address_details(
@@ -1448,6 +1547,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_network(Network self, SseSerializer serializer);
 
   @protected
+  void sse_encode_onchain_confirmation_speed(OnchainConfirmationSpeed self, SseSerializer serializer);
+
+  @protected
   void sse_encode_opt_String(String? self, SseSerializer serializer);
 
   @protected
@@ -1470,6 +1572,9 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_opt_box_autoadd_payment_details(PaymentDetails? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_send_payment_options(SendPaymentOptions? self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_box_autoadd_spark_address_payment_type(
@@ -1520,6 +1625,12 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_encode_prepare_lnurl_pay_response(PrepareLnurlPayResponse self, SseSerializer serializer);
 
   @protected
+  void sse_encode_prepare_send_payment_request(PrepareSendPaymentRequest self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_prepare_send_payment_response(PrepareSendPaymentResponse self, SseSerializer serializer);
+
+  @protected
   void sse_encode_receive_payment_method(ReceivePaymentMethod self, SseSerializer serializer);
 
   @protected
@@ -1542,6 +1653,24 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
   @protected
   void sse_encode_sdk_event(SdkEvent self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_send_onchain_fee_quote(SendOnchainFeeQuote self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_send_onchain_speed_fee_quote(SendOnchainSpeedFeeQuote self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_send_payment_method(SendPaymentMethod self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_send_payment_options(SendPaymentOptions self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_send_payment_request(SendPaymentRequest self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_send_payment_response(SendPaymentResponse self, SseSerializer serializer);
 
   @protected
   void sse_encode_silent_payment_address_details(SilentPaymentAddressDetails self, SseSerializer serializer);
@@ -1597,14 +1726,15 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
 
 // Section: wire_class
 
-class RustLibWire implements BaseWire {
-  factory RustLibWire.fromExternalLibrary(ExternalLibrary lib) => RustLibWire(lib.ffiDynamicLibrary);
+class BreezSdkSparkLibWire implements BaseWire {
+  factory BreezSdkSparkLibWire.fromExternalLibrary(ExternalLibrary lib) =>
+      BreezSdkSparkLibWire(lib.ffiDynamicLibrary);
 
   /// Holds the symbol lookup function.
   final ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName) _lookup;
 
   /// The symbols are looked up in [dynamicLibrary].
-  RustLibWire(ffi.DynamicLibrary dynamicLibrary) : _lookup = dynamicLibrary.lookup;
+  BreezSdkSparkLibWire(ffi.DynamicLibrary dynamicLibrary) : _lookup = dynamicLibrary.lookup;
 
   void
   rust_arc_increment_strong_count_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerArcdynStorage(

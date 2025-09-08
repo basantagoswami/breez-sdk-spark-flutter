@@ -12,18 +12,18 @@ import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 import 'sdk_builder.dart';
 
 Future<BreezSdk> connect({required ConnectRequest request}) =>
-    RustLib.instance.api.crateSdkConnect(request: request);
+    BreezSdkSparkLib.instance.api.crateSdkConnect(request: request);
 
 Config defaultConfig({required Network network}) =>
-    RustLib.instance.api.crateSdkDefaultConfig(network: network);
+    BreezSdkSparkLib.instance.api.crateSdkDefaultConfig(network: network);
 
 ArcStorage defaultStorage({required String dataDir}) =>
-    RustLib.instance.api.crateSdkDefaultStorage(dataDir: dataDir);
+    BreezSdkSparkLib.instance.api.crateSdkDefaultStorage(dataDir: dataDir);
 
 Stream<LogEntry> initLogging({String? logDir, String? logFilter}) =>
-    RustLib.instance.api.crateSdkInitLogging(logDir: logDir, logFilter: logFilter);
+    BreezSdkSparkLib.instance.api.crateSdkInitLogging(logDir: logDir, logFilter: logFilter);
 
-Future<InputType> parse({required String input}) => RustLib.instance.api.crateSdkParse(input: input);
+Future<InputType> parse({required String input}) => BreezSdkSparkLib.instance.api.crateSdkParse(input: input);
 
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<BreezSdk>>
 abstract class BreezSdk implements RustOpaqueInterface {
@@ -47,11 +47,15 @@ abstract class BreezSdk implements RustOpaqueInterface {
 
   Future<PrepareLnurlPayResponse> prepareLnurlPay({required PrepareLnurlPayRequest request});
 
+  Future<PrepareSendPaymentResponse> prepareSendPayment({required PrepareSendPaymentRequest request});
+
   Future<ReceivePaymentResponse> receivePayment({required ReceivePaymentRequest request});
 
   Future<RefundDepositResponse> refundDeposit({required RefundDepositRequest request});
 
   bool removeEventListener({required String id});
+
+  Future<SendPaymentResponse> sendPayment({required SendPaymentRequest request});
 
   SyncWalletResponse syncWallet({required SyncWalletRequest request});
 }

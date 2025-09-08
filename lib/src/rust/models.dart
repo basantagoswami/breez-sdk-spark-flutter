@@ -906,6 +906,8 @@ class MessageSuccessActionData {
 
 enum Network { mainnet, regtest }
 
+enum OnchainConfirmationSpeed { fast, medium, slow }
+
 class Payment {
   final String id;
   final PaymentType paymentType;
@@ -1061,6 +1063,42 @@ class PrepareLnurlPayResponse {
           successAction == other.successAction;
 }
 
+class PrepareSendPaymentRequest {
+  final String paymentRequest;
+  final BigInt? amountSats;
+
+  const PrepareSendPaymentRequest({required this.paymentRequest, this.amountSats});
+
+  @override
+  int get hashCode => paymentRequest.hashCode ^ amountSats.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PrepareSendPaymentRequest &&
+          runtimeType == other.runtimeType &&
+          paymentRequest == other.paymentRequest &&
+          amountSats == other.amountSats;
+}
+
+class PrepareSendPaymentResponse {
+  final SendPaymentMethod paymentMethod;
+  final BigInt amountSats;
+
+  const PrepareSendPaymentResponse({required this.paymentMethod, required this.amountSats});
+
+  @override
+  int get hashCode => paymentMethod.hashCode ^ amountSats.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PrepareSendPaymentResponse &&
+          runtimeType == other.runtimeType &&
+          paymentMethod == other.paymentMethod &&
+          amountSats == other.amountSats;
+}
+
 @freezed
 sealed class ReceivePaymentMethod with _$ReceivePaymentMethod {
   const ReceivePaymentMethod._();
@@ -1162,6 +1200,113 @@ class SatsPaymentDetails {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is SatsPaymentDetails && runtimeType == other.runtimeType && amount == other.amount;
+}
+
+class SendOnchainFeeQuote {
+  final String id;
+  final BigInt expiresAt;
+  final SendOnchainSpeedFeeQuote speedFast;
+  final SendOnchainSpeedFeeQuote speedMedium;
+  final SendOnchainSpeedFeeQuote speedSlow;
+
+  const SendOnchainFeeQuote({
+    required this.id,
+    required this.expiresAt,
+    required this.speedFast,
+    required this.speedMedium,
+    required this.speedSlow,
+  });
+
+  @override
+  int get hashCode =>
+      id.hashCode ^ expiresAt.hashCode ^ speedFast.hashCode ^ speedMedium.hashCode ^ speedSlow.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SendOnchainFeeQuote &&
+          runtimeType == other.runtimeType &&
+          id == other.id &&
+          expiresAt == other.expiresAt &&
+          speedFast == other.speedFast &&
+          speedMedium == other.speedMedium &&
+          speedSlow == other.speedSlow;
+}
+
+class SendOnchainSpeedFeeQuote {
+  final BigInt userFeeSat;
+  final BigInt l1BroadcastFeeSat;
+
+  const SendOnchainSpeedFeeQuote({required this.userFeeSat, required this.l1BroadcastFeeSat});
+
+  @override
+  int get hashCode => userFeeSat.hashCode ^ l1BroadcastFeeSat.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SendOnchainSpeedFeeQuote &&
+          runtimeType == other.runtimeType &&
+          userFeeSat == other.userFeeSat &&
+          l1BroadcastFeeSat == other.l1BroadcastFeeSat;
+}
+
+@freezed
+sealed class SendPaymentMethod with _$SendPaymentMethod {
+  const SendPaymentMethod._();
+
+  const factory SendPaymentMethod.bitcoinAddress({
+    required BitcoinAddressDetails address,
+    required SendOnchainFeeQuote feeQuote,
+  }) = SendPaymentMethod_BitcoinAddress;
+  const factory SendPaymentMethod.bolt11Invoice({
+    required Bolt11InvoiceDetails invoiceDetails,
+    BigInt? sparkTransferFeeSats,
+    required BigInt lightningFeeSats,
+  }) = SendPaymentMethod_Bolt11Invoice;
+  const factory SendPaymentMethod.sparkAddress({required String address, required BigInt feeSats}) =
+      SendPaymentMethod_SparkAddress;
+}
+
+@freezed
+sealed class SendPaymentOptions with _$SendPaymentOptions {
+  const SendPaymentOptions._();
+
+  const factory SendPaymentOptions.bitcoinAddress({required OnchainConfirmationSpeed confirmationSpeed}) =
+      SendPaymentOptions_BitcoinAddress;
+  const factory SendPaymentOptions.bolt11Invoice({required bool useSpark}) = SendPaymentOptions_Bolt11Invoice;
+}
+
+class SendPaymentRequest {
+  final PrepareSendPaymentResponse prepareResponse;
+  final SendPaymentOptions? options;
+
+  const SendPaymentRequest({required this.prepareResponse, this.options});
+
+  @override
+  int get hashCode => prepareResponse.hashCode ^ options.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SendPaymentRequest &&
+          runtimeType == other.runtimeType &&
+          prepareResponse == other.prepareResponse &&
+          options == other.options;
+}
+
+class SendPaymentResponse {
+  final Payment payment;
+
+  const SendPaymentResponse({required this.payment});
+
+  @override
+  int get hashCode => payment.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SendPaymentResponse && runtimeType == other.runtimeType && payment == other.payment;
 }
 
 class SilentPaymentAddressDetails {

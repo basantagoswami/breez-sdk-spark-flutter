@@ -17,7 +17,11 @@ abstract class SdkBuilder implements RustOpaqueInterface {
   Future<BreezSdk> build();
 
   factory SdkBuilder({required Config config, required String mnemonic, required ArcStorage storage}) =>
-      RustLib.instance.api.crateSdkBuilderSdkBuilderNew(config: config, mnemonic: mnemonic, storage: storage);
+      BreezSdkSparkLib.instance.api.crateSdkBuilderSdkBuilderNew(
+        config: config,
+        mnemonic: mnemonic,
+        storage: storage,
+      );
 
   SdkBuilder withRestChainService({required String url, Credentials? credentials});
 }

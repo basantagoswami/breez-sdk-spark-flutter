@@ -16,20 +16,25 @@ import 'sdk.dart';
 import 'sdk_builder.dart';
 
 /// Main entrypoint of the Rust API
-class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
+class BreezSdkSparkLib
+    extends BaseEntrypoint<BreezSdkSparkLibApi, BreezSdkSparkLibApiImpl, BreezSdkSparkLibWire> {
   @internal
-  static final instance = RustLib._();
+  static final instance = BreezSdkSparkLib._();
 
-  RustLib._();
+  BreezSdkSparkLib._();
 
   /// Initialize flutter_rust_bridge
-  static Future<void> init({RustLibApi? api, BaseHandler? handler, ExternalLibrary? externalLibrary}) async {
+  static Future<void> init({
+    BreezSdkSparkLibApi? api,
+    BaseHandler? handler,
+    ExternalLibrary? externalLibrary,
+  }) async {
     await instance.initImpl(api: api, handler: handler, externalLibrary: externalLibrary);
   }
 
   /// Initialize flutter_rust_bridge in mock mode.
   /// No libraries for FFI are loaded.
-  static void initMock({required RustLibApi api}) {
+  static void initMock({required BreezSdkSparkLibApi api}) {
     instance.initMockImpl(api: api);
   }
 
@@ -40,10 +45,11 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   static void dispose() => instance.disposeImpl();
 
   @override
-  ApiImplConstructor<RustLibApiImpl, RustLibWire> get apiImplConstructor => RustLibApiImpl.new;
+  ApiImplConstructor<BreezSdkSparkLibApiImpl, BreezSdkSparkLibWire> get apiImplConstructor =>
+      BreezSdkSparkLibApiImpl.new;
 
   @override
-  WireConstructor<RustLibWire> get wireConstructor => RustLibWire.fromExternalLibrary;
+  WireConstructor<BreezSdkSparkLibWire> get wireConstructor => BreezSdkSparkLibWire.fromExternalLibrary;
 
   @override
   Future<void> executeRustInitializers() async {}
@@ -55,7 +61,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.9.0';
 
   @override
-  int get rustContentHash => -1403608656;
+  int get rustContentHash => 821136117;
 
   static const kDefaultExternalLibraryLoaderConfig = ExternalLibraryLoaderConfig(
     stem: 'breez_sdk_spark_flutter',
@@ -64,7 +70,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   );
 }
 
-abstract class RustLibApi extends BaseApi {
+abstract class BreezSdkSparkLibApi extends BaseApi {
   Stream<SdkEvent> crateSdkBreezSdkAddEventListener({required BreezSdk that});
 
   Future<ClaimDepositResponse> crateSdkBreezSdkClaimDeposit({
@@ -101,6 +107,11 @@ abstract class RustLibApi extends BaseApi {
     required PrepareLnurlPayRequest request,
   });
 
+  Future<PrepareSendPaymentResponse> crateSdkBreezSdkPrepareSendPayment({
+    required BreezSdk that,
+    required PrepareSendPaymentRequest request,
+  });
+
   Future<ReceivePaymentResponse> crateSdkBreezSdkReceivePayment({
     required BreezSdk that,
     required ReceivePaymentRequest request,
@@ -112,6 +123,11 @@ abstract class RustLibApi extends BaseApi {
   });
 
   bool crateSdkBreezSdkRemoveEventListener({required BreezSdk that, required String id});
+
+  Future<SendPaymentResponse> crateSdkBreezSdkSendPayment({
+    required BreezSdk that,
+    required SendPaymentRequest request,
+  });
 
   SyncWalletResponse crateSdkBreezSdkSyncWallet({required BreezSdk that, required SyncWalletRequest request});
 
@@ -158,8 +174,8 @@ abstract class RustLibApi extends BaseApi {
   CrossPlatformFinalizerArg get rust_arc_decrement_strong_count_SdkBuilderPtr;
 }
 
-class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
-  RustLibApiImpl({
+class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements BreezSdkSparkLibApi {
+  BreezSdkSparkLibApiImpl({
     required super.handler,
     required super.wire,
     required super.generalizedFrbRustBinding,
@@ -423,6 +439,36 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "BreezSdk_prepare_lnurl_pay", argNames: ["that", "request"]);
 
   @override
+  Future<PrepareSendPaymentResponse> crateSdkBreezSdkPrepareSendPayment({
+    required BreezSdk that,
+    required PrepareSendPaymentRequest request,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBreezSdk(
+            that,
+            serializer,
+          );
+          sse_encode_box_autoadd_prepare_send_payment_request(request, serializer);
+          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10, port: port_);
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_prepare_send_payment_response,
+          decodeErrorData: sse_decode_sdk_error,
+        ),
+        constMeta: kCrateSdkBreezSdkPrepareSendPaymentConstMeta,
+        argValues: [that, request],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateSdkBreezSdkPrepareSendPaymentConstMeta =>
+      const TaskConstMeta(debugName: "BreezSdk_prepare_send_payment", argNames: ["that", "request"]);
+
+  @override
   Future<ReceivePaymentResponse> crateSdkBreezSdkReceivePayment({
     required BreezSdk that,
     required ReceivePaymentRequest request,
@@ -436,7 +482,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_box_autoadd_receive_payment_request(request, serializer);
-          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 10, port: port_);
+          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11, port: port_);
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_receive_payment_response,
@@ -466,7 +512,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_box_autoadd_refund_deposit_request(request, serializer);
-          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 11, port: port_);
+          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12, port: port_);
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_refund_deposit_response,
@@ -493,7 +539,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_String(id, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 12)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
         },
         codec: SseCodec(decodeSuccessData: sse_decode_bool, decodeErrorData: null),
         constMeta: kCrateSdkBreezSdkRemoveEventListenerConstMeta,
@@ -505,6 +551,36 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   TaskConstMeta get kCrateSdkBreezSdkRemoveEventListenerConstMeta =>
       const TaskConstMeta(debugName: "BreezSdk_remove_event_listener", argNames: ["that", "id"]);
+
+  @override
+  Future<SendPaymentResponse> crateSdkBreezSdkSendPayment({
+    required BreezSdk that,
+    required SendPaymentRequest request,
+  }) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBreezSdk(
+            that,
+            serializer,
+          );
+          sse_encode_box_autoadd_send_payment_request(request, serializer);
+          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14, port: port_);
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_send_payment_response,
+          decodeErrorData: sse_decode_sdk_error,
+        ),
+        constMeta: kCrateSdkBreezSdkSendPaymentConstMeta,
+        argValues: [that, request],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateSdkBreezSdkSendPaymentConstMeta =>
+      const TaskConstMeta(debugName: "BreezSdk_send_payment", argNames: ["that", "request"]);
 
   @override
   SyncWalletResponse crateSdkBreezSdkSyncWallet({
@@ -520,7 +596,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             serializer,
           );
           sse_encode_box_autoadd_sync_wallet_request(request, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 13)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_sync_wallet_response,
@@ -546,7 +622,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             that,
             serializer,
           );
-          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 14, port: port_);
+          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16, port: port_);
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -579,7 +655,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
             storage,
             serializer,
           );
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 15)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 17)!;
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -612,7 +688,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           );
           sse_encode_String(url, serializer);
           sse_encode_opt_box_autoadd_credentials(credentials, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 16)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 18)!;
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -638,7 +714,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_box_autoadd_connect_request(request, serializer);
-          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 17, port: port_);
+          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 19, port: port_);
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -662,7 +738,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_network(network, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 18)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 20)!;
         },
         codec: SseCodec(decodeSuccessData: sse_decode_config, decodeErrorData: null),
         constMeta: kCrateSdkDefaultConfigConstMeta,
@@ -682,7 +758,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(dataDir, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 19)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 21)!;
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -709,7 +785,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           sse_encode_opt_String(logDir, serializer);
           sse_encode_StreamSink_log_entry_Sse(appLogger, serializer);
           sse_encode_opt_String(logFilter, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 20)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 22)!;
         },
         codec: SseCodec(decodeSuccessData: sse_decode_unit, decodeErrorData: sse_decode_sdk_error),
         constMeta: kCrateSdkInitLoggingConstMeta,
@@ -730,7 +806,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(input, serializer);
-          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 21, port: port_);
+          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 23, port: port_);
         },
         codec: SseCodec(decodeSuccessData: sse_decode_input_type, decodeErrorData: sse_decode_sdk_error),
         constMeta: kCrateSdkParseConstMeta,
@@ -1255,6 +1331,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PrepareSendPaymentRequest dco_decode_box_autoadd_prepare_send_payment_request(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_prepare_send_payment_request(raw);
+  }
+
+  @protected
   ReceivePaymentRequest dco_decode_box_autoadd_receive_payment_request(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_receive_payment_request(raw);
@@ -1270,6 +1352,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   SatsPaymentDetails dco_decode_box_autoadd_sats_payment_details(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return dco_decode_sats_payment_details(raw);
+  }
+
+  @protected
+  SendOnchainFeeQuote dco_decode_box_autoadd_send_onchain_fee_quote(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_send_onchain_fee_quote(raw);
+  }
+
+  @protected
+  SendPaymentOptions dco_decode_box_autoadd_send_payment_options(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_send_payment_options(raw);
+  }
+
+  @protected
+  SendPaymentRequest dco_decode_box_autoadd_send_payment_request(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_send_payment_request(raw);
   }
 
   @protected
@@ -1715,6 +1815,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  OnchainConfirmationSpeed dco_decode_onchain_confirmation_speed(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return OnchainConfirmationSpeed.values[raw as int];
+  }
+
+  @protected
   String? dco_decode_opt_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_String(raw);
@@ -1760,6 +1866,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   PaymentDetails? dco_decode_opt_box_autoadd_payment_details(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw == null ? null : dco_decode_box_autoadd_payment_details(raw);
+  }
+
+  @protected
+  SendPaymentOptions? dco_decode_opt_box_autoadd_send_payment_options(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_send_payment_options(raw);
   }
 
   @protected
@@ -1897,6 +2009,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PrepareSendPaymentRequest dco_decode_prepare_send_payment_request(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return PrepareSendPaymentRequest(
+      paymentRequest: dco_decode_String(arr[0]),
+      amountSats: dco_decode_opt_box_autoadd_u_64(arr[1]),
+    );
+  }
+
+  @protected
+  PrepareSendPaymentResponse dco_decode_prepare_send_payment_response(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return PrepareSendPaymentResponse(
+      paymentMethod: dco_decode_send_payment_method(arr[0]),
+      amountSats: dco_decode_u_64(arr[1]),
+    );
+  }
+
+  @protected
   ReceivePaymentMethod dco_decode_receive_payment_method(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     switch (raw[0]) {
@@ -2011,6 +2145,90 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw Exception("unreachable");
     }
+  }
+
+  @protected
+  SendOnchainFeeQuote dco_decode_send_onchain_fee_quote(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 5) throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
+    return SendOnchainFeeQuote(
+      id: dco_decode_String(arr[0]),
+      expiresAt: dco_decode_u_64(arr[1]),
+      speedFast: dco_decode_send_onchain_speed_fee_quote(arr[2]),
+      speedMedium: dco_decode_send_onchain_speed_fee_quote(arr[3]),
+      speedSlow: dco_decode_send_onchain_speed_fee_quote(arr[4]),
+    );
+  }
+
+  @protected
+  SendOnchainSpeedFeeQuote dco_decode_send_onchain_speed_fee_quote(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return SendOnchainSpeedFeeQuote(
+      userFeeSat: dco_decode_u_64(arr[0]),
+      l1BroadcastFeeSat: dco_decode_u_64(arr[1]),
+    );
+  }
+
+  @protected
+  SendPaymentMethod dco_decode_send_payment_method(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return SendPaymentMethod_BitcoinAddress(
+          address: dco_decode_box_autoadd_bitcoin_address_details(raw[1]),
+          feeQuote: dco_decode_box_autoadd_send_onchain_fee_quote(raw[2]),
+        );
+      case 1:
+        return SendPaymentMethod_Bolt11Invoice(
+          invoiceDetails: dco_decode_box_autoadd_bolt_11_invoice_details(raw[1]),
+          sparkTransferFeeSats: dco_decode_opt_box_autoadd_u_64(raw[2]),
+          lightningFeeSats: dco_decode_u_64(raw[3]),
+        );
+      case 2:
+        return SendPaymentMethod_SparkAddress(
+          address: dco_decode_String(raw[1]),
+          feeSats: dco_decode_u_64(raw[2]),
+        );
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  SendPaymentOptions dco_decode_send_payment_options(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    switch (raw[0]) {
+      case 0:
+        return SendPaymentOptions_BitcoinAddress(
+          confirmationSpeed: dco_decode_onchain_confirmation_speed(raw[1]),
+        );
+      case 1:
+        return SendPaymentOptions_Bolt11Invoice(useSpark: dco_decode_bool(raw[1]));
+      default:
+        throw Exception("unreachable");
+    }
+  }
+
+  @protected
+  SendPaymentRequest dco_decode_send_payment_request(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 2) throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    return SendPaymentRequest(
+      prepareResponse: dco_decode_prepare_send_payment_response(arr[0]),
+      options: dco_decode_opt_box_autoadd_send_payment_options(arr[1]),
+    );
+  }
+
+  @protected
+  SendPaymentResponse dco_decode_send_payment_response(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 1) throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return SendPaymentResponse(payment: dco_decode_payment(arr[0]));
   }
 
   @protected
@@ -2705,6 +2923,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PrepareSendPaymentRequest sse_decode_box_autoadd_prepare_send_payment_request(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_prepare_send_payment_request(deserializer));
+  }
+
+  @protected
   ReceivePaymentRequest sse_decode_box_autoadd_receive_payment_request(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_receive_payment_request(deserializer));
@@ -2720,6 +2946,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   SatsPaymentDetails sse_decode_box_autoadd_sats_payment_details(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return (sse_decode_sats_payment_details(deserializer));
+  }
+
+  @protected
+  SendOnchainFeeQuote sse_decode_box_autoadd_send_onchain_fee_quote(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_send_onchain_fee_quote(deserializer));
+  }
+
+  @protected
+  SendPaymentOptions sse_decode_box_autoadd_send_payment_options(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_send_payment_options(deserializer));
+  }
+
+  @protected
+  SendPaymentRequest sse_decode_box_autoadd_send_payment_request(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_send_payment_request(deserializer));
   }
 
   @protected
@@ -3236,6 +3480,13 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  OnchainConfirmationSpeed sse_decode_onchain_confirmation_speed(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return OnchainConfirmationSpeed.values[inner];
+  }
+
+  @protected
   String? sse_decode_opt_String(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -3318,6 +3569,17 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
     if (sse_decode_bool(deserializer)) {
       return (sse_decode_box_autoadd_payment_details(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  SendPaymentOptions? sse_decode_opt_box_autoadd_send_payment_options(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_send_payment_options(deserializer));
     } else {
       return null;
     }
@@ -3512,6 +3774,22 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  PrepareSendPaymentRequest sse_decode_prepare_send_payment_request(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_paymentRequest = sse_decode_String(deserializer);
+    var var_amountSats = sse_decode_opt_box_autoadd_u_64(deserializer);
+    return PrepareSendPaymentRequest(paymentRequest: var_paymentRequest, amountSats: var_amountSats);
+  }
+
+  @protected
+  PrepareSendPaymentResponse sse_decode_prepare_send_payment_response(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_paymentMethod = sse_decode_send_payment_method(deserializer);
+    var var_amountSats = sse_decode_u_64(deserializer);
+    return PrepareSendPaymentResponse(paymentMethod: var_paymentMethod, amountSats: var_amountSats);
+  }
+
+  @protected
   ReceivePaymentMethod sse_decode_receive_payment_method(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -3645,6 +3923,91 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       default:
         throw UnimplementedError('');
     }
+  }
+
+  @protected
+  SendOnchainFeeQuote sse_decode_send_onchain_fee_quote(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_id = sse_decode_String(deserializer);
+    var var_expiresAt = sse_decode_u_64(deserializer);
+    var var_speedFast = sse_decode_send_onchain_speed_fee_quote(deserializer);
+    var var_speedMedium = sse_decode_send_onchain_speed_fee_quote(deserializer);
+    var var_speedSlow = sse_decode_send_onchain_speed_fee_quote(deserializer);
+    return SendOnchainFeeQuote(
+      id: var_id,
+      expiresAt: var_expiresAt,
+      speedFast: var_speedFast,
+      speedMedium: var_speedMedium,
+      speedSlow: var_speedSlow,
+    );
+  }
+
+  @protected
+  SendOnchainSpeedFeeQuote sse_decode_send_onchain_speed_fee_quote(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_userFeeSat = sse_decode_u_64(deserializer);
+    var var_l1BroadcastFeeSat = sse_decode_u_64(deserializer);
+    return SendOnchainSpeedFeeQuote(userFeeSat: var_userFeeSat, l1BroadcastFeeSat: var_l1BroadcastFeeSat);
+  }
+
+  @protected
+  SendPaymentMethod sse_decode_send_payment_method(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_address = sse_decode_box_autoadd_bitcoin_address_details(deserializer);
+        var var_feeQuote = sse_decode_box_autoadd_send_onchain_fee_quote(deserializer);
+        return SendPaymentMethod_BitcoinAddress(address: var_address, feeQuote: var_feeQuote);
+      case 1:
+        var var_invoiceDetails = sse_decode_box_autoadd_bolt_11_invoice_details(deserializer);
+        var var_sparkTransferFeeSats = sse_decode_opt_box_autoadd_u_64(deserializer);
+        var var_lightningFeeSats = sse_decode_u_64(deserializer);
+        return SendPaymentMethod_Bolt11Invoice(
+          invoiceDetails: var_invoiceDetails,
+          sparkTransferFeeSats: var_sparkTransferFeeSats,
+          lightningFeeSats: var_lightningFeeSats,
+        );
+      case 2:
+        var var_address = sse_decode_String(deserializer);
+        var var_feeSats = sse_decode_u_64(deserializer);
+        return SendPaymentMethod_SparkAddress(address: var_address, feeSats: var_feeSats);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  SendPaymentOptions sse_decode_send_payment_options(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var tag_ = sse_decode_i_32(deserializer);
+    switch (tag_) {
+      case 0:
+        var var_confirmationSpeed = sse_decode_onchain_confirmation_speed(deserializer);
+        return SendPaymentOptions_BitcoinAddress(confirmationSpeed: var_confirmationSpeed);
+      case 1:
+        var var_useSpark = sse_decode_bool(deserializer);
+        return SendPaymentOptions_Bolt11Invoice(useSpark: var_useSpark);
+      default:
+        throw UnimplementedError('');
+    }
+  }
+
+  @protected
+  SendPaymentRequest sse_decode_send_payment_request(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_prepareResponse = sse_decode_prepare_send_payment_response(deserializer);
+    var var_options = sse_decode_opt_box_autoadd_send_payment_options(deserializer);
+    return SendPaymentRequest(prepareResponse: var_prepareResponse, options: var_options);
+  }
+
+  @protected
+  SendPaymentResponse sse_decode_send_payment_response(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_payment = sse_decode_payment(deserializer);
+    return SendPaymentResponse(payment: var_payment);
   }
 
   @protected
@@ -4321,6 +4684,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_box_autoadd_prepare_send_payment_request(
+    PrepareSendPaymentRequest self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_prepare_send_payment_request(self, serializer);
+  }
+
+  @protected
   void sse_encode_box_autoadd_receive_payment_request(ReceivePaymentRequest self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_receive_payment_request(self, serializer);
@@ -4336,6 +4708,24 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   void sse_encode_box_autoadd_sats_payment_details(SatsPaymentDetails self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_sats_payment_details(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_send_onchain_fee_quote(SendOnchainFeeQuote self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_send_onchain_fee_quote(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_send_payment_options(SendPaymentOptions self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_send_payment_options(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_send_payment_request(SendPaymentRequest self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_send_payment_request(self, serializer);
   }
 
   @protected
@@ -4772,6 +5162,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_onchain_confirmation_speed(OnchainConfirmationSpeed self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
   void sse_encode_opt_String(String? self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -4848,6 +5244,16 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_bool(self != null, serializer);
     if (self != null) {
       sse_encode_box_autoadd_payment_details(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_opt_box_autoadd_send_payment_options(SendPaymentOptions? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_send_payment_options(self, serializer);
     }
   }
 
@@ -5006,6 +5412,20 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_prepare_send_payment_request(PrepareSendPaymentRequest self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.paymentRequest, serializer);
+    sse_encode_opt_box_autoadd_u_64(self.amountSats, serializer);
+  }
+
+  @protected
+  void sse_encode_prepare_send_payment_response(PrepareSendPaymentResponse self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_send_payment_method(self.paymentMethod, serializer);
+    sse_encode_u_64(self.amountSats, serializer);
+  }
+
+  @protected
   void sse_encode_receive_payment_method(ReceivePaymentMethod self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     switch (self) {
@@ -5117,6 +5537,73 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         sse_encode_i_32(3, serializer);
         sse_encode_box_autoadd_payment(payment, serializer);
     }
+  }
+
+  @protected
+  void sse_encode_send_onchain_fee_quote(SendOnchainFeeQuote self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_String(self.id, serializer);
+    sse_encode_u_64(self.expiresAt, serializer);
+    sse_encode_send_onchain_speed_fee_quote(self.speedFast, serializer);
+    sse_encode_send_onchain_speed_fee_quote(self.speedMedium, serializer);
+    sse_encode_send_onchain_speed_fee_quote(self.speedSlow, serializer);
+  }
+
+  @protected
+  void sse_encode_send_onchain_speed_fee_quote(SendOnchainSpeedFeeQuote self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_64(self.userFeeSat, serializer);
+    sse_encode_u_64(self.l1BroadcastFeeSat, serializer);
+  }
+
+  @protected
+  void sse_encode_send_payment_method(SendPaymentMethod self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case SendPaymentMethod_BitcoinAddress(address: final address, feeQuote: final feeQuote):
+        sse_encode_i_32(0, serializer);
+        sse_encode_box_autoadd_bitcoin_address_details(address, serializer);
+        sse_encode_box_autoadd_send_onchain_fee_quote(feeQuote, serializer);
+      case SendPaymentMethod_Bolt11Invoice(
+        invoiceDetails: final invoiceDetails,
+        sparkTransferFeeSats: final sparkTransferFeeSats,
+        lightningFeeSats: final lightningFeeSats,
+      ):
+        sse_encode_i_32(1, serializer);
+        sse_encode_box_autoadd_bolt_11_invoice_details(invoiceDetails, serializer);
+        sse_encode_opt_box_autoadd_u_64(sparkTransferFeeSats, serializer);
+        sse_encode_u_64(lightningFeeSats, serializer);
+      case SendPaymentMethod_SparkAddress(address: final address, feeSats: final feeSats):
+        sse_encode_i_32(2, serializer);
+        sse_encode_String(address, serializer);
+        sse_encode_u_64(feeSats, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_send_payment_options(SendPaymentOptions self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    switch (self) {
+      case SendPaymentOptions_BitcoinAddress(confirmationSpeed: final confirmationSpeed):
+        sse_encode_i_32(0, serializer);
+        sse_encode_onchain_confirmation_speed(confirmationSpeed, serializer);
+      case SendPaymentOptions_Bolt11Invoice(useSpark: final useSpark):
+        sse_encode_i_32(1, serializer);
+        sse_encode_bool(useSpark, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_send_payment_request(SendPaymentRequest self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_prepare_send_payment_response(self.prepareResponse, serializer);
+    sse_encode_opt_box_autoadd_send_payment_options(self.options, serializer);
+  }
+
+  @protected
+  void sse_encode_send_payment_response(SendPaymentResponse self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_payment(self.payment, serializer);
   }
 
   @protected
@@ -5271,9 +5758,10 @@ class ArcStorageImpl extends RustOpaque implements ArcStorage {
     : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib.instance.api.rust_arc_increment_strong_count_ArcStorage,
-    rustArcDecrementStrongCount: RustLib.instance.api.rust_arc_decrement_strong_count_ArcStorage,
-    rustArcDecrementStrongCountPtr: RustLib.instance.api.rust_arc_decrement_strong_count_ArcStoragePtr,
+    rustArcIncrementStrongCount: BreezSdkSparkLib.instance.api.rust_arc_increment_strong_count_ArcStorage,
+    rustArcDecrementStrongCount: BreezSdkSparkLib.instance.api.rust_arc_decrement_strong_count_ArcStorage,
+    rustArcDecrementStrongCountPtr:
+        BreezSdkSparkLib.instance.api.rust_arc_decrement_strong_count_ArcStoragePtr,
   );
 }
 
@@ -5287,48 +5775,55 @@ class BreezSdkImpl extends RustOpaque implements BreezSdk {
     : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib.instance.api.rust_arc_increment_strong_count_BreezSdk,
-    rustArcDecrementStrongCount: RustLib.instance.api.rust_arc_decrement_strong_count_BreezSdk,
-    rustArcDecrementStrongCountPtr: RustLib.instance.api.rust_arc_decrement_strong_count_BreezSdkPtr,
+    rustArcIncrementStrongCount: BreezSdkSparkLib.instance.api.rust_arc_increment_strong_count_BreezSdk,
+    rustArcDecrementStrongCount: BreezSdkSparkLib.instance.api.rust_arc_decrement_strong_count_BreezSdk,
+    rustArcDecrementStrongCountPtr: BreezSdkSparkLib.instance.api.rust_arc_decrement_strong_count_BreezSdkPtr,
   );
 
-  Stream<SdkEvent> addEventListener() => RustLib.instance.api.crateSdkBreezSdkAddEventListener(that: this);
+  Stream<SdkEvent> addEventListener() =>
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkAddEventListener(that: this);
 
   Future<ClaimDepositResponse> claimDeposit({required ClaimDepositRequest request}) =>
-      RustLib.instance.api.crateSdkBreezSdkClaimDeposit(that: this, request: request);
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkClaimDeposit(that: this, request: request);
 
-  void disconnect() => RustLib.instance.api.crateSdkBreezSdkDisconnect(that: this);
+  void disconnect() => BreezSdkSparkLib.instance.api.crateSdkBreezSdkDisconnect(that: this);
 
   Future<GetInfoResponse> getInfo({required GetInfoRequest request}) =>
-      RustLib.instance.api.crateSdkBreezSdkGetInfo(that: this, request: request);
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkGetInfo(that: this, request: request);
 
   Future<GetPaymentResponse> getPayment({required GetPaymentRequest request}) =>
-      RustLib.instance.api.crateSdkBreezSdkGetPayment(that: this, request: request);
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkGetPayment(that: this, request: request);
 
   Future<ListPaymentsResponse> listPayments({required ListPaymentsRequest request}) =>
-      RustLib.instance.api.crateSdkBreezSdkListPayments(that: this, request: request);
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkListPayments(that: this, request: request);
 
   Future<ListUnclaimedDepositsResponse> listUnclaimedDeposits({
     required ListUnclaimedDepositsRequest request,
-  }) => RustLib.instance.api.crateSdkBreezSdkListUnclaimedDeposits(that: this, request: request);
+  }) => BreezSdkSparkLib.instance.api.crateSdkBreezSdkListUnclaimedDeposits(that: this, request: request);
 
   Future<LnurlPayResponse> lnurlPay({required LnurlPayRequest request}) =>
-      RustLib.instance.api.crateSdkBreezSdkLnurlPay(that: this, request: request);
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkLnurlPay(that: this, request: request);
 
   Future<PrepareLnurlPayResponse> prepareLnurlPay({required PrepareLnurlPayRequest request}) =>
-      RustLib.instance.api.crateSdkBreezSdkPrepareLnurlPay(that: this, request: request);
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkPrepareLnurlPay(that: this, request: request);
+
+  Future<PrepareSendPaymentResponse> prepareSendPayment({required PrepareSendPaymentRequest request}) =>
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkPrepareSendPayment(that: this, request: request);
 
   Future<ReceivePaymentResponse> receivePayment({required ReceivePaymentRequest request}) =>
-      RustLib.instance.api.crateSdkBreezSdkReceivePayment(that: this, request: request);
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkReceivePayment(that: this, request: request);
 
   Future<RefundDepositResponse> refundDeposit({required RefundDepositRequest request}) =>
-      RustLib.instance.api.crateSdkBreezSdkRefundDeposit(that: this, request: request);
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkRefundDeposit(that: this, request: request);
 
   bool removeEventListener({required String id}) =>
-      RustLib.instance.api.crateSdkBreezSdkRemoveEventListener(that: this, id: id);
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkRemoveEventListener(that: this, id: id);
+
+  Future<SendPaymentResponse> sendPayment({required SendPaymentRequest request}) =>
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkSendPayment(that: this, request: request);
 
   SyncWalletResponse syncWallet({required SyncWalletRequest request}) =>
-      RustLib.instance.api.crateSdkBreezSdkSyncWallet(that: this, request: request);
+      BreezSdkSparkLib.instance.api.crateSdkBreezSdkSyncWallet(that: this, request: request);
 }
 
 @sealed
@@ -5341,13 +5836,16 @@ class SdkBuilderImpl extends RustOpaque implements SdkBuilder {
     : super.frbInternalSseDecode(ptr, externalSizeOnNative, _kStaticData);
 
   static final _kStaticData = RustArcStaticData(
-    rustArcIncrementStrongCount: RustLib.instance.api.rust_arc_increment_strong_count_SdkBuilder,
-    rustArcDecrementStrongCount: RustLib.instance.api.rust_arc_decrement_strong_count_SdkBuilder,
-    rustArcDecrementStrongCountPtr: RustLib.instance.api.rust_arc_decrement_strong_count_SdkBuilderPtr,
+    rustArcIncrementStrongCount: BreezSdkSparkLib.instance.api.rust_arc_increment_strong_count_SdkBuilder,
+    rustArcDecrementStrongCount: BreezSdkSparkLib.instance.api.rust_arc_decrement_strong_count_SdkBuilder,
+    rustArcDecrementStrongCountPtr:
+        BreezSdkSparkLib.instance.api.rust_arc_decrement_strong_count_SdkBuilderPtr,
   );
 
-  Future<BreezSdk> build() => RustLib.instance.api.crateSdkBuilderSdkBuilderBuild(that: this);
+  Future<BreezSdk> build() => BreezSdkSparkLib.instance.api.crateSdkBuilderSdkBuilderBuild(that: this);
 
-  SdkBuilder withRestChainService({required String url, Credentials? credentials}) => RustLib.instance.api
+  SdkBuilder withRestChainService({required String url, Credentials? credentials}) => BreezSdkSparkLib
+      .instance
+      .api
       .crateSdkBuilderSdkBuilderWithRestChainService(that: this, url: url, credentials: credentials);
 }

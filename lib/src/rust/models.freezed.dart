@@ -2684,6 +2684,670 @@ as BigInt?,
 }
 
 /// @nodoc
+mixin _$SendPaymentMethod {
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendPaymentMethod);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SendPaymentMethod()';
+}
+
+
+}
+
+/// @nodoc
+class $SendPaymentMethodCopyWith<$Res>  {
+$SendPaymentMethodCopyWith(SendPaymentMethod _, $Res Function(SendPaymentMethod) __);
+}
+
+
+/// Adds pattern-matching-related methods to [SendPaymentMethod].
+extension SendPaymentMethodPatterns on SendPaymentMethod {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SendPaymentMethod_BitcoinAddress value)?  bitcoinAddress,TResult Function( SendPaymentMethod_Bolt11Invoice value)?  bolt11Invoice,TResult Function( SendPaymentMethod_SparkAddress value)?  sparkAddress,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case SendPaymentMethod_BitcoinAddress() when bitcoinAddress != null:
+return bitcoinAddress(_that);case SendPaymentMethod_Bolt11Invoice() when bolt11Invoice != null:
+return bolt11Invoice(_that);case SendPaymentMethod_SparkAddress() when sparkAddress != null:
+return sparkAddress(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SendPaymentMethod_BitcoinAddress value)  bitcoinAddress,required TResult Function( SendPaymentMethod_Bolt11Invoice value)  bolt11Invoice,required TResult Function( SendPaymentMethod_SparkAddress value)  sparkAddress,}){
+final _that = this;
+switch (_that) {
+case SendPaymentMethod_BitcoinAddress():
+return bitcoinAddress(_that);case SendPaymentMethod_Bolt11Invoice():
+return bolt11Invoice(_that);case SendPaymentMethod_SparkAddress():
+return sparkAddress(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SendPaymentMethod_BitcoinAddress value)?  bitcoinAddress,TResult? Function( SendPaymentMethod_Bolt11Invoice value)?  bolt11Invoice,TResult? Function( SendPaymentMethod_SparkAddress value)?  sparkAddress,}){
+final _that = this;
+switch (_that) {
+case SendPaymentMethod_BitcoinAddress() when bitcoinAddress != null:
+return bitcoinAddress(_that);case SendPaymentMethod_Bolt11Invoice() when bolt11Invoice != null:
+return bolt11Invoice(_that);case SendPaymentMethod_SparkAddress() when sparkAddress != null:
+return sparkAddress(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( BitcoinAddressDetails address,  SendOnchainFeeQuote feeQuote)?  bitcoinAddress,TResult Function( Bolt11InvoiceDetails invoiceDetails,  BigInt? sparkTransferFeeSats,  BigInt lightningFeeSats)?  bolt11Invoice,TResult Function( String address,  BigInt feeSats)?  sparkAddress,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case SendPaymentMethod_BitcoinAddress() when bitcoinAddress != null:
+return bitcoinAddress(_that.address,_that.feeQuote);case SendPaymentMethod_Bolt11Invoice() when bolt11Invoice != null:
+return bolt11Invoice(_that.invoiceDetails,_that.sparkTransferFeeSats,_that.lightningFeeSats);case SendPaymentMethod_SparkAddress() when sparkAddress != null:
+return sparkAddress(_that.address,_that.feeSats);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( BitcoinAddressDetails address,  SendOnchainFeeQuote feeQuote)  bitcoinAddress,required TResult Function( Bolt11InvoiceDetails invoiceDetails,  BigInt? sparkTransferFeeSats,  BigInt lightningFeeSats)  bolt11Invoice,required TResult Function( String address,  BigInt feeSats)  sparkAddress,}) {final _that = this;
+switch (_that) {
+case SendPaymentMethod_BitcoinAddress():
+return bitcoinAddress(_that.address,_that.feeQuote);case SendPaymentMethod_Bolt11Invoice():
+return bolt11Invoice(_that.invoiceDetails,_that.sparkTransferFeeSats,_that.lightningFeeSats);case SendPaymentMethod_SparkAddress():
+return sparkAddress(_that.address,_that.feeSats);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( BitcoinAddressDetails address,  SendOnchainFeeQuote feeQuote)?  bitcoinAddress,TResult? Function( Bolt11InvoiceDetails invoiceDetails,  BigInt? sparkTransferFeeSats,  BigInt lightningFeeSats)?  bolt11Invoice,TResult? Function( String address,  BigInt feeSats)?  sparkAddress,}) {final _that = this;
+switch (_that) {
+case SendPaymentMethod_BitcoinAddress() when bitcoinAddress != null:
+return bitcoinAddress(_that.address,_that.feeQuote);case SendPaymentMethod_Bolt11Invoice() when bolt11Invoice != null:
+return bolt11Invoice(_that.invoiceDetails,_that.sparkTransferFeeSats,_that.lightningFeeSats);case SendPaymentMethod_SparkAddress() when sparkAddress != null:
+return sparkAddress(_that.address,_that.feeSats);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class SendPaymentMethod_BitcoinAddress extends SendPaymentMethod {
+  const SendPaymentMethod_BitcoinAddress({required this.address, required this.feeQuote}): super._();
+  
+
+ final  BitcoinAddressDetails address;
+ final  SendOnchainFeeQuote feeQuote;
+
+/// Create a copy of SendPaymentMethod
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SendPaymentMethod_BitcoinAddressCopyWith<SendPaymentMethod_BitcoinAddress> get copyWith => _$SendPaymentMethod_BitcoinAddressCopyWithImpl<SendPaymentMethod_BitcoinAddress>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendPaymentMethod_BitcoinAddress&&(identical(other.address, address) || other.address == address)&&(identical(other.feeQuote, feeQuote) || other.feeQuote == feeQuote));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,address,feeQuote);
+
+@override
+String toString() {
+  return 'SendPaymentMethod.bitcoinAddress(address: $address, feeQuote: $feeQuote)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SendPaymentMethod_BitcoinAddressCopyWith<$Res> implements $SendPaymentMethodCopyWith<$Res> {
+  factory $SendPaymentMethod_BitcoinAddressCopyWith(SendPaymentMethod_BitcoinAddress value, $Res Function(SendPaymentMethod_BitcoinAddress) _then) = _$SendPaymentMethod_BitcoinAddressCopyWithImpl;
+@useResult
+$Res call({
+ BitcoinAddressDetails address, SendOnchainFeeQuote feeQuote
+});
+
+
+
+
+}
+/// @nodoc
+class _$SendPaymentMethod_BitcoinAddressCopyWithImpl<$Res>
+    implements $SendPaymentMethod_BitcoinAddressCopyWith<$Res> {
+  _$SendPaymentMethod_BitcoinAddressCopyWithImpl(this._self, this._then);
+
+  final SendPaymentMethod_BitcoinAddress _self;
+  final $Res Function(SendPaymentMethod_BitcoinAddress) _then;
+
+/// Create a copy of SendPaymentMethod
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? address = null,Object? feeQuote = null,}) {
+  return _then(SendPaymentMethod_BitcoinAddress(
+address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as BitcoinAddressDetails,feeQuote: null == feeQuote ? _self.feeQuote : feeQuote // ignore: cast_nullable_to_non_nullable
+as SendOnchainFeeQuote,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class SendPaymentMethod_Bolt11Invoice extends SendPaymentMethod {
+  const SendPaymentMethod_Bolt11Invoice({required this.invoiceDetails, this.sparkTransferFeeSats, required this.lightningFeeSats}): super._();
+  
+
+ final  Bolt11InvoiceDetails invoiceDetails;
+ final  BigInt? sparkTransferFeeSats;
+ final  BigInt lightningFeeSats;
+
+/// Create a copy of SendPaymentMethod
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SendPaymentMethod_Bolt11InvoiceCopyWith<SendPaymentMethod_Bolt11Invoice> get copyWith => _$SendPaymentMethod_Bolt11InvoiceCopyWithImpl<SendPaymentMethod_Bolt11Invoice>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendPaymentMethod_Bolt11Invoice&&(identical(other.invoiceDetails, invoiceDetails) || other.invoiceDetails == invoiceDetails)&&(identical(other.sparkTransferFeeSats, sparkTransferFeeSats) || other.sparkTransferFeeSats == sparkTransferFeeSats)&&(identical(other.lightningFeeSats, lightningFeeSats) || other.lightningFeeSats == lightningFeeSats));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,invoiceDetails,sparkTransferFeeSats,lightningFeeSats);
+
+@override
+String toString() {
+  return 'SendPaymentMethod.bolt11Invoice(invoiceDetails: $invoiceDetails, sparkTransferFeeSats: $sparkTransferFeeSats, lightningFeeSats: $lightningFeeSats)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SendPaymentMethod_Bolt11InvoiceCopyWith<$Res> implements $SendPaymentMethodCopyWith<$Res> {
+  factory $SendPaymentMethod_Bolt11InvoiceCopyWith(SendPaymentMethod_Bolt11Invoice value, $Res Function(SendPaymentMethod_Bolt11Invoice) _then) = _$SendPaymentMethod_Bolt11InvoiceCopyWithImpl;
+@useResult
+$Res call({
+ Bolt11InvoiceDetails invoiceDetails, BigInt? sparkTransferFeeSats, BigInt lightningFeeSats
+});
+
+
+
+
+}
+/// @nodoc
+class _$SendPaymentMethod_Bolt11InvoiceCopyWithImpl<$Res>
+    implements $SendPaymentMethod_Bolt11InvoiceCopyWith<$Res> {
+  _$SendPaymentMethod_Bolt11InvoiceCopyWithImpl(this._self, this._then);
+
+  final SendPaymentMethod_Bolt11Invoice _self;
+  final $Res Function(SendPaymentMethod_Bolt11Invoice) _then;
+
+/// Create a copy of SendPaymentMethod
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? invoiceDetails = null,Object? sparkTransferFeeSats = freezed,Object? lightningFeeSats = null,}) {
+  return _then(SendPaymentMethod_Bolt11Invoice(
+invoiceDetails: null == invoiceDetails ? _self.invoiceDetails : invoiceDetails // ignore: cast_nullable_to_non_nullable
+as Bolt11InvoiceDetails,sparkTransferFeeSats: freezed == sparkTransferFeeSats ? _self.sparkTransferFeeSats : sparkTransferFeeSats // ignore: cast_nullable_to_non_nullable
+as BigInt?,lightningFeeSats: null == lightningFeeSats ? _self.lightningFeeSats : lightningFeeSats // ignore: cast_nullable_to_non_nullable
+as BigInt,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class SendPaymentMethod_SparkAddress extends SendPaymentMethod {
+  const SendPaymentMethod_SparkAddress({required this.address, required this.feeSats}): super._();
+  
+
+ final  String address;
+ final  BigInt feeSats;
+
+/// Create a copy of SendPaymentMethod
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SendPaymentMethod_SparkAddressCopyWith<SendPaymentMethod_SparkAddress> get copyWith => _$SendPaymentMethod_SparkAddressCopyWithImpl<SendPaymentMethod_SparkAddress>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendPaymentMethod_SparkAddress&&(identical(other.address, address) || other.address == address)&&(identical(other.feeSats, feeSats) || other.feeSats == feeSats));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,address,feeSats);
+
+@override
+String toString() {
+  return 'SendPaymentMethod.sparkAddress(address: $address, feeSats: $feeSats)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SendPaymentMethod_SparkAddressCopyWith<$Res> implements $SendPaymentMethodCopyWith<$Res> {
+  factory $SendPaymentMethod_SparkAddressCopyWith(SendPaymentMethod_SparkAddress value, $Res Function(SendPaymentMethod_SparkAddress) _then) = _$SendPaymentMethod_SparkAddressCopyWithImpl;
+@useResult
+$Res call({
+ String address, BigInt feeSats
+});
+
+
+
+
+}
+/// @nodoc
+class _$SendPaymentMethod_SparkAddressCopyWithImpl<$Res>
+    implements $SendPaymentMethod_SparkAddressCopyWith<$Res> {
+  _$SendPaymentMethod_SparkAddressCopyWithImpl(this._self, this._then);
+
+  final SendPaymentMethod_SparkAddress _self;
+  final $Res Function(SendPaymentMethod_SparkAddress) _then;
+
+/// Create a copy of SendPaymentMethod
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? address = null,Object? feeSats = null,}) {
+  return _then(SendPaymentMethod_SparkAddress(
+address: null == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as String,feeSats: null == feeSats ? _self.feeSats : feeSats // ignore: cast_nullable_to_non_nullable
+as BigInt,
+  ));
+}
+
+
+}
+
+/// @nodoc
+mixin _$SendPaymentOptions {
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendPaymentOptions);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SendPaymentOptions()';
+}
+
+
+}
+
+/// @nodoc
+class $SendPaymentOptionsCopyWith<$Res>  {
+$SendPaymentOptionsCopyWith(SendPaymentOptions _, $Res Function(SendPaymentOptions) __);
+}
+
+
+/// Adds pattern-matching-related methods to [SendPaymentOptions].
+extension SendPaymentOptionsPatterns on SendPaymentOptions {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SendPaymentOptions_BitcoinAddress value)?  bitcoinAddress,TResult Function( SendPaymentOptions_Bolt11Invoice value)?  bolt11Invoice,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case SendPaymentOptions_BitcoinAddress() when bitcoinAddress != null:
+return bitcoinAddress(_that);case SendPaymentOptions_Bolt11Invoice() when bolt11Invoice != null:
+return bolt11Invoice(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SendPaymentOptions_BitcoinAddress value)  bitcoinAddress,required TResult Function( SendPaymentOptions_Bolt11Invoice value)  bolt11Invoice,}){
+final _that = this;
+switch (_that) {
+case SendPaymentOptions_BitcoinAddress():
+return bitcoinAddress(_that);case SendPaymentOptions_Bolt11Invoice():
+return bolt11Invoice(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SendPaymentOptions_BitcoinAddress value)?  bitcoinAddress,TResult? Function( SendPaymentOptions_Bolt11Invoice value)?  bolt11Invoice,}){
+final _that = this;
+switch (_that) {
+case SendPaymentOptions_BitcoinAddress() when bitcoinAddress != null:
+return bitcoinAddress(_that);case SendPaymentOptions_Bolt11Invoice() when bolt11Invoice != null:
+return bolt11Invoice(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( OnchainConfirmationSpeed confirmationSpeed)?  bitcoinAddress,TResult Function( bool useSpark)?  bolt11Invoice,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case SendPaymentOptions_BitcoinAddress() when bitcoinAddress != null:
+return bitcoinAddress(_that.confirmationSpeed);case SendPaymentOptions_Bolt11Invoice() when bolt11Invoice != null:
+return bolt11Invoice(_that.useSpark);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( OnchainConfirmationSpeed confirmationSpeed)  bitcoinAddress,required TResult Function( bool useSpark)  bolt11Invoice,}) {final _that = this;
+switch (_that) {
+case SendPaymentOptions_BitcoinAddress():
+return bitcoinAddress(_that.confirmationSpeed);case SendPaymentOptions_Bolt11Invoice():
+return bolt11Invoice(_that.useSpark);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( OnchainConfirmationSpeed confirmationSpeed)?  bitcoinAddress,TResult? Function( bool useSpark)?  bolt11Invoice,}) {final _that = this;
+switch (_that) {
+case SendPaymentOptions_BitcoinAddress() when bitcoinAddress != null:
+return bitcoinAddress(_that.confirmationSpeed);case SendPaymentOptions_Bolt11Invoice() when bolt11Invoice != null:
+return bolt11Invoice(_that.useSpark);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class SendPaymentOptions_BitcoinAddress extends SendPaymentOptions {
+  const SendPaymentOptions_BitcoinAddress({required this.confirmationSpeed}): super._();
+  
+
+ final  OnchainConfirmationSpeed confirmationSpeed;
+
+/// Create a copy of SendPaymentOptions
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SendPaymentOptions_BitcoinAddressCopyWith<SendPaymentOptions_BitcoinAddress> get copyWith => _$SendPaymentOptions_BitcoinAddressCopyWithImpl<SendPaymentOptions_BitcoinAddress>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendPaymentOptions_BitcoinAddress&&(identical(other.confirmationSpeed, confirmationSpeed) || other.confirmationSpeed == confirmationSpeed));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,confirmationSpeed);
+
+@override
+String toString() {
+  return 'SendPaymentOptions.bitcoinAddress(confirmationSpeed: $confirmationSpeed)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SendPaymentOptions_BitcoinAddressCopyWith<$Res> implements $SendPaymentOptionsCopyWith<$Res> {
+  factory $SendPaymentOptions_BitcoinAddressCopyWith(SendPaymentOptions_BitcoinAddress value, $Res Function(SendPaymentOptions_BitcoinAddress) _then) = _$SendPaymentOptions_BitcoinAddressCopyWithImpl;
+@useResult
+$Res call({
+ OnchainConfirmationSpeed confirmationSpeed
+});
+
+
+
+
+}
+/// @nodoc
+class _$SendPaymentOptions_BitcoinAddressCopyWithImpl<$Res>
+    implements $SendPaymentOptions_BitcoinAddressCopyWith<$Res> {
+  _$SendPaymentOptions_BitcoinAddressCopyWithImpl(this._self, this._then);
+
+  final SendPaymentOptions_BitcoinAddress _self;
+  final $Res Function(SendPaymentOptions_BitcoinAddress) _then;
+
+/// Create a copy of SendPaymentOptions
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? confirmationSpeed = null,}) {
+  return _then(SendPaymentOptions_BitcoinAddress(
+confirmationSpeed: null == confirmationSpeed ? _self.confirmationSpeed : confirmationSpeed // ignore: cast_nullable_to_non_nullable
+as OnchainConfirmationSpeed,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class SendPaymentOptions_Bolt11Invoice extends SendPaymentOptions {
+  const SendPaymentOptions_Bolt11Invoice({required this.useSpark}): super._();
+  
+
+ final  bool useSpark;
+
+/// Create a copy of SendPaymentOptions
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SendPaymentOptions_Bolt11InvoiceCopyWith<SendPaymentOptions_Bolt11Invoice> get copyWith => _$SendPaymentOptions_Bolt11InvoiceCopyWithImpl<SendPaymentOptions_Bolt11Invoice>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendPaymentOptions_Bolt11Invoice&&(identical(other.useSpark, useSpark) || other.useSpark == useSpark));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,useSpark);
+
+@override
+String toString() {
+  return 'SendPaymentOptions.bolt11Invoice(useSpark: $useSpark)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SendPaymentOptions_Bolt11InvoiceCopyWith<$Res> implements $SendPaymentOptionsCopyWith<$Res> {
+  factory $SendPaymentOptions_Bolt11InvoiceCopyWith(SendPaymentOptions_Bolt11Invoice value, $Res Function(SendPaymentOptions_Bolt11Invoice) _then) = _$SendPaymentOptions_Bolt11InvoiceCopyWithImpl;
+@useResult
+$Res call({
+ bool useSpark
+});
+
+
+
+
+}
+/// @nodoc
+class _$SendPaymentOptions_Bolt11InvoiceCopyWithImpl<$Res>
+    implements $SendPaymentOptions_Bolt11InvoiceCopyWith<$Res> {
+  _$SendPaymentOptions_Bolt11InvoiceCopyWithImpl(this._self, this._then);
+
+  final SendPaymentOptions_Bolt11Invoice _self;
+  final $Res Function(SendPaymentOptions_Bolt11Invoice) _then;
+
+/// Create a copy of SendPaymentOptions
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? useSpark = null,}) {
+  return _then(SendPaymentOptions_Bolt11Invoice(
+useSpark: null == useSpark ? _self.useSpark : useSpark // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$SparkAddressPaymentType {
 
  Object get field0;
