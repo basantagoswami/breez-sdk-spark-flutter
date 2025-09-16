@@ -29,11 +29,17 @@ Future<InputType> parse({required String input}) => BreezSdkSparkLib.instance.ap
 abstract class BreezSdk implements RustOpaqueInterface {
   Stream<SdkEvent> addEventListener();
 
+  Future<bool> checkLightningAddressAvailable({required CheckLightningAddressRequest request});
+
   Future<ClaimDepositResponse> claimDeposit({required ClaimDepositRequest request});
+
+  Future<void> deleteLightningAddress();
 
   void disconnect();
 
   Future<GetInfoResponse> getInfo({required GetInfoRequest request});
+
+  Future<LightningAddressInfo?> getLightningAddress();
 
   Future<GetPaymentResponse> getPayment({required GetPaymentRequest request});
 
@@ -52,6 +58,8 @@ abstract class BreezSdk implements RustOpaqueInterface {
   Future<ReceivePaymentResponse> receivePayment({required ReceivePaymentRequest request});
 
   Future<RefundDepositResponse> refundDeposit({required RefundDepositRequest request});
+
+  Future<LightningAddressInfo> registerLightningAddress({required RegisterLightningAddressRequest request});
 
   bool removeEventListener({required String id});
 

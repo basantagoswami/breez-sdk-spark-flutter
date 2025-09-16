@@ -172,6 +172,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   bool dco_decode_box_autoadd_bool(dynamic raw);
 
   @protected
+  CheckLightningAddressRequest dco_decode_box_autoadd_check_lightning_address_request(dynamic raw);
+
+  @protected
   ClaimDepositRequest dco_decode_box_autoadd_claim_deposit_request(dynamic raw);
 
   @protected
@@ -197,6 +200,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   LightningAddressDetails dco_decode_box_autoadd_lightning_address_details(dynamic raw);
+
+  @protected
+  LightningAddressInfo dco_decode_box_autoadd_lightning_address_info(dynamic raw);
 
   @protected
   ListPaymentsRequest dco_decode_box_autoadd_list_payments_request(dynamic raw);
@@ -239,6 +245,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   RefundDepositRequest dco_decode_box_autoadd_refund_deposit_request(dynamic raw);
+
+  @protected
+  RegisterLightningAddressRequest dco_decode_box_autoadd_register_lightning_address_request(dynamic raw);
 
   @protected
   SatsPaymentDetails dco_decode_box_autoadd_sats_payment_details(dynamic raw);
@@ -286,6 +295,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   UrlSuccessActionData dco_decode_box_autoadd_url_success_action_data(dynamic raw);
 
   @protected
+  CheckLightningAddressRequest dco_decode_check_lightning_address_request(dynamic raw);
+
+  @protected
   ClaimDepositRequest dco_decode_claim_deposit_request(dynamic raw);
 
   @protected
@@ -329,6 +341,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   LightningAddressDetails dco_decode_lightning_address_details(dynamic raw);
+
+  @protected
+  LightningAddressInfo dco_decode_lightning_address_info(dynamic raw);
 
   @protected
   List<String> dco_decode_list_String(dynamic raw);
@@ -418,6 +433,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   Fee? dco_decode_opt_box_autoadd_fee(dynamic raw);
 
   @protected
+  LightningAddressInfo? dco_decode_opt_box_autoadd_lightning_address_info(dynamic raw);
+
+  @protected
   LnurlPayInfo? dco_decode_opt_box_autoadd_lnurl_pay_info(dynamic raw);
 
   @protected
@@ -488,6 +506,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   RefundDepositResponse dco_decode_refund_deposit_response(dynamic raw);
+
+  @protected
+  RegisterLightningAddressRequest dco_decode_register_lightning_address_request(dynamic raw);
 
   @protected
   SatsPaymentDetails dco_decode_sats_payment_details(dynamic raw);
@@ -717,6 +738,11 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   bool sse_decode_box_autoadd_bool(SseDeserializer deserializer);
 
   @protected
+  CheckLightningAddressRequest sse_decode_box_autoadd_check_lightning_address_request(
+    SseDeserializer deserializer,
+  );
+
+  @protected
   ClaimDepositRequest sse_decode_box_autoadd_claim_deposit_request(SseDeserializer deserializer);
 
   @protected
@@ -742,6 +768,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   LightningAddressDetails sse_decode_box_autoadd_lightning_address_details(SseDeserializer deserializer);
+
+  @protected
+  LightningAddressInfo sse_decode_box_autoadd_lightning_address_info(SseDeserializer deserializer);
 
   @protected
   ListPaymentsRequest sse_decode_box_autoadd_list_payments_request(SseDeserializer deserializer);
@@ -788,6 +817,11 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   RefundDepositRequest sse_decode_box_autoadd_refund_deposit_request(SseDeserializer deserializer);
+
+  @protected
+  RegisterLightningAddressRequest sse_decode_box_autoadd_register_lightning_address_request(
+    SseDeserializer deserializer,
+  );
 
   @protected
   SatsPaymentDetails sse_decode_box_autoadd_sats_payment_details(SseDeserializer deserializer);
@@ -837,6 +871,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   UrlSuccessActionData sse_decode_box_autoadd_url_success_action_data(SseDeserializer deserializer);
 
   @protected
+  CheckLightningAddressRequest sse_decode_check_lightning_address_request(SseDeserializer deserializer);
+
+  @protected
   ClaimDepositRequest sse_decode_claim_deposit_request(SseDeserializer deserializer);
 
   @protected
@@ -880,6 +917,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   LightningAddressDetails sse_decode_lightning_address_details(SseDeserializer deserializer);
+
+  @protected
+  LightningAddressInfo sse_decode_lightning_address_info(SseDeserializer deserializer);
 
   @protected
   List<String> sse_decode_list_String(SseDeserializer deserializer);
@@ -969,6 +1009,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   Fee? sse_decode_opt_box_autoadd_fee(SseDeserializer deserializer);
 
   @protected
+  LightningAddressInfo? sse_decode_opt_box_autoadd_lightning_address_info(SseDeserializer deserializer);
+
+  @protected
   LnurlPayInfo? sse_decode_opt_box_autoadd_lnurl_pay_info(SseDeserializer deserializer);
 
   @protected
@@ -1041,6 +1084,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   RefundDepositResponse sse_decode_refund_deposit_response(SseDeserializer deserializer);
+
+  @protected
+  RegisterLightningAddressRequest sse_decode_register_lightning_address_request(SseDeserializer deserializer);
 
   @protected
   SatsPaymentDetails sse_decode_sats_payment_details(SseDeserializer deserializer);
@@ -1283,6 +1329,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_box_autoadd_bool(bool self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_check_lightning_address_request(
+    CheckLightningAddressRequest self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_claim_deposit_request(ClaimDepositRequest self, SseSerializer serializer);
 
   @protected
@@ -1311,6 +1363,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
     LightningAddressDetails self,
     SseSerializer serializer,
   );
+
+  @protected
+  void sse_encode_box_autoadd_lightning_address_info(LightningAddressInfo self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_list_payments_request(ListPaymentsRequest self, SseSerializer serializer);
@@ -1376,6 +1431,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_box_autoadd_refund_deposit_request(RefundDepositRequest self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_register_lightning_address_request(
+    RegisterLightningAddressRequest self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_box_autoadd_sats_payment_details(SatsPaymentDetails self, SseSerializer serializer);
 
   @protected
@@ -1427,6 +1488,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_box_autoadd_url_success_action_data(UrlSuccessActionData self, SseSerializer serializer);
 
   @protected
+  void sse_encode_check_lightning_address_request(
+    CheckLightningAddressRequest self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_claim_deposit_request(ClaimDepositRequest self, SseSerializer serializer);
 
   @protected
@@ -1470,6 +1537,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_lightning_address_details(LightningAddressDetails self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_lightning_address_info(LightningAddressInfo self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_String(List<String> self, SseSerializer serializer);
@@ -1568,6 +1638,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_opt_box_autoadd_fee(Fee? self, SseSerializer serializer);
 
   @protected
+  void sse_encode_opt_box_autoadd_lightning_address_info(
+    LightningAddressInfo? self,
+    SseSerializer serializer,
+  );
+
+  @protected
   void sse_encode_opt_box_autoadd_lnurl_pay_info(LnurlPayInfo? self, SseSerializer serializer);
 
   @protected
@@ -1644,6 +1720,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_refund_deposit_response(RefundDepositResponse self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_register_lightning_address_request(
+    RegisterLightningAddressRequest self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_sats_payment_details(SatsPaymentDetails self, SseSerializer serializer);

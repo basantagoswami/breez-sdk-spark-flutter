@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.9.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 821136117;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -912340516;
 
 // Section: executor
 
@@ -100,6 +100,67 @@ fn wire__crate__sdk__BreezSdk_add_event_listener_impl(
         },
     )
 }
+fn wire__crate__sdk__BreezSdk_check_lightning_address_available_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "BreezSdk_check_lightning_address_available",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<BreezSdk>,
+            >>::sse_decode(&mut deserializer);
+            let api_request =
+                <crate::models::CheckLightningAddressRequest>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, crate::errors::SdkError>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok = crate::sdk::BreezSdk::check_lightning_address_available(
+                            &*api_that_guard,
+                            api_request,
+                        )
+                        .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
 fn wire__crate__sdk__BreezSdk_claim_deposit_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -149,6 +210,63 @@ fn wire__crate__sdk__BreezSdk_claim_deposit_impl(
                         let api_that_guard = api_that_guard.unwrap();
                         let output_ok =
                             crate::sdk::BreezSdk::claim_deposit(&*api_that_guard, api_request)
+                                .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__sdk__BreezSdk_delete_lightning_address_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "BreezSdk_delete_lightning_address",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<BreezSdk>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, crate::errors::SdkError>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok =
+                            crate::sdk::BreezSdk::delete_lightning_address(&*api_that_guard)
                                 .await?;
                         Ok(output_ok)
                     })()
@@ -253,6 +371,62 @@ fn wire__crate__sdk__BreezSdk_get_info_impl(
                         let api_that_guard = api_that_guard.unwrap();
                         let output_ok =
                             crate::sdk::BreezSdk::get_info(&*api_that_guard, api_request).await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__sdk__BreezSdk_get_lightning_address_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "BreezSdk_get_lightning_address",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<BreezSdk>,
+            >>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, crate::errors::SdkError>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok =
+                            crate::sdk::BreezSdk::get_lightning_address(&*api_that_guard).await?;
                         Ok(output_ok)
                     })()
                     .await,
@@ -723,6 +897,67 @@ fn wire__crate__sdk__BreezSdk_refund_deposit_impl(
                         let output_ok =
                             crate::sdk::BreezSdk::refund_deposit(&*api_that_guard, api_request)
                                 .await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
+        },
+    )
+}
+fn wire__crate__sdk__BreezSdk_register_lightning_address_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "BreezSdk_register_lightning_address",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <RustOpaqueMoi<
+                flutter_rust_bridge::for_generated::RustAutoOpaqueInner<BreezSdk>,
+            >>::sse_decode(&mut deserializer);
+            let api_request =
+                <crate::models::RegisterLightningAddressRequest>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| async move {
+                transform_result_sse::<_, crate::errors::SdkError>(
+                    (move || async move {
+                        let mut api_that_guard = None;
+                        let decode_indices_ =
+                            flutter_rust_bridge::for_generated::lockable_compute_decode_order(
+                                vec![flutter_rust_bridge::for_generated::LockableOrderInfo::new(
+                                    &api_that, 0, false,
+                                )],
+                            );
+                        for i in decode_indices_ {
+                            match i {
+                                0 => {
+                                    api_that_guard =
+                                        Some(api_that.lockable_decode_async_ref().await)
+                                }
+                                _ => unreachable!(),
+                            }
+                        }
+                        let api_that_guard = api_that_guard.unwrap();
+                        let output_ok = crate::sdk::BreezSdk::register_lightning_address(
+                            &*api_that_guard,
+                            api_request,
+                        )
+                        .await?;
                         Ok(output_ok)
                     })()
                     .await,
@@ -1317,6 +1552,11 @@ const _: fn() = || {
         let _: Option<String> = Bolt12OfferDetails.signing_pubkey;
     }
     {
+        let CheckLightningAddressRequest =
+            None::<crate::models::CheckLightningAddressRequest>.unwrap();
+        let _: String = CheckLightningAddressRequest.username;
+    }
+    {
         let ClaimDepositRequest = None::<crate::models::ClaimDepositRequest>.unwrap();
         let _: String = ClaimDepositRequest.txid;
         let _: u32 = ClaimDepositRequest.vout;
@@ -1332,6 +1572,7 @@ const _: fn() = || {
         let _: crate::models::Network = Config.network;
         let _: u32 = Config.sync_interval_secs;
         let _: Option<crate::models::Fee> = Config.max_deposit_claim_fee;
+        let _: Option<String> = Config.lnurl_domain;
     }
     {
         let ConnectRequest = None::<crate::models::ConnectRequest>.unwrap();
@@ -1441,6 +1682,13 @@ const _: fn() = || {
         let LightningAddressDetails = None::<crate::models::LightningAddressDetails>.unwrap();
         let _: String = LightningAddressDetails.address;
         let _: crate::models::LnurlPayRequestDetails = LightningAddressDetails.pay_request;
+    }
+    {
+        let LightningAddressInfo = None::<crate::models::LightningAddressInfo>.unwrap();
+        let _: String = LightningAddressInfo.description;
+        let _: String = LightningAddressInfo.lightning_address;
+        let _: String = LightningAddressInfo.lnurl;
+        let _: String = LightningAddressInfo.username;
     }
     {
         let ListPaymentsRequest = None::<crate::models::ListPaymentsRequest>.unwrap();
@@ -1614,6 +1862,12 @@ const _: fn() = || {
         let RefundDepositResponse = None::<crate::models::RefundDepositResponse>.unwrap();
         let _: String = RefundDepositResponse.tx_id;
         let _: String = RefundDepositResponse.tx_hex;
+    }
+    {
+        let RegisterLightningAddressRequest =
+            None::<crate::models::RegisterLightningAddressRequest>.unwrap();
+        let _: String = RegisterLightningAddressRequest.username;
+        let _: String = RegisterLightningAddressRequest.description;
     }
     {
         let SatsPaymentDetails = None::<crate::models::SatsPaymentDetails>.unwrap();
@@ -2205,6 +2459,16 @@ impl SseDecode for bool {
     }
 }
 
+impl SseDecode for crate::models::CheckLightningAddressRequest {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_username = <String>::sse_decode(deserializer);
+        return crate::models::CheckLightningAddressRequest {
+            username: var_username,
+        };
+    }
+}
+
 impl SseDecode for crate::models::ClaimDepositRequest {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -2236,11 +2500,13 @@ impl SseDecode for crate::models::Config {
         let mut var_network = <crate::models::Network>::sse_decode(deserializer);
         let mut var_syncIntervalSecs = <u32>::sse_decode(deserializer);
         let mut var_maxDepositClaimFee = <Option<crate::models::Fee>>::sse_decode(deserializer);
+        let mut var_lnurlDomain = <Option<String>>::sse_decode(deserializer);
         return crate::models::Config {
             api_key: var_apiKey,
             network: var_network,
             sync_interval_secs: var_syncIntervalSecs,
             max_deposit_claim_fee: var_maxDepositClaimFee,
+            lnurl_domain: var_lnurlDomain,
         };
     }
 }
@@ -2477,6 +2743,22 @@ impl SseDecode for crate::models::LightningAddressDetails {
         return crate::models::LightningAddressDetails {
             address: var_address,
             pay_request: var_payRequest,
+        };
+    }
+}
+
+impl SseDecode for crate::models::LightningAddressInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_description = <String>::sse_decode(deserializer);
+        let mut var_lightningAddress = <String>::sse_decode(deserializer);
+        let mut var_lnurl = <String>::sse_decode(deserializer);
+        let mut var_username = <String>::sse_decode(deserializer);
+        return crate::models::LightningAddressInfo {
+            description: var_description,
+            lightning_address: var_lightningAddress,
+            lnurl: var_lnurl,
+            username: var_username,
         };
     }
 }
@@ -2853,6 +3135,19 @@ impl SseDecode for Option<crate::models::Fee> {
     }
 }
 
+impl SseDecode for Option<crate::models::LightningAddressInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<crate::models::LightningAddressInfo>::sse_decode(
+                deserializer,
+            ));
+        } else {
+            return None;
+        }
+    }
+}
+
 impl SseDecode for Option<crate::models::LnurlPayInfo> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -3210,6 +3505,18 @@ impl SseDecode for crate::models::RefundDepositResponse {
         return crate::models::RefundDepositResponse {
             tx_id: var_txId,
             tx_hex: var_txHex,
+        };
+    }
+}
+
+impl SseDecode for crate::models::RegisterLightningAddressRequest {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_username = <String>::sse_decode(deserializer);
+        let mut var_description = <String>::sse_decode(deserializer);
+        return crate::models::RegisterLightningAddressRequest {
+            username: var_username,
+            description: var_description,
         };
     }
 }
@@ -3668,28 +3975,49 @@ fn pde_ffi_dispatcher_primary_impl(
 ) {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        2 => wire__crate__sdk__BreezSdk_claim_deposit_impl(port, ptr, rust_vec_len, data_len),
-        4 => wire__crate__sdk__BreezSdk_get_info_impl(port, ptr, rust_vec_len, data_len),
-        5 => wire__crate__sdk__BreezSdk_get_payment_impl(port, ptr, rust_vec_len, data_len),
-        6 => wire__crate__sdk__BreezSdk_list_payments_impl(port, ptr, rust_vec_len, data_len),
-        7 => wire__crate__sdk__BreezSdk_list_unclaimed_deposits_impl(
+        2 => wire__crate__sdk__BreezSdk_check_lightning_address_available_impl(
             port,
             ptr,
             rust_vec_len,
             data_len,
         ),
-        8 => wire__crate__sdk__BreezSdk_lnurl_pay_impl(port, ptr, rust_vec_len, data_len),
-        9 => wire__crate__sdk__BreezSdk_prepare_lnurl_pay_impl(port, ptr, rust_vec_len, data_len),
-        10 => {
+        3 => wire__crate__sdk__BreezSdk_claim_deposit_impl(port, ptr, rust_vec_len, data_len),
+        4 => wire__crate__sdk__BreezSdk_delete_lightning_address_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        6 => wire__crate__sdk__BreezSdk_get_info_impl(port, ptr, rust_vec_len, data_len),
+        7 => {
+            wire__crate__sdk__BreezSdk_get_lightning_address_impl(port, ptr, rust_vec_len, data_len)
+        }
+        8 => wire__crate__sdk__BreezSdk_get_payment_impl(port, ptr, rust_vec_len, data_len),
+        9 => wire__crate__sdk__BreezSdk_list_payments_impl(port, ptr, rust_vec_len, data_len),
+        10 => wire__crate__sdk__BreezSdk_list_unclaimed_deposits_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        11 => wire__crate__sdk__BreezSdk_lnurl_pay_impl(port, ptr, rust_vec_len, data_len),
+        12 => wire__crate__sdk__BreezSdk_prepare_lnurl_pay_impl(port, ptr, rust_vec_len, data_len),
+        13 => {
             wire__crate__sdk__BreezSdk_prepare_send_payment_impl(port, ptr, rust_vec_len, data_len)
         }
-        11 => wire__crate__sdk__BreezSdk_receive_payment_impl(port, ptr, rust_vec_len, data_len),
-        12 => wire__crate__sdk__BreezSdk_refund_deposit_impl(port, ptr, rust_vec_len, data_len),
-        14 => wire__crate__sdk__BreezSdk_send_payment_impl(port, ptr, rust_vec_len, data_len),
-        16 => wire__crate__sdk_builder__SdkBuilder_build_impl(port, ptr, rust_vec_len, data_len),
-        19 => wire__crate__sdk__connect_impl(port, ptr, rust_vec_len, data_len),
-        21 => wire__crate__sdk__default_storage_impl(port, ptr, rust_vec_len, data_len),
-        23 => wire__crate__sdk__parse_impl(port, ptr, rust_vec_len, data_len),
+        14 => wire__crate__sdk__BreezSdk_receive_payment_impl(port, ptr, rust_vec_len, data_len),
+        15 => wire__crate__sdk__BreezSdk_refund_deposit_impl(port, ptr, rust_vec_len, data_len),
+        16 => wire__crate__sdk__BreezSdk_register_lightning_address_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        18 => wire__crate__sdk__BreezSdk_send_payment_impl(port, ptr, rust_vec_len, data_len),
+        20 => wire__crate__sdk_builder__SdkBuilder_build_impl(port, ptr, rust_vec_len, data_len),
+        23 => wire__crate__sdk__connect_impl(port, ptr, rust_vec_len, data_len),
+        25 => wire__crate__sdk__default_storage_impl(port, ptr, rust_vec_len, data_len),
+        27 => wire__crate__sdk__parse_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -3703,17 +4031,17 @@ fn pde_ffi_dispatcher_sync_impl(
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
         1 => wire__crate__sdk__BreezSdk_add_event_listener_impl(ptr, rust_vec_len, data_len),
-        3 => wire__crate__sdk__BreezSdk_disconnect_impl(ptr, rust_vec_len, data_len),
-        13 => wire__crate__sdk__BreezSdk_remove_event_listener_impl(ptr, rust_vec_len, data_len),
-        15 => wire__crate__sdk__BreezSdk_sync_wallet_impl(ptr, rust_vec_len, data_len),
-        17 => wire__crate__sdk_builder__SdkBuilder_new_impl(ptr, rust_vec_len, data_len),
-        18 => wire__crate__sdk_builder__SdkBuilder_with_rest_chain_service_impl(
+        5 => wire__crate__sdk__BreezSdk_disconnect_impl(ptr, rust_vec_len, data_len),
+        17 => wire__crate__sdk__BreezSdk_remove_event_listener_impl(ptr, rust_vec_len, data_len),
+        19 => wire__crate__sdk__BreezSdk_sync_wallet_impl(ptr, rust_vec_len, data_len),
+        21 => wire__crate__sdk_builder__SdkBuilder_new_impl(ptr, rust_vec_len, data_len),
+        22 => wire__crate__sdk_builder__SdkBuilder_with_rest_chain_service_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        20 => wire__crate__sdk__default_config_impl(ptr, rust_vec_len, data_len),
-        22 => wire__crate__sdk__init_logging_impl(ptr, rust_vec_len, data_len),
+        24 => wire__crate__sdk__default_config_impl(ptr, rust_vec_len, data_len),
+        26 => wire__crate__sdk__init_logging_impl(ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -4187,6 +4515,23 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::models::Bolt12OfferDeta
     }
 }
 // Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::models::CheckLightningAddressRequest> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [self.0.username.into_into_dart().into_dart()].into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::models::CheckLightningAddressRequest>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::models::CheckLightningAddressRequest>>
+    for crate::models::CheckLightningAddressRequest
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::models::CheckLightningAddressRequest> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::models::ClaimDepositRequest> {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
         [
@@ -4233,6 +4578,7 @@ impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::models::Config> {
             self.0.network.into_into_dart().into_dart(),
             self.0.sync_interval_secs.into_into_dart().into_dart(),
             self.0.max_deposit_claim_fee.into_into_dart().into_dart(),
+            self.0.lnurl_domain.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -4530,6 +4876,29 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::models::LightningAddres
     for crate::models::LightningAddressDetails
 {
     fn into_into_dart(self) -> FrbWrapper<crate::models::LightningAddressDetails> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::models::LightningAddressInfo> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.description.into_into_dart().into_dart(),
+            self.0.lightning_address.into_into_dart().into_dart(),
+            self.0.lnurl.into_into_dart().into_dart(),
+            self.0.username.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::models::LightningAddressInfo>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::models::LightningAddressInfo>>
+    for crate::models::LightningAddressInfo
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::models::LightningAddressInfo> {
         self.into()
     }
 }
@@ -5189,6 +5558,27 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::models::RefundDepositRe
     for crate::models::RefundDepositResponse
 {
     fn into_into_dart(self) -> FrbWrapper<crate::models::RefundDepositResponse> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::models::RegisterLightningAddressRequest> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.0.username.into_into_dart().into_dart(),
+            self.0.description.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::models::RegisterLightningAddressRequest>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::models::RegisterLightningAddressRequest>>
+    for crate::models::RegisterLightningAddressRequest
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::models::RegisterLightningAddressRequest> {
         self.into()
     }
 }
@@ -6016,6 +6406,13 @@ impl SseEncode for bool {
     }
 }
 
+impl SseEncode for crate::models::CheckLightningAddressRequest {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.username, serializer);
+    }
+}
+
 impl SseEncode for crate::models::ClaimDepositRequest {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -6039,6 +6436,7 @@ impl SseEncode for crate::models::Config {
         <crate::models::Network>::sse_encode(self.network, serializer);
         <u32>::sse_encode(self.sync_interval_secs, serializer);
         <Option<crate::models::Fee>>::sse_encode(self.max_deposit_claim_fee, serializer);
+        <Option<String>>::sse_encode(self.lnurl_domain, serializer);
     }
 }
 
@@ -6223,6 +6621,16 @@ impl SseEncode for crate::models::LightningAddressDetails {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.address, serializer);
         <crate::models::LnurlPayRequestDetails>::sse_encode(self.pay_request, serializer);
+    }
+}
+
+impl SseEncode for crate::models::LightningAddressInfo {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.description, serializer);
+        <String>::sse_encode(self.lightning_address, serializer);
+        <String>::sse_encode(self.lnurl, serializer);
+        <String>::sse_encode(self.username, serializer);
     }
 }
 
@@ -6517,6 +6925,16 @@ impl SseEncode for Option<crate::models::Fee> {
         <bool>::sse_encode(self.is_some(), serializer);
         if let Some(value) = self {
             <crate::models::Fee>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for Option<crate::models::LightningAddressInfo> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <crate::models::LightningAddressInfo>::sse_encode(value, serializer);
         }
     }
 }
@@ -6816,6 +7234,14 @@ impl SseEncode for crate::models::RefundDepositResponse {
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.tx_id, serializer);
         <String>::sse_encode(self.tx_hex, serializer);
+    }
+}
+
+impl SseEncode for crate::models::RegisterLightningAddressRequest {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.username, serializer);
+        <String>::sse_encode(self.description, serializer);
     }
 }
 

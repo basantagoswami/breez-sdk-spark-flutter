@@ -412,6 +412,20 @@ class Bolt12OfferDetails {
           signingPubkey == other.signingPubkey;
 }
 
+class CheckLightningAddressRequest {
+  final String username;
+
+  const CheckLightningAddressRequest({required this.username});
+
+  @override
+  int get hashCode => username.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CheckLightningAddressRequest && runtimeType == other.runtimeType && username == other.username;
+}
+
 class ClaimDepositRequest {
   final String txid;
   final int vout;
@@ -451,12 +465,23 @@ class Config {
   final Network network;
   final int syncIntervalSecs;
   final Fee? maxDepositClaimFee;
+  final String? lnurlDomain;
 
-  const Config({this.apiKey, required this.network, required this.syncIntervalSecs, this.maxDepositClaimFee});
+  const Config({
+    this.apiKey,
+    required this.network,
+    required this.syncIntervalSecs,
+    this.maxDepositClaimFee,
+    this.lnurlDomain,
+  });
 
   @override
   int get hashCode =>
-      apiKey.hashCode ^ network.hashCode ^ syncIntervalSecs.hashCode ^ maxDepositClaimFee.hashCode;
+      apiKey.hashCode ^
+      network.hashCode ^
+      syncIntervalSecs.hashCode ^
+      maxDepositClaimFee.hashCode ^
+      lnurlDomain.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -466,7 +491,8 @@ class Config {
           apiKey == other.apiKey &&
           network == other.network &&
           syncIntervalSecs == other.syncIntervalSecs &&
-          maxDepositClaimFee == other.maxDepositClaimFee;
+          maxDepositClaimFee == other.maxDepositClaimFee &&
+          lnurlDomain == other.lnurlDomain;
 }
 
 class ConnectRequest {
@@ -644,6 +670,33 @@ class LightningAddressDetails {
           runtimeType == other.runtimeType &&
           address == other.address &&
           payRequest == other.payRequest;
+}
+
+class LightningAddressInfo {
+  final String description;
+  final String lightningAddress;
+  final String lnurl;
+  final String username;
+
+  const LightningAddressInfo({
+    required this.description,
+    required this.lightningAddress,
+    required this.lnurl,
+    required this.username,
+  });
+
+  @override
+  int get hashCode => description.hashCode ^ lightningAddress.hashCode ^ lnurl.hashCode ^ username.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is LightningAddressInfo &&
+          runtimeType == other.runtimeType &&
+          description == other.description &&
+          lightningAddress == other.lightningAddress &&
+          lnurl == other.lnurl &&
+          username == other.username;
 }
 
 class ListPaymentsRequest {
@@ -1186,6 +1239,24 @@ class RefundDepositResponse {
           runtimeType == other.runtimeType &&
           txId == other.txId &&
           txHex == other.txHex;
+}
+
+class RegisterLightningAddressRequest {
+  final String username;
+  final String description;
+
+  const RegisterLightningAddressRequest({required this.username, required this.description});
+
+  @override
+  int get hashCode => username.hashCode ^ description.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is RegisterLightningAddressRequest &&
+          runtimeType == other.runtimeType &&
+          username == other.username &&
+          description == other.description;
 }
 
 class SatsPaymentDetails {
