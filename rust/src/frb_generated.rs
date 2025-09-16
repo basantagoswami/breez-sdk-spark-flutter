@@ -1083,15 +1083,16 @@ fn wire__crate__sdk__default_config_impl(
     )
 }
 fn wire__crate__sdk__default_storage_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
     data_len_: i32,
-) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
             debug_name: "default_storage",
-            port: None,
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
         },
         move || {
             let message = unsafe {
@@ -1105,10 +1106,15 @@ fn wire__crate__sdk__default_storage_impl(
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_data_dir = <String>::sse_decode(&mut deserializer);
             deserializer.end();
-            transform_result_sse::<_, crate::errors::SdkError>((move || {
-                let output_ok = crate::sdk::default_storage(api_data_dir)?;
-                Ok(output_ok)
-            })())
+            move |context| async move {
+                transform_result_sse::<_, crate::errors::SdkError>(
+                    (move || async move {
+                        let output_ok = crate::sdk::default_storage(api_data_dir).await?;
+                        Ok(output_ok)
+                    })()
+                    .await,
+                )
+            }
         },
     )
 }
@@ -1485,7 +1491,7 @@ const _: fn() = || {
         let _: String = LnurlPayRequestDetails.domain;
         let _: String = LnurlPayRequestDetails.url;
         let _: Option<String> = LnurlPayRequestDetails.address;
-        let _: bool = LnurlPayRequestDetails.allows_nostr;
+        let _: Option<bool> = LnurlPayRequestDetails.allows_nostr;
         let _: Option<String> = LnurlPayRequestDetails.nostr_pubkey;
     }
     {
@@ -2686,7 +2692,7 @@ impl SseDecode for crate::models::LnurlPayRequestDetails {
         let mut var_domain = <String>::sse_decode(deserializer);
         let mut var_url = <String>::sse_decode(deserializer);
         let mut var_address = <Option<String>>::sse_decode(deserializer);
-        let mut var_allowsNostr = <bool>::sse_decode(deserializer);
+        let mut var_allowsNostr = <Option<bool>>::sse_decode(deserializer);
         let mut var_nostrPubkey = <Option<String>>::sse_decode(deserializer);
         return crate::models::LnurlPayRequestDetails {
             callback: var_callback,
@@ -3682,6 +3688,7 @@ fn pde_ffi_dispatcher_primary_impl(
         14 => wire__crate__sdk__BreezSdk_send_payment_impl(port, ptr, rust_vec_len, data_len),
         16 => wire__crate__sdk_builder__SdkBuilder_build_impl(port, ptr, rust_vec_len, data_len),
         19 => wire__crate__sdk__connect_impl(port, ptr, rust_vec_len, data_len),
+        21 => wire__crate__sdk__default_storage_impl(port, ptr, rust_vec_len, data_len),
         23 => wire__crate__sdk__parse_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
@@ -3706,7 +3713,6 @@ fn pde_ffi_dispatcher_sync_impl(
             data_len,
         ),
         20 => wire__crate__sdk__default_config_impl(ptr, rust_vec_len, data_len),
-        21 => wire__crate__sdk__default_storage_impl(ptr, rust_vec_len, data_len),
         22 => wire__crate__sdk__init_logging_impl(ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
@@ -6380,7 +6386,7 @@ impl SseEncode for crate::models::LnurlPayRequestDetails {
         <String>::sse_encode(self.domain, serializer);
         <String>::sse_encode(self.url, serializer);
         <Option<String>>::sse_encode(self.address, serializer);
-        <bool>::sse_encode(self.allows_nostr, serializer);
+        <Option<bool>>::sse_encode(self.allows_nostr, serializer);
         <Option<String>>::sse_encode(self.nostr_pubkey, serializer);
     }
 }

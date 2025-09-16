@@ -149,7 +149,7 @@ abstract class BreezSdkSparkLibApi extends BaseApi {
 
   Config crateSdkDefaultConfig({required Network network});
 
-  ArcStorage crateSdkDefaultStorage({required String dataDir});
+  Future<ArcStorage> crateSdkDefaultStorage({required String dataDir});
 
   Stream<LogEntry> crateSdkInitLogging({String? logDir, String? logFilter});
 
@@ -752,13 +752,13 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
       const TaskConstMeta(debugName: "default_config", argNames: ["network"]);
 
   @override
-  ArcStorage crateSdkDefaultStorage({required String dataDir}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
+  Future<ArcStorage> crateSdkDefaultStorage({required String dataDir}) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_String(dataDir, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 21)!;
+          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 21, port: port_);
         },
         codec: SseCodec(
           decodeSuccessData:
@@ -1762,7 +1762,7 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
       domain: dco_decode_String(arr[5]),
       url: dco_decode_String(arr[6]),
       address: dco_decode_opt_String(arr[7]),
-      allowsNostr: dco_decode_bool(arr[8]),
+      allowsNostr: dco_decode_opt_box_autoadd_bool(arr[8]),
       nostrPubkey: dco_decode_opt_String(arr[9]),
     );
   }
@@ -3416,7 +3416,7 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
     var var_domain = sse_decode_String(deserializer);
     var var_url = sse_decode_String(deserializer);
     var var_address = sse_decode_opt_String(deserializer);
-    var var_allowsNostr = sse_decode_bool(deserializer);
+    var var_allowsNostr = sse_decode_opt_box_autoadd_bool(deserializer);
     var var_nostrPubkey = sse_decode_opt_String(deserializer);
     return LnurlPayRequestDetails(
       callback: var_callback,
@@ -5121,7 +5121,7 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
     sse_encode_String(self.domain, serializer);
     sse_encode_String(self.url, serializer);
     sse_encode_opt_String(self.address, serializer);
-    sse_encode_bool(self.allowsNostr, serializer);
+    sse_encode_opt_box_autoadd_bool(self.allowsNostr, serializer);
     sse_encode_opt_String(self.nostrPubkey, serializer);
   }
 

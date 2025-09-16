@@ -791,7 +791,7 @@ class LnurlPayRequestDetails {
   final String domain;
   final String url;
   final String? address;
-  final bool allowsNostr;
+  final bool? allowsNostr;
   final String? nostrPubkey;
 
   const LnurlPayRequestDetails({
@@ -803,7 +803,7 @@ class LnurlPayRequestDetails {
     required this.domain,
     required this.url,
     this.address,
-    required this.allowsNostr,
+    this.allowsNostr,
     this.nostrPubkey,
   });
 
