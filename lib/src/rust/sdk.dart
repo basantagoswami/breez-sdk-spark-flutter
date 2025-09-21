@@ -17,7 +17,7 @@ Future<BreezSdk> connect({required ConnectRequest request}) =>
 Config defaultConfig({required Network network}) =>
     BreezSdkSparkLib.instance.api.crateSdkDefaultConfig(network: network);
 
-Future<ArcStorage> defaultStorage({required String dataDir}) =>
+ArcStorage defaultStorage({required String dataDir}) =>
     BreezSdkSparkLib.instance.api.crateSdkDefaultStorage(dataDir: dataDir);
 
 Stream<LogEntry> initLogging({String? logDir, String? logFilter}) =>

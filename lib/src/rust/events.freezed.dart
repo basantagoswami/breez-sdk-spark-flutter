@@ -55,14 +55,15 @@ extension SdkEventPatterns on SdkEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SdkEvent_Synced value)?  synced,TResult Function( SdkEvent_ClaimDepositsFailed value)?  claimDepositsFailed,TResult Function( SdkEvent_ClaimDepositsSucceeded value)?  claimDepositsSucceeded,TResult Function( SdkEvent_PaymentSucceeded value)?  paymentSucceeded,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SdkEvent_Synced value)?  synced,TResult Function( SdkEvent_ClaimDepositsFailed value)?  claimDepositsFailed,TResult Function( SdkEvent_ClaimDepositsSucceeded value)?  claimDepositsSucceeded,TResult Function( SdkEvent_PaymentSucceeded value)?  paymentSucceeded,TResult Function( SdkEvent_PaymentFailed value)?  paymentFailed,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case SdkEvent_Synced() when synced != null:
 return synced(_that);case SdkEvent_ClaimDepositsFailed() when claimDepositsFailed != null:
 return claimDepositsFailed(_that);case SdkEvent_ClaimDepositsSucceeded() when claimDepositsSucceeded != null:
 return claimDepositsSucceeded(_that);case SdkEvent_PaymentSucceeded() when paymentSucceeded != null:
-return paymentSucceeded(_that);case _:
+return paymentSucceeded(_that);case SdkEvent_PaymentFailed() when paymentFailed != null:
+return paymentFailed(_that);case _:
   return orElse();
 
 }
@@ -80,14 +81,15 @@ return paymentSucceeded(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SdkEvent_Synced value)  synced,required TResult Function( SdkEvent_ClaimDepositsFailed value)  claimDepositsFailed,required TResult Function( SdkEvent_ClaimDepositsSucceeded value)  claimDepositsSucceeded,required TResult Function( SdkEvent_PaymentSucceeded value)  paymentSucceeded,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SdkEvent_Synced value)  synced,required TResult Function( SdkEvent_ClaimDepositsFailed value)  claimDepositsFailed,required TResult Function( SdkEvent_ClaimDepositsSucceeded value)  claimDepositsSucceeded,required TResult Function( SdkEvent_PaymentSucceeded value)  paymentSucceeded,required TResult Function( SdkEvent_PaymentFailed value)  paymentFailed,}){
 final _that = this;
 switch (_that) {
 case SdkEvent_Synced():
 return synced(_that);case SdkEvent_ClaimDepositsFailed():
 return claimDepositsFailed(_that);case SdkEvent_ClaimDepositsSucceeded():
 return claimDepositsSucceeded(_that);case SdkEvent_PaymentSucceeded():
-return paymentSucceeded(_that);}
+return paymentSucceeded(_that);case SdkEvent_PaymentFailed():
+return paymentFailed(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -101,14 +103,15 @@ return paymentSucceeded(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SdkEvent_Synced value)?  synced,TResult? Function( SdkEvent_ClaimDepositsFailed value)?  claimDepositsFailed,TResult? Function( SdkEvent_ClaimDepositsSucceeded value)?  claimDepositsSucceeded,TResult? Function( SdkEvent_PaymentSucceeded value)?  paymentSucceeded,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SdkEvent_Synced value)?  synced,TResult? Function( SdkEvent_ClaimDepositsFailed value)?  claimDepositsFailed,TResult? Function( SdkEvent_ClaimDepositsSucceeded value)?  claimDepositsSucceeded,TResult? Function( SdkEvent_PaymentSucceeded value)?  paymentSucceeded,TResult? Function( SdkEvent_PaymentFailed value)?  paymentFailed,}){
 final _that = this;
 switch (_that) {
 case SdkEvent_Synced() when synced != null:
 return synced(_that);case SdkEvent_ClaimDepositsFailed() when claimDepositsFailed != null:
 return claimDepositsFailed(_that);case SdkEvent_ClaimDepositsSucceeded() when claimDepositsSucceeded != null:
 return claimDepositsSucceeded(_that);case SdkEvent_PaymentSucceeded() when paymentSucceeded != null:
-return paymentSucceeded(_that);case _:
+return paymentSucceeded(_that);case SdkEvent_PaymentFailed() when paymentFailed != null:
+return paymentFailed(_that);case _:
   return null;
 
 }
@@ -125,13 +128,14 @@ return paymentSucceeded(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  synced,TResult Function( List<DepositInfo> unclaimedDeposits)?  claimDepositsFailed,TResult Function( List<DepositInfo> claimedDeposits)?  claimDepositsSucceeded,TResult Function( Payment payment)?  paymentSucceeded,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  synced,TResult Function( List<DepositInfo> unclaimedDeposits)?  claimDepositsFailed,TResult Function( List<DepositInfo> claimedDeposits)?  claimDepositsSucceeded,TResult Function( Payment payment)?  paymentSucceeded,TResult Function( Payment payment)?  paymentFailed,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case SdkEvent_Synced() when synced != null:
 return synced();case SdkEvent_ClaimDepositsFailed() when claimDepositsFailed != null:
 return claimDepositsFailed(_that.unclaimedDeposits);case SdkEvent_ClaimDepositsSucceeded() when claimDepositsSucceeded != null:
 return claimDepositsSucceeded(_that.claimedDeposits);case SdkEvent_PaymentSucceeded() when paymentSucceeded != null:
-return paymentSucceeded(_that.payment);case _:
+return paymentSucceeded(_that.payment);case SdkEvent_PaymentFailed() when paymentFailed != null:
+return paymentFailed(_that.payment);case _:
   return orElse();
 
 }
@@ -149,13 +153,14 @@ return paymentSucceeded(_that.payment);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  synced,required TResult Function( List<DepositInfo> unclaimedDeposits)  claimDepositsFailed,required TResult Function( List<DepositInfo> claimedDeposits)  claimDepositsSucceeded,required TResult Function( Payment payment)  paymentSucceeded,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  synced,required TResult Function( List<DepositInfo> unclaimedDeposits)  claimDepositsFailed,required TResult Function( List<DepositInfo> claimedDeposits)  claimDepositsSucceeded,required TResult Function( Payment payment)  paymentSucceeded,required TResult Function( Payment payment)  paymentFailed,}) {final _that = this;
 switch (_that) {
 case SdkEvent_Synced():
 return synced();case SdkEvent_ClaimDepositsFailed():
 return claimDepositsFailed(_that.unclaimedDeposits);case SdkEvent_ClaimDepositsSucceeded():
 return claimDepositsSucceeded(_that.claimedDeposits);case SdkEvent_PaymentSucceeded():
-return paymentSucceeded(_that.payment);}
+return paymentSucceeded(_that.payment);case SdkEvent_PaymentFailed():
+return paymentFailed(_that.payment);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -169,13 +174,14 @@ return paymentSucceeded(_that.payment);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  synced,TResult? Function( List<DepositInfo> unclaimedDeposits)?  claimDepositsFailed,TResult? Function( List<DepositInfo> claimedDeposits)?  claimDepositsSucceeded,TResult? Function( Payment payment)?  paymentSucceeded,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  synced,TResult? Function( List<DepositInfo> unclaimedDeposits)?  claimDepositsFailed,TResult? Function( List<DepositInfo> claimedDeposits)?  claimDepositsSucceeded,TResult? Function( Payment payment)?  paymentSucceeded,TResult? Function( Payment payment)?  paymentFailed,}) {final _that = this;
 switch (_that) {
 case SdkEvent_Synced() when synced != null:
 return synced();case SdkEvent_ClaimDepositsFailed() when claimDepositsFailed != null:
 return claimDepositsFailed(_that.unclaimedDeposits);case SdkEvent_ClaimDepositsSucceeded() when claimDepositsSucceeded != null:
 return claimDepositsSucceeded(_that.claimedDeposits);case SdkEvent_PaymentSucceeded() when paymentSucceeded != null:
-return paymentSucceeded(_that.payment);case _:
+return paymentSucceeded(_that.payment);case SdkEvent_PaymentFailed() when paymentFailed != null:
+return paymentFailed(_that.payment);case _:
   return null;
 
 }
@@ -417,6 +423,72 @@ class _$SdkEvent_PaymentSucceededCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? payment = null,}) {
   return _then(SdkEvent_PaymentSucceeded(
+payment: null == payment ? _self.payment : payment // ignore: cast_nullable_to_non_nullable
+as Payment,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class SdkEvent_PaymentFailed extends SdkEvent {
+  const SdkEvent_PaymentFailed({required this.payment}): super._();
+  
+
+ final  Payment payment;
+
+/// Create a copy of SdkEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SdkEvent_PaymentFailedCopyWith<SdkEvent_PaymentFailed> get copyWith => _$SdkEvent_PaymentFailedCopyWithImpl<SdkEvent_PaymentFailed>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SdkEvent_PaymentFailed&&(identical(other.payment, payment) || other.payment == payment));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,payment);
+
+@override
+String toString() {
+  return 'SdkEvent.paymentFailed(payment: $payment)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SdkEvent_PaymentFailedCopyWith<$Res> implements $SdkEventCopyWith<$Res> {
+  factory $SdkEvent_PaymentFailedCopyWith(SdkEvent_PaymentFailed value, $Res Function(SdkEvent_PaymentFailed) _then) = _$SdkEvent_PaymentFailedCopyWithImpl;
+@useResult
+$Res call({
+ Payment payment
+});
+
+
+
+
+}
+/// @nodoc
+class _$SdkEvent_PaymentFailedCopyWithImpl<$Res>
+    implements $SdkEvent_PaymentFailedCopyWith<$Res> {
+  _$SdkEvent_PaymentFailedCopyWithImpl(this._self, this._then);
+
+  final SdkEvent_PaymentFailed _self;
+  final $Res Function(SdkEvent_PaymentFailed) _then;
+
+/// Create a copy of SdkEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? payment = null,}) {
+  return _then(SdkEvent_PaymentFailed(
 payment: null == payment ? _self.payment : payment // ignore: cast_nullable_to_non_nullable
 as Payment,
   ));

@@ -340,6 +340,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   InputType dco_decode_input_type(dynamic raw);
 
   @protected
+  KeySetType dco_decode_key_set_type(dynamic raw);
+
+  @protected
   LightningAddressDetails dco_decode_lightning_address_details(dynamic raw);
 
   @protected
@@ -914,6 +917,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   InputType sse_decode_input_type(SseDeserializer deserializer);
+
+  @protected
+  KeySetType sse_decode_key_set_type(SseDeserializer deserializer);
 
   @protected
   LightningAddressDetails sse_decode_lightning_address_details(SseDeserializer deserializer);
@@ -1534,6 +1540,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_input_type(InputType self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_key_set_type(KeySetType self, SseSerializer serializer);
 
   @protected
   void sse_encode_lightning_address_details(LightningAddressDetails self, SseSerializer serializer);

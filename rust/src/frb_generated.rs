@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.9.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -912340516;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 1817858015;
 
 // Section: executor
 
@@ -1213,6 +1213,42 @@ fn wire__crate__sdk_builder__SdkBuilder_new_impl(
         },
     )
 }
+fn wire__crate__sdk_builder__SdkBuilder_with_key_set_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "SdkBuilder_with_key_set",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_that = <SdkBuilder>::sse_decode(&mut deserializer);
+            let api_key_set_type = <crate::models::KeySetType>::sse_decode(&mut deserializer);
+            let api_use_address_index = <bool>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Result::<_, ()>::Ok(crate::sdk_builder::SdkBuilder::with_key_set(
+                    api_that,
+                    api_key_set_type,
+                    api_use_address_index,
+                ))?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
 fn wire__crate__sdk_builder__SdkBuilder_with_rest_chain_service_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
@@ -1318,16 +1354,15 @@ fn wire__crate__sdk__default_config_impl(
     )
 }
 fn wire__crate__sdk__default_storage_impl(
-    port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
     data_len_: i32,
-) {
-    FLUTTER_RUST_BRIDGE_HANDLER.wrap_async::<flutter_rust_bridge::for_generated::SseCodec, _, _, _>(
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
             debug_name: "default_storage",
-            port: Some(port_),
-            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
         move || {
             let message = unsafe {
@@ -1341,15 +1376,10 @@ fn wire__crate__sdk__default_storage_impl(
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_data_dir = <String>::sse_decode(&mut deserializer);
             deserializer.end();
-            move |context| async move {
-                transform_result_sse::<_, crate::errors::SdkError>(
-                    (move || async move {
-                        let output_ok = crate::sdk::default_storage(api_data_dir).await?;
-                        Ok(output_ok)
-                    })()
-                    .await,
-                )
-            }
+            transform_result_sse::<_, crate::errors::SdkError>((move || {
+                let output_ok = crate::sdk::default_storage(api_data_dir)?;
+                Ok(output_ok)
+            })())
         },
     )
 }
@@ -1573,6 +1603,7 @@ const _: fn() = || {
         let _: u32 = Config.sync_interval_secs;
         let _: Option<crate::models::Fee> = Config.max_deposit_claim_fee;
         let _: Option<String> = Config.lnurl_domain;
+        let _: bool = Config.prefer_spark_over_lightning;
     }
     {
         let ConnectRequest = None::<crate::models::ConnectRequest>.unwrap();
@@ -1923,6 +1954,9 @@ const _: fn() = || {
             let _: Vec<crate::models::DepositInfo> = claimed_deposits;
         }
         crate::events::SdkEvent::PaymentSucceeded { payment } => {
+            let _: crate::models::Payment = payment;
+        }
+        crate::events::SdkEvent::PaymentFailed { payment } => {
             let _: crate::models::Payment = payment;
         }
     }
@@ -2501,12 +2535,14 @@ impl SseDecode for crate::models::Config {
         let mut var_syncIntervalSecs = <u32>::sse_decode(deserializer);
         let mut var_maxDepositClaimFee = <Option<crate::models::Fee>>::sse_decode(deserializer);
         let mut var_lnurlDomain = <Option<String>>::sse_decode(deserializer);
+        let mut var_preferSparkOverLightning = <bool>::sse_decode(deserializer);
         return crate::models::Config {
             api_key: var_apiKey,
             network: var_network,
             sync_interval_secs: var_syncIntervalSecs,
             max_deposit_claim_fee: var_maxDepositClaimFee,
             lnurl_domain: var_lnurlDomain,
+            prefer_spark_over_lightning: var_preferSparkOverLightning,
         };
     }
 }
@@ -2732,6 +2768,21 @@ impl SseDecode for crate::models::InputType {
                 unimplemented!("");
             }
         }
+    }
+}
+
+impl SseDecode for crate::models::KeySetType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::models::KeySetType::Default,
+            1 => crate::models::KeySetType::Taproot,
+            2 => crate::models::KeySetType::NativeSegwit,
+            3 => crate::models::KeySetType::WrappedSegwit,
+            4 => crate::models::KeySetType::Legacy,
+            _ => unreachable!("Invalid variant for KeySetType: {}", inner),
+        };
     }
 }
 
@@ -3621,6 +3672,12 @@ impl SseDecode for crate::events::SdkEvent {
                     payment: var_payment,
                 };
             }
+            4 => {
+                let mut var_payment = <crate::models::Payment>::sse_decode(deserializer);
+                return crate::events::SdkEvent::PaymentFailed {
+                    payment: var_payment,
+                };
+            }
             _ => {
                 unimplemented!("");
             }
@@ -4015,9 +4072,8 @@ fn pde_ffi_dispatcher_primary_impl(
         ),
         18 => wire__crate__sdk__BreezSdk_send_payment_impl(port, ptr, rust_vec_len, data_len),
         20 => wire__crate__sdk_builder__SdkBuilder_build_impl(port, ptr, rust_vec_len, data_len),
-        23 => wire__crate__sdk__connect_impl(port, ptr, rust_vec_len, data_len),
-        25 => wire__crate__sdk__default_storage_impl(port, ptr, rust_vec_len, data_len),
-        27 => wire__crate__sdk__parse_impl(port, ptr, rust_vec_len, data_len),
+        24 => wire__crate__sdk__connect_impl(port, ptr, rust_vec_len, data_len),
+        28 => wire__crate__sdk__parse_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -4035,13 +4091,15 @@ fn pde_ffi_dispatcher_sync_impl(
         17 => wire__crate__sdk__BreezSdk_remove_event_listener_impl(ptr, rust_vec_len, data_len),
         19 => wire__crate__sdk__BreezSdk_sync_wallet_impl(ptr, rust_vec_len, data_len),
         21 => wire__crate__sdk_builder__SdkBuilder_new_impl(ptr, rust_vec_len, data_len),
-        22 => wire__crate__sdk_builder__SdkBuilder_with_rest_chain_service_impl(
+        22 => wire__crate__sdk_builder__SdkBuilder_with_key_set_impl(ptr, rust_vec_len, data_len),
+        23 => wire__crate__sdk_builder__SdkBuilder_with_rest_chain_service_impl(
             ptr,
             rust_vec_len,
             data_len,
         ),
-        24 => wire__crate__sdk__default_config_impl(ptr, rust_vec_len, data_len),
-        26 => wire__crate__sdk__init_logging_impl(ptr, rust_vec_len, data_len),
+        25 => wire__crate__sdk__default_config_impl(ptr, rust_vec_len, data_len),
+        26 => wire__crate__sdk__default_storage_impl(ptr, rust_vec_len, data_len),
+        27 => wire__crate__sdk__init_logging_impl(ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -4579,6 +4637,10 @@ impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::models::Config> {
             self.0.sync_interval_secs.into_into_dart().into_dart(),
             self.0.max_deposit_claim_fee.into_into_dart().into_dart(),
             self.0.lnurl_domain.into_into_dart().into_dart(),
+            self.0
+                .prefer_spark_over_lightning
+                .into_into_dart()
+                .into_dart(),
         ]
         .into_dart()
     }
@@ -4855,6 +4917,30 @@ impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::models::InputType>>
     for crate::models::InputType
 {
     fn into_into_dart(self) -> FrbWrapper<crate::models::InputType> {
+        self.into()
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::models::KeySetType> {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self.0 {
+            crate::models::KeySetType::Default => 0.into_dart(),
+            crate::models::KeySetType::Taproot => 1.into_dart(),
+            crate::models::KeySetType::NativeSegwit => 2.into_dart(),
+            crate::models::KeySetType::WrappedSegwit => 3.into_dart(),
+            crate::models::KeySetType::Legacy => 4.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for FrbWrapper<crate::models::KeySetType>
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<FrbWrapper<crate::models::KeySetType>>
+    for crate::models::KeySetType
+{
+    fn into_into_dart(self) -> FrbWrapper<crate::models::KeySetType> {
         self.into()
     }
 }
@@ -5679,6 +5765,9 @@ impl flutter_rust_bridge::IntoDart for FrbWrapper<crate::events::SdkEvent> {
             crate::events::SdkEvent::PaymentSucceeded { payment } => {
                 [3.into_dart(), payment.into_into_dart().into_dart()].into_dart()
             }
+            crate::events::SdkEvent::PaymentFailed { payment } => {
+                [4.into_dart(), payment.into_into_dart().into_dart()].into_dart()
+            }
             _ => {
                 unimplemented!("");
             }
@@ -6437,6 +6526,7 @@ impl SseEncode for crate::models::Config {
         <u32>::sse_encode(self.sync_interval_secs, serializer);
         <Option<crate::models::Fee>>::sse_encode(self.max_deposit_claim_fee, serializer);
         <Option<String>>::sse_encode(self.lnurl_domain, serializer);
+        <bool>::sse_encode(self.prefer_spark_over_lightning, serializer);
     }
 }
 
@@ -6613,6 +6703,25 @@ impl SseEncode for crate::models::InputType {
                 unimplemented!("");
             }
         }
+    }
+}
+
+impl SseEncode for crate::models::KeySetType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::models::KeySetType::Default => 0,
+                crate::models::KeySetType::Taproot => 1,
+                crate::models::KeySetType::NativeSegwit => 2,
+                crate::models::KeySetType::WrappedSegwit => 3,
+                crate::models::KeySetType::Legacy => 4,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
     }
 }
 
@@ -7329,6 +7438,10 @@ impl SseEncode for crate::events::SdkEvent {
             }
             crate::events::SdkEvent::PaymentSucceeded { payment } => {
                 <i32>::sse_encode(3, serializer);
+                <crate::models::Payment>::sse_encode(payment, serializer);
+            }
+            crate::events::SdkEvent::PaymentFailed { payment } => {
+                <i32>::sse_encode(4, serializer);
                 <crate::models::Payment>::sse_encode(payment, serializer);
             }
             _ => {

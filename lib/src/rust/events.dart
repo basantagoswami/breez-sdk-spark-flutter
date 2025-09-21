@@ -23,4 +23,5 @@ sealed class SdkEvent with _$SdkEvent {
   const factory SdkEvent.claimDepositsSucceeded({required List<DepositInfo> claimedDeposits}) =
       SdkEvent_ClaimDepositsSucceeded;
   const factory SdkEvent.paymentSucceeded({required Payment payment}) = SdkEvent_PaymentSucceeded;
+  const factory SdkEvent.paymentFailed({required Payment payment}) = SdkEvent_PaymentFailed;
 }

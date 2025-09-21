@@ -466,6 +466,7 @@ class Config {
   final int syncIntervalSecs;
   final Fee? maxDepositClaimFee;
   final String? lnurlDomain;
+  final bool preferSparkOverLightning;
 
   const Config({
     this.apiKey,
@@ -473,6 +474,7 @@ class Config {
     required this.syncIntervalSecs,
     this.maxDepositClaimFee,
     this.lnurlDomain,
+    required this.preferSparkOverLightning,
   });
 
   @override
@@ -481,7 +483,8 @@ class Config {
       network.hashCode ^
       syncIntervalSecs.hashCode ^
       maxDepositClaimFee.hashCode ^
-      lnurlDomain.hashCode;
+      lnurlDomain.hashCode ^
+      preferSparkOverLightning.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -492,7 +495,8 @@ class Config {
           network == other.network &&
           syncIntervalSecs == other.syncIntervalSecs &&
           maxDepositClaimFee == other.maxDepositClaimFee &&
-          lnurlDomain == other.lnurlDomain;
+          lnurlDomain == other.lnurlDomain &&
+          preferSparkOverLightning == other.preferSparkOverLightning;
 }
 
 class ConnectRequest {
@@ -653,6 +657,8 @@ sealed class InputType with _$InputType {
   const factory InputType.lnurlWithdraw(LnurlWithdrawRequestDetails field0) = InputType_LnurlWithdraw;
   const factory InputType.sparkAddress(SparkAddressDetails field0) = InputType_SparkAddress;
 }
+
+enum KeySetType { default_, taproot, nativeSegwit, wrappedSegwit, legacy }
 
 class LightningAddressDetails {
   final String address;
