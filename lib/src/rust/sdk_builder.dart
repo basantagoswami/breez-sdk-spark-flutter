@@ -16,10 +16,10 @@ abstract class ArcStorage implements RustOpaqueInterface {}
 abstract class SdkBuilder implements RustOpaqueInterface {
   Future<BreezSdk> build();
 
-  factory SdkBuilder({required Config config, required String mnemonic, required ArcStorage storage}) =>
+  factory SdkBuilder({required Config config, required Seed seed, required ArcStorage storage}) =>
       BreezSdkSparkLib.instance.api.crateSdkBuilderSdkBuilderNew(
         config: config,
-        mnemonic: mnemonic,
+        seed: seed,
         storage: storage,
       );
 

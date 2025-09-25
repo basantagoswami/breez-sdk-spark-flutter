@@ -253,6 +253,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   SatsPaymentDetails dco_decode_box_autoadd_sats_payment_details(dynamic raw);
 
   @protected
+  Seed dco_decode_box_autoadd_seed(dynamic raw);
+
+  @protected
   SendOnchainFeeQuote dco_decode_box_autoadd_send_onchain_fee_quote(dynamic raw);
 
   @protected
@@ -278,6 +281,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   SuccessActionProcessed dco_decode_box_autoadd_success_action_processed(dynamic raw);
+
+  @protected
+  Symbol dco_decode_box_autoadd_symbol(dynamic raw);
 
   @protected
   SyncWalletRequest dco_decode_box_autoadd_sync_wallet_request(dynamic raw);
@@ -313,13 +319,22 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   Credentials dco_decode_credentials(dynamic raw);
 
   @protected
+  CurrencyInfo dco_decode_currency_info(dynamic raw);
+
+  @protected
   DepositClaimError dco_decode_deposit_claim_error(dynamic raw);
 
   @protected
   DepositInfo dco_decode_deposit_info(dynamic raw);
 
   @protected
+  double dco_decode_f_64(dynamic raw);
+
+  @protected
   Fee dco_decode_fee(dynamic raw);
+
+  @protected
+  FiatCurrency dco_decode_fiat_currency(dynamic raw);
 
   @protected
   GetInfoRequest dco_decode_get_info_request(dynamic raw);
@@ -367,7 +382,22 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   List<DepositInfo> dco_decode_list_deposit_info(dynamic raw);
 
   @protected
+  ListFiatCurrenciesResponse dco_decode_list_fiat_currencies_response(dynamic raw);
+
+  @protected
+  List<FiatCurrency> dco_decode_list_fiat_currency(dynamic raw);
+
+  @protected
+  ListFiatRatesResponse dco_decode_list_fiat_rates_response(dynamic raw);
+
+  @protected
   List<InputType> dco_decode_list_input_type(dynamic raw);
+
+  @protected
+  List<LocaleOverrides> dco_decode_list_locale_overrides(dynamic raw);
+
+  @protected
+  List<LocalizedName> dco_decode_list_localized_name(dynamic raw);
 
   @protected
   List<Payment> dco_decode_list_payment(dynamic raw);
@@ -380,6 +410,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
+
+  @protected
+  List<Rate> dco_decode_list_rate(dynamic raw);
 
   @protected
   ListUnclaimedDepositsRequest dco_decode_list_unclaimed_deposits_request(dynamic raw);
@@ -404,6 +437,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   LnurlWithdrawRequestDetails dco_decode_lnurl_withdraw_request_details(dynamic raw);
+
+  @protected
+  LocaleOverrides dco_decode_locale_overrides(dynamic raw);
+
+  @protected
+  LocalizedName dco_decode_localized_name(dynamic raw);
 
   @protected
   LogEntry dco_decode_log_entry(dynamic raw);
@@ -460,6 +499,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   SuccessActionProcessed? dco_decode_opt_box_autoadd_success_action_processed(dynamic raw);
 
   @protected
+  Symbol? dco_decode_opt_box_autoadd_symbol(dynamic raw);
+
+  @protected
   int? dco_decode_opt_box_autoadd_u_32(dynamic raw);
 
   @protected
@@ -496,6 +538,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   PrepareSendPaymentResponse dco_decode_prepare_send_payment_response(dynamic raw);
 
   @protected
+  Rate dco_decode_rate(dynamic raw);
+
+  @protected
   ReceivePaymentMethod dco_decode_receive_payment_method(dynamic raw);
 
   @protected
@@ -521,6 +566,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   SdkEvent dco_decode_sdk_event(dynamic raw);
+
+  @protected
+  Seed dco_decode_seed(dynamic raw);
 
   @protected
   SendOnchainFeeQuote dco_decode_send_onchain_fee_quote(dynamic raw);
@@ -560,6 +608,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   SuccessActionProcessed dco_decode_success_action_processed(dynamic raw);
+
+  @protected
+  Symbol dco_decode_symbol(dynamic raw);
 
   @protected
   SyncWalletRequest dco_decode_sync_wallet_request(dynamic raw);
@@ -830,6 +881,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   SatsPaymentDetails sse_decode_box_autoadd_sats_payment_details(SseDeserializer deserializer);
 
   @protected
+  Seed sse_decode_box_autoadd_seed(SseDeserializer deserializer);
+
+  @protected
   SendOnchainFeeQuote sse_decode_box_autoadd_send_onchain_fee_quote(SseDeserializer deserializer);
 
   @protected
@@ -857,6 +911,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   SuccessActionProcessed sse_decode_box_autoadd_success_action_processed(SseDeserializer deserializer);
+
+  @protected
+  Symbol sse_decode_box_autoadd_symbol(SseDeserializer deserializer);
 
   @protected
   SyncWalletRequest sse_decode_box_autoadd_sync_wallet_request(SseDeserializer deserializer);
@@ -892,13 +949,22 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   Credentials sse_decode_credentials(SseDeserializer deserializer);
 
   @protected
+  CurrencyInfo sse_decode_currency_info(SseDeserializer deserializer);
+
+  @protected
   DepositClaimError sse_decode_deposit_claim_error(SseDeserializer deserializer);
 
   @protected
   DepositInfo sse_decode_deposit_info(SseDeserializer deserializer);
 
   @protected
+  double sse_decode_f_64(SseDeserializer deserializer);
+
+  @protected
   Fee sse_decode_fee(SseDeserializer deserializer);
+
+  @protected
+  FiatCurrency sse_decode_fiat_currency(SseDeserializer deserializer);
 
   @protected
   GetInfoRequest sse_decode_get_info_request(SseDeserializer deserializer);
@@ -946,7 +1012,22 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   List<DepositInfo> sse_decode_list_deposit_info(SseDeserializer deserializer);
 
   @protected
+  ListFiatCurrenciesResponse sse_decode_list_fiat_currencies_response(SseDeserializer deserializer);
+
+  @protected
+  List<FiatCurrency> sse_decode_list_fiat_currency(SseDeserializer deserializer);
+
+  @protected
+  ListFiatRatesResponse sse_decode_list_fiat_rates_response(SseDeserializer deserializer);
+
+  @protected
   List<InputType> sse_decode_list_input_type(SseDeserializer deserializer);
+
+  @protected
+  List<LocaleOverrides> sse_decode_list_locale_overrides(SseDeserializer deserializer);
+
+  @protected
+  List<LocalizedName> sse_decode_list_localized_name(SseDeserializer deserializer);
 
   @protected
   List<Payment> sse_decode_list_payment(SseDeserializer deserializer);
@@ -959,6 +1040,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
+
+  @protected
+  List<Rate> sse_decode_list_rate(SseDeserializer deserializer);
 
   @protected
   ListUnclaimedDepositsRequest sse_decode_list_unclaimed_deposits_request(SseDeserializer deserializer);
@@ -983,6 +1067,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   LnurlWithdrawRequestDetails sse_decode_lnurl_withdraw_request_details(SseDeserializer deserializer);
+
+  @protected
+  LocaleOverrides sse_decode_locale_overrides(SseDeserializer deserializer);
+
+  @protected
+  LocalizedName sse_decode_localized_name(SseDeserializer deserializer);
 
   @protected
   LogEntry sse_decode_log_entry(SseDeserializer deserializer);
@@ -1041,6 +1131,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   SuccessActionProcessed? sse_decode_opt_box_autoadd_success_action_processed(SseDeserializer deserializer);
 
   @protected
+  Symbol? sse_decode_opt_box_autoadd_symbol(SseDeserializer deserializer);
+
+  @protected
   int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer);
 
   @protected
@@ -1077,6 +1170,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   PrepareSendPaymentResponse sse_decode_prepare_send_payment_response(SseDeserializer deserializer);
 
   @protected
+  Rate sse_decode_rate(SseDeserializer deserializer);
+
+  @protected
   ReceivePaymentMethod sse_decode_receive_payment_method(SseDeserializer deserializer);
 
   @protected
@@ -1102,6 +1198,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   SdkEvent sse_decode_sdk_event(SseDeserializer deserializer);
+
+  @protected
+  Seed sse_decode_seed(SseDeserializer deserializer);
 
   @protected
   SendOnchainFeeQuote sse_decode_send_onchain_fee_quote(SseDeserializer deserializer);
@@ -1141,6 +1240,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   SuccessActionProcessed sse_decode_success_action_processed(SseDeserializer deserializer);
+
+  @protected
+  Symbol sse_decode_symbol(SseDeserializer deserializer);
 
   @protected
   SyncWalletRequest sse_decode_sync_wallet_request(SseDeserializer deserializer);
@@ -1446,6 +1548,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_box_autoadd_sats_payment_details(SatsPaymentDetails self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_seed(Seed self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_send_onchain_fee_quote(SendOnchainFeeQuote self, SseSerializer serializer);
 
   @protected
@@ -1477,6 +1582,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_box_autoadd_success_action_processed(SuccessActionProcessed self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_symbol(Symbol self, SseSerializer serializer);
 
   @protected
   void sse_encode_box_autoadd_sync_wallet_request(SyncWalletRequest self, SseSerializer serializer);
@@ -1515,13 +1623,22 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_credentials(Credentials self, SseSerializer serializer);
 
   @protected
+  void sse_encode_currency_info(CurrencyInfo self, SseSerializer serializer);
+
+  @protected
   void sse_encode_deposit_claim_error(DepositClaimError self, SseSerializer serializer);
 
   @protected
   void sse_encode_deposit_info(DepositInfo self, SseSerializer serializer);
 
   @protected
+  void sse_encode_f_64(double self, SseSerializer serializer);
+
+  @protected
   void sse_encode_fee(Fee self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_fiat_currency(FiatCurrency self, SseSerializer serializer);
 
   @protected
   void sse_encode_get_info_request(GetInfoRequest self, SseSerializer serializer);
@@ -1572,7 +1689,22 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_list_deposit_info(List<DepositInfo> self, SseSerializer serializer);
 
   @protected
+  void sse_encode_list_fiat_currencies_response(ListFiatCurrenciesResponse self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_fiat_currency(List<FiatCurrency> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_fiat_rates_response(ListFiatRatesResponse self, SseSerializer serializer);
+
+  @protected
   void sse_encode_list_input_type(List<InputType> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_locale_overrides(List<LocaleOverrides> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_localized_name(List<LocalizedName> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_payment(List<Payment> self, SseSerializer serializer);
@@ -1585,6 +1717,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_list_prim_u_8_strict(Uint8List self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_rate(List<Rate> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_unclaimed_deposits_request(
@@ -1615,6 +1750,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_lnurl_withdraw_request_details(LnurlWithdrawRequestDetails self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_locale_overrides(LocaleOverrides self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_localized_name(LocalizedName self, SseSerializer serializer);
 
   @protected
   void sse_encode_log_entry(LogEntry self, SseSerializer serializer);
@@ -1680,6 +1821,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   );
 
   @protected
+  void sse_encode_opt_box_autoadd_symbol(Symbol? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer);
 
   @protected
@@ -1716,6 +1860,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_prepare_send_payment_response(PrepareSendPaymentResponse self, SseSerializer serializer);
 
   @protected
+  void sse_encode_rate(Rate self, SseSerializer serializer);
+
+  @protected
   void sse_encode_receive_payment_method(ReceivePaymentMethod self, SseSerializer serializer);
 
   @protected
@@ -1744,6 +1891,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_sdk_event(SdkEvent self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_seed(Seed self, SseSerializer serializer);
 
   @protected
   void sse_encode_send_onchain_fee_quote(SendOnchainFeeQuote self, SseSerializer serializer);
@@ -1783,6 +1933,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_success_action_processed(SuccessActionProcessed self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_symbol(Symbol self, SseSerializer serializer);
 
   @protected
   void sse_encode_sync_wallet_request(SyncWalletRequest self, SseSerializer serializer);

@@ -2684,6 +2684,300 @@ as BigInt?,
 }
 
 /// @nodoc
+mixin _$Seed {
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Seed);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'Seed()';
+}
+
+
+}
+
+/// @nodoc
+class $SeedCopyWith<$Res>  {
+$SeedCopyWith(Seed _, $Res Function(Seed) __);
+}
+
+
+/// Adds pattern-matching-related methods to [Seed].
+extension SeedPatterns on Seed {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Seed_Mnemonic value)?  mnemonic,TResult Function( Seed_Entropy value)?  entropy,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case Seed_Mnemonic() when mnemonic != null:
+return mnemonic(_that);case Seed_Entropy() when entropy != null:
+return entropy(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Seed_Mnemonic value)  mnemonic,required TResult Function( Seed_Entropy value)  entropy,}){
+final _that = this;
+switch (_that) {
+case Seed_Mnemonic():
+return mnemonic(_that);case Seed_Entropy():
+return entropy(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Seed_Mnemonic value)?  mnemonic,TResult? Function( Seed_Entropy value)?  entropy,}){
+final _that = this;
+switch (_that) {
+case Seed_Mnemonic() when mnemonic != null:
+return mnemonic(_that);case Seed_Entropy() when entropy != null:
+return entropy(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String mnemonic,  String? passphrase)?  mnemonic,TResult Function( Uint8List field0)?  entropy,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case Seed_Mnemonic() when mnemonic != null:
+return mnemonic(_that.mnemonic,_that.passphrase);case Seed_Entropy() when entropy != null:
+return entropy(_that.field0);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String mnemonic,  String? passphrase)  mnemonic,required TResult Function( Uint8List field0)  entropy,}) {final _that = this;
+switch (_that) {
+case Seed_Mnemonic():
+return mnemonic(_that.mnemonic,_that.passphrase);case Seed_Entropy():
+return entropy(_that.field0);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String mnemonic,  String? passphrase)?  mnemonic,TResult? Function( Uint8List field0)?  entropy,}) {final _that = this;
+switch (_that) {
+case Seed_Mnemonic() when mnemonic != null:
+return mnemonic(_that.mnemonic,_that.passphrase);case Seed_Entropy() when entropy != null:
+return entropy(_that.field0);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class Seed_Mnemonic extends Seed {
+  const Seed_Mnemonic({required this.mnemonic, this.passphrase}): super._();
+  
+
+ final  String mnemonic;
+ final  String? passphrase;
+
+/// Create a copy of Seed
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$Seed_MnemonicCopyWith<Seed_Mnemonic> get copyWith => _$Seed_MnemonicCopyWithImpl<Seed_Mnemonic>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Seed_Mnemonic&&(identical(other.mnemonic, mnemonic) || other.mnemonic == mnemonic)&&(identical(other.passphrase, passphrase) || other.passphrase == passphrase));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,mnemonic,passphrase);
+
+@override
+String toString() {
+  return 'Seed.mnemonic(mnemonic: $mnemonic, passphrase: $passphrase)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $Seed_MnemonicCopyWith<$Res> implements $SeedCopyWith<$Res> {
+  factory $Seed_MnemonicCopyWith(Seed_Mnemonic value, $Res Function(Seed_Mnemonic) _then) = _$Seed_MnemonicCopyWithImpl;
+@useResult
+$Res call({
+ String mnemonic, String? passphrase
+});
+
+
+
+
+}
+/// @nodoc
+class _$Seed_MnemonicCopyWithImpl<$Res>
+    implements $Seed_MnemonicCopyWith<$Res> {
+  _$Seed_MnemonicCopyWithImpl(this._self, this._then);
+
+  final Seed_Mnemonic _self;
+  final $Res Function(Seed_Mnemonic) _then;
+
+/// Create a copy of Seed
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? mnemonic = null,Object? passphrase = freezed,}) {
+  return _then(Seed_Mnemonic(
+mnemonic: null == mnemonic ? _self.mnemonic : mnemonic // ignore: cast_nullable_to_non_nullable
+as String,passphrase: freezed == passphrase ? _self.passphrase : passphrase // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class Seed_Entropy extends Seed {
+  const Seed_Entropy(this.field0): super._();
+  
+
+ final  Uint8List field0;
+
+/// Create a copy of Seed
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$Seed_EntropyCopyWith<Seed_Entropy> get copyWith => _$Seed_EntropyCopyWithImpl<Seed_Entropy>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Seed_Entropy&&const DeepCollectionEquality().equals(other.field0, field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(field0));
+
+@override
+String toString() {
+  return 'Seed.entropy(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $Seed_EntropyCopyWith<$Res> implements $SeedCopyWith<$Res> {
+  factory $Seed_EntropyCopyWith(Seed_Entropy value, $Res Function(Seed_Entropy) _then) = _$Seed_EntropyCopyWithImpl;
+@useResult
+$Res call({
+ Uint8List field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$Seed_EntropyCopyWithImpl<$Res>
+    implements $Seed_EntropyCopyWith<$Res> {
+  _$Seed_EntropyCopyWithImpl(this._self, this._then);
+
+  final Seed_Entropy _self;
+  final $Res Function(Seed_Entropy) _then;
+
+/// Create a copy of Seed
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(Seed_Entropy(
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as Uint8List,
+  ));
+}
+
+
+}
+
+/// @nodoc
 mixin _$SendPaymentMethod {
 
 
@@ -3163,11 +3457,11 @@ return bolt11Invoice(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( OnchainConfirmationSpeed confirmationSpeed)?  bitcoinAddress,TResult Function( bool useSpark)?  bolt11Invoice,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( OnchainConfirmationSpeed confirmationSpeed)?  bitcoinAddress,TResult Function( bool preferSpark)?  bolt11Invoice,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case SendPaymentOptions_BitcoinAddress() when bitcoinAddress != null:
 return bitcoinAddress(_that.confirmationSpeed);case SendPaymentOptions_Bolt11Invoice() when bolt11Invoice != null:
-return bolt11Invoice(_that.useSpark);case _:
+return bolt11Invoice(_that.preferSpark);case _:
   return orElse();
 
 }
@@ -3185,11 +3479,11 @@ return bolt11Invoice(_that.useSpark);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( OnchainConfirmationSpeed confirmationSpeed)  bitcoinAddress,required TResult Function( bool useSpark)  bolt11Invoice,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( OnchainConfirmationSpeed confirmationSpeed)  bitcoinAddress,required TResult Function( bool preferSpark)  bolt11Invoice,}) {final _that = this;
 switch (_that) {
 case SendPaymentOptions_BitcoinAddress():
 return bitcoinAddress(_that.confirmationSpeed);case SendPaymentOptions_Bolt11Invoice():
-return bolt11Invoice(_that.useSpark);}
+return bolt11Invoice(_that.preferSpark);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -3203,11 +3497,11 @@ return bolt11Invoice(_that.useSpark);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( OnchainConfirmationSpeed confirmationSpeed)?  bitcoinAddress,TResult? Function( bool useSpark)?  bolt11Invoice,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( OnchainConfirmationSpeed confirmationSpeed)?  bitcoinAddress,TResult? Function( bool preferSpark)?  bolt11Invoice,}) {final _that = this;
 switch (_that) {
 case SendPaymentOptions_BitcoinAddress() when bitcoinAddress != null:
 return bitcoinAddress(_that.confirmationSpeed);case SendPaymentOptions_Bolt11Invoice() when bolt11Invoice != null:
-return bolt11Invoice(_that.useSpark);case _:
+return bolt11Invoice(_that.preferSpark);case _:
   return null;
 
 }
@@ -3285,10 +3579,10 @@ as OnchainConfirmationSpeed,
 
 
 class SendPaymentOptions_Bolt11Invoice extends SendPaymentOptions {
-  const SendPaymentOptions_Bolt11Invoice({required this.useSpark}): super._();
+  const SendPaymentOptions_Bolt11Invoice({required this.preferSpark}): super._();
   
 
- final  bool useSpark;
+ final  bool preferSpark;
 
 /// Create a copy of SendPaymentOptions
 /// with the given fields replaced by the non-null parameter values.
@@ -3300,16 +3594,16 @@ $SendPaymentOptions_Bolt11InvoiceCopyWith<SendPaymentOptions_Bolt11Invoice> get 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendPaymentOptions_Bolt11Invoice&&(identical(other.useSpark, useSpark) || other.useSpark == useSpark));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendPaymentOptions_Bolt11Invoice&&(identical(other.preferSpark, preferSpark) || other.preferSpark == preferSpark));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,useSpark);
+int get hashCode => Object.hash(runtimeType,preferSpark);
 
 @override
 String toString() {
-  return 'SendPaymentOptions.bolt11Invoice(useSpark: $useSpark)';
+  return 'SendPaymentOptions.bolt11Invoice(preferSpark: $preferSpark)';
 }
 
 
@@ -3320,7 +3614,7 @@ abstract mixin class $SendPaymentOptions_Bolt11InvoiceCopyWith<$Res> implements 
   factory $SendPaymentOptions_Bolt11InvoiceCopyWith(SendPaymentOptions_Bolt11Invoice value, $Res Function(SendPaymentOptions_Bolt11Invoice) _then) = _$SendPaymentOptions_Bolt11InvoiceCopyWithImpl;
 @useResult
 $Res call({
- bool useSpark
+ bool preferSpark
 });
 
 
@@ -3337,9 +3631,9 @@ class _$SendPaymentOptions_Bolt11InvoiceCopyWithImpl<$Res>
 
 /// Create a copy of SendPaymentOptions
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? useSpark = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? preferSpark = null,}) {
   return _then(SendPaymentOptions_Bolt11Invoice(
-useSpark: null == useSpark ? _self.useSpark : useSpark // ignore: cast_nullable_to_non_nullable
+preferSpark: null == preferSpark ? _self.preferSpark : preferSpark // ignore: cast_nullable_to_non_nullable
 as bool,
   ));
 }

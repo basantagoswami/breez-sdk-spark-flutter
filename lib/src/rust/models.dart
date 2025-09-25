@@ -501,13 +501,13 @@ class Config {
 
 class ConnectRequest {
   final Config config;
-  final String mnemonic;
+  final Seed seed;
   final String storageDir;
 
-  const ConnectRequest({required this.config, required this.mnemonic, required this.storageDir});
+  const ConnectRequest({required this.config, required this.seed, required this.storageDir});
 
   @override
-  int get hashCode => config.hashCode ^ mnemonic.hashCode ^ storageDir.hashCode;
+  int get hashCode => config.hashCode ^ seed.hashCode ^ storageDir.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -515,7 +515,7 @@ class ConnectRequest {
       other is ConnectRequest &&
           runtimeType == other.runtimeType &&
           config == other.config &&
-          mnemonic == other.mnemonic &&
+          seed == other.seed &&
           storageDir == other.storageDir;
 }
 
@@ -535,6 +535,49 @@ class Credentials {
           runtimeType == other.runtimeType &&
           username == other.username &&
           password == other.password;
+}
+
+class CurrencyInfo {
+  final String name;
+  final int fractionSize;
+  final int? spacing;
+  final Symbol? symbol;
+  final Symbol? uniqSymbol;
+  final List<LocalizedName> localizedName;
+  final List<LocaleOverrides> localeOverrides;
+
+  const CurrencyInfo({
+    required this.name,
+    required this.fractionSize,
+    this.spacing,
+    this.symbol,
+    this.uniqSymbol,
+    required this.localizedName,
+    required this.localeOverrides,
+  });
+
+  @override
+  int get hashCode =>
+      name.hashCode ^
+      fractionSize.hashCode ^
+      spacing.hashCode ^
+      symbol.hashCode ^
+      uniqSymbol.hashCode ^
+      localizedName.hashCode ^
+      localeOverrides.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is CurrencyInfo &&
+          runtimeType == other.runtimeType &&
+          name == other.name &&
+          fractionSize == other.fractionSize &&
+          spacing == other.spacing &&
+          symbol == other.symbol &&
+          uniqSymbol == other.uniqSymbol &&
+          localizedName == other.localizedName &&
+          localeOverrides == other.localeOverrides;
 }
 
 class DepositInfo {
@@ -582,6 +625,21 @@ sealed class Fee with _$Fee {
 
   const factory Fee.fixed({required BigInt amount}) = Fee_Fixed;
   const factory Fee.rate({required BigInt satPerVbyte}) = Fee_Rate;
+}
+
+class FiatCurrency {
+  final String id;
+  final CurrencyInfo info;
+
+  const FiatCurrency({required this.id, required this.info});
+
+  @override
+  int get hashCode => id.hashCode ^ info.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FiatCurrency && runtimeType == other.runtimeType && id == other.id && info == other.info;
 }
 
 class GetInfoRequest {
@@ -703,6 +761,36 @@ class LightningAddressInfo {
           lightningAddress == other.lightningAddress &&
           lnurl == other.lnurl &&
           username == other.username;
+}
+
+class ListFiatCurrenciesResponse {
+  final List<FiatCurrency> currencies;
+
+  const ListFiatCurrenciesResponse({required this.currencies});
+
+  @override
+  int get hashCode => currencies.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ListFiatCurrenciesResponse &&
+          runtimeType == other.runtimeType &&
+          currencies == other.currencies;
+}
+
+class ListFiatRatesResponse {
+  final List<Rate> rates;
+
+  const ListFiatRatesResponse({required this.rates});
+
+  @override
+  int get hashCode => rates.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ListFiatRatesResponse && runtimeType == other.runtimeType && rates == other.rates;
 }
 
 class ListPaymentsRequest {
@@ -949,6 +1037,44 @@ class LnurlWithdrawRequestDetails {
           maxWithdrawable == other.maxWithdrawable;
 }
 
+class LocaleOverrides {
+  final String locale;
+  final int? spacing;
+  final Symbol symbol;
+
+  const LocaleOverrides({required this.locale, this.spacing, required this.symbol});
+
+  @override
+  int get hashCode => locale.hashCode ^ spacing.hashCode ^ symbol.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is LocaleOverrides &&
+          runtimeType == other.runtimeType &&
+          locale == other.locale &&
+          spacing == other.spacing &&
+          symbol == other.symbol;
+}
+
+class LocalizedName {
+  final String locale;
+  final String name;
+
+  const LocalizedName({required this.locale, required this.name});
+
+  @override
+  int get hashCode => locale.hashCode ^ name.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is LocalizedName &&
+          runtimeType == other.runtimeType &&
+          locale == other.locale &&
+          name == other.name;
+}
+
 class MessageSuccessActionData {
   final String message;
 
@@ -1158,6 +1284,21 @@ class PrepareSendPaymentResponse {
           amountSats == other.amountSats;
 }
 
+class Rate {
+  final String coin;
+  final double value;
+
+  const Rate({required this.coin, required this.value});
+
+  @override
+  int get hashCode => coin.hashCode ^ value.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Rate && runtimeType == other.runtimeType && coin == other.coin && value == other.value;
+}
+
 @freezed
 sealed class ReceivePaymentMethod with _$ReceivePaymentMethod {
   const ReceivePaymentMethod._();
@@ -1279,6 +1420,14 @@ class SatsPaymentDetails {
       other is SatsPaymentDetails && runtimeType == other.runtimeType && amount == other.amount;
 }
 
+@freezed
+sealed class Seed with _$Seed {
+  const Seed._();
+
+  const factory Seed.mnemonic({required String mnemonic, String? passphrase}) = Seed_Mnemonic;
+  const factory Seed.entropy(Uint8List field0) = Seed_Entropy;
+}
+
 class SendOnchainFeeQuote {
   final String id;
   final BigInt expiresAt;
@@ -1351,7 +1500,8 @@ sealed class SendPaymentOptions with _$SendPaymentOptions {
 
   const factory SendPaymentOptions.bitcoinAddress({required OnchainConfirmationSpeed confirmationSpeed}) =
       SendPaymentOptions_BitcoinAddress;
-  const factory SendPaymentOptions.bolt11Invoice({required bool useSpark}) = SendPaymentOptions_Bolt11Invoice;
+  const factory SendPaymentOptions.bolt11Invoice({required bool preferSpark}) =
+      SendPaymentOptions_Bolt11Invoice;
 }
 
 class SendPaymentRequest {
@@ -1521,6 +1671,28 @@ sealed class SuccessActionProcessed with _$SuccessActionProcessed {
   const factory SuccessActionProcessed.message({required MessageSuccessActionData data}) =
       SuccessActionProcessed_Message;
   const factory SuccessActionProcessed.url({required UrlSuccessActionData data}) = SuccessActionProcessed_Url;
+}
+
+class Symbol {
+  final String? grapheme;
+  final String? template;
+  final bool? rtl;
+  final int? position;
+
+  const Symbol({this.grapheme, this.template, this.rtl, this.position});
+
+  @override
+  int get hashCode => grapheme.hashCode ^ template.hashCode ^ rtl.hashCode ^ position.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is Symbol &&
+          runtimeType == other.runtimeType &&
+          grapheme == other.grapheme &&
+          template == other.template &&
+          rtl == other.rtl &&
+          position == other.position;
 }
 
 class SyncWalletRequest {
