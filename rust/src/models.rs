@@ -1,5 +1,5 @@
-pub use breez_sdk_common::input::*;
 pub use breez_sdk_common::fiat::*;
+pub use breez_sdk_common::input::*;
 pub use breez_sdk_common::lnurl::auth::*;
 pub use breez_sdk_common::lnurl::pay::*;
 pub use breez_sdk_common::network::BitcoinNetwork;
@@ -373,6 +373,7 @@ pub enum _PaymentDetails {
 #[frb(mirror(PaymentMetadata))]
 pub struct _PaymentMetadata {
     pub lnurl_pay_info: Option<LnurlPayInfo>,
+    pub lnurl_description: Option<String>,
 }
 
 #[frb(mirror(PaymentMethod))]
@@ -614,7 +615,7 @@ pub struct _CheckLightningAddressRequest {
 #[frb(mirror(RegisterLightningAddressRequest))]
 pub struct _RegisterLightningAddressRequest {
     pub username: String,
-    pub description: String,
+    pub description: Option<String>,
 }
 
 #[frb(mirror(LightningAddressInfo))]

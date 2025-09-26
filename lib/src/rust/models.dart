@@ -1390,9 +1390,9 @@ class RefundDepositResponse {
 
 class RegisterLightningAddressRequest {
   final String username;
-  final String description;
+  final String? description;
 
-  const RegisterLightningAddressRequest({required this.username, required this.description});
+  const RegisterLightningAddressRequest({required this.username, this.description});
 
   @override
   int get hashCode => username.hashCode ^ description.hashCode;

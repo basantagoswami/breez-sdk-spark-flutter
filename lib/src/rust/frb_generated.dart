@@ -2483,7 +2483,7 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
     if (arr.length != 2) throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
     return RegisterLightningAddressRequest(
       username: dco_decode_String(arr[0]),
-      description: dco_decode_String(arr[1]),
+      description: dco_decode_opt_String(arr[1]),
     );
   }
 
@@ -4490,7 +4490,7 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_username = sse_decode_String(deserializer);
-    var var_description = sse_decode_String(deserializer);
+    var var_description = sse_decode_opt_String(deserializer);
     return RegisterLightningAddressRequest(username: var_username, description: var_description);
   }
 
@@ -6335,7 +6335,7 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
   ) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_String(self.username, serializer);
-    sse_encode_String(self.description, serializer);
+    sse_encode_opt_String(self.description, serializer);
   }
 
   @protected

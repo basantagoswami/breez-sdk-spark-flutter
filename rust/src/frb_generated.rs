@@ -2049,7 +2049,7 @@ const _: fn() = || {
         let RegisterLightningAddressRequest =
             None::<crate::models::RegisterLightningAddressRequest>.unwrap();
         let _: String = RegisterLightningAddressRequest.username;
-        let _: String = RegisterLightningAddressRequest.description;
+        let _: Option<String> = RegisterLightningAddressRequest.description;
     }
     {
         let SatsPaymentDetails = None::<crate::models::SatsPaymentDetails>.unwrap();
@@ -3891,7 +3891,7 @@ impl SseDecode for crate::models::RegisterLightningAddressRequest {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut var_username = <String>::sse_decode(deserializer);
-        let mut var_description = <String>::sse_decode(deserializer);
+        let mut var_description = <Option<String>>::sse_decode(deserializer);
         return crate::models::RegisterLightningAddressRequest {
             username: var_username,
             description: var_description,
@@ -8035,7 +8035,7 @@ impl SseEncode for crate::models::RegisterLightningAddressRequest {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <String>::sse_encode(self.username, serializer);
-        <String>::sse_encode(self.description, serializer);
+        <Option<String>>::sse_encode(self.description, serializer);
     }
 }
 
