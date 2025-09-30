@@ -161,6 +161,7 @@ abstract class BreezSdkSparkLibApi extends BaseApi {
     required SdkBuilder that,
     required KeySetType keySetType,
     required bool useAddressIndex,
+    int? accountNumber,
   });
 
   SdkBuilder crateSdkBuilderSdkBuilderWithRestChainService({
@@ -861,6 +862,7 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
     required SdkBuilder that,
     required KeySetType keySetType,
     required bool useAddressIndex,
+    int? accountNumber,
   }) {
     return handler.executeSync(
       SyncTask(
@@ -872,6 +874,7 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
           );
           sse_encode_key_set_type(keySetType, serializer);
           sse_encode_bool(useAddressIndex, serializer);
+          sse_encode_opt_box_autoadd_u_32(accountNumber, serializer);
           return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 24)!;
         },
         codec: SseCodec(
@@ -880,7 +883,7 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
           decodeErrorData: null,
         ),
         constMeta: kCrateSdkBuilderSdkBuilderWithKeySetConstMeta,
-        argValues: [that, keySetType, useAddressIndex],
+        argValues: [that, keySetType, useAddressIndex, accountNumber],
         apiImpl: this,
       ),
     );
@@ -888,7 +891,7 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
 
   TaskConstMeta get kCrateSdkBuilderSdkBuilderWithKeySetConstMeta => const TaskConstMeta(
     debugName: "SdkBuilder_with_key_set",
-    argNames: ["that", "keySetType", "useAddressIndex"],
+    argNames: ["that", "keySetType", "useAddressIndex", "accountNumber"],
   );
 
   @override
@@ -6760,12 +6763,16 @@ class SdkBuilderImpl extends RustOpaque implements SdkBuilder {
 
   Future<BreezSdk> build() => BreezSdkSparkLib.instance.api.crateSdkBuilderSdkBuilderBuild(that: this);
 
-  SdkBuilder withKeySet({required KeySetType keySetType, required bool useAddressIndex}) =>
-      BreezSdkSparkLib.instance.api.crateSdkBuilderSdkBuilderWithKeySet(
-        that: this,
-        keySetType: keySetType,
-        useAddressIndex: useAddressIndex,
-      );
+  SdkBuilder withKeySet({
+    required KeySetType keySetType,
+    required bool useAddressIndex,
+    int? accountNumber,
+  }) => BreezSdkSparkLib.instance.api.crateSdkBuilderSdkBuilderWithKeySet(
+    that: this,
+    keySetType: keySetType,
+    useAddressIndex: useAddressIndex,
+    accountNumber: accountNumber,
+  );
 
   SdkBuilder withRestChainService({required String url, Credentials? credentials}) => BreezSdkSparkLib
       .instance

@@ -1349,12 +1349,14 @@ fn wire__crate__sdk_builder__SdkBuilder_with_key_set_impl(
             let api_that = <SdkBuilder>::sse_decode(&mut deserializer);
             let api_key_set_type = <crate::models::KeySetType>::sse_decode(&mut deserializer);
             let api_use_address_index = <bool>::sse_decode(&mut deserializer);
+            let api_account_number = <Option<u32>>::sse_decode(&mut deserializer);
             deserializer.end();
             transform_result_sse::<_, ()>((move || {
                 let output_ok = Result::<_, ()>::Ok(crate::sdk_builder::SdkBuilder::with_key_set(
                     api_that,
                     api_key_set_type,
                     api_use_address_index,
+                    api_account_number,
                 ))?;
                 Ok(output_ok)
             })())
