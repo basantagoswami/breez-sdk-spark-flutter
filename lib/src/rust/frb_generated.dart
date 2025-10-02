@@ -140,14 +140,17 @@ abstract class BreezSdkSparkLibApi extends BaseApi {
     required RegisterLightningAddressRequest request,
   });
 
-  bool crateSdkBreezSdkRemoveEventListener({required BreezSdk that, required String id});
+  Future<bool> crateSdkBreezSdkRemoveEventListener({required BreezSdk that, required String id});
 
   Future<SendPaymentResponse> crateSdkBreezSdkSendPayment({
     required BreezSdk that,
     required SendPaymentRequest request,
   });
 
-  SyncWalletResponse crateSdkBreezSdkSyncWallet({required BreezSdk that, required SyncWalletRequest request});
+  Future<SyncWalletResponse> crateSdkBreezSdkSyncWallet({
+    required BreezSdk that,
+    required SyncWalletRequest request,
+  });
 
   Future<BreezSdk> crateSdkBuilderSdkBuilderBuild({required SdkBuilder that});
 
@@ -210,21 +213,23 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
   @override
   Stream<SdkEvent> crateSdkBreezSdkAddEventListener({required BreezSdk that}) {
     final listener = RustStreamSink<SdkEvent>();
-    handler.executeSync(
-      SyncTask(
-        callFfi: () {
-          final serializer = SseSerializer(generalizedFrbRustBinding);
-          sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBreezSdk(
-            that,
-            serializer,
-          );
-          sse_encode_StreamSink_sdk_event_Sse(listener, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 1)!;
-        },
-        codec: SseCodec(decodeSuccessData: sse_decode_String, decodeErrorData: null),
-        constMeta: kCrateSdkBreezSdkAddEventListenerConstMeta,
-        argValues: [that, listener],
-        apiImpl: this,
+    unawaited(
+      handler.executeNormal(
+        NormalTask(
+          callFfi: (port_) {
+            final serializer = SseSerializer(generalizedFrbRustBinding);
+            sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBreezSdk(
+              that,
+              serializer,
+            );
+            sse_encode_StreamSink_sdk_event_Sse(listener, serializer);
+            pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 1, port: port_);
+          },
+          codec: SseCodec(decodeSuccessData: sse_decode_String, decodeErrorData: null),
+          constMeta: kCrateSdkBreezSdkAddEventListenerConstMeta,
+          argValues: [that, listener],
+          apiImpl: this,
+        ),
       ),
     );
     return listener.stream;
@@ -714,17 +719,17 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
       const TaskConstMeta(debugName: "BreezSdk_register_lightning_address", argNames: ["that", "request"]);
 
   @override
-  bool crateSdkBreezSdkRemoveEventListener({required BreezSdk that, required String id}) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
+  Future<bool> crateSdkBreezSdkRemoveEventListener({required BreezSdk that, required String id}) {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBreezSdk(
             that,
             serializer,
           );
           sse_encode_String(id, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 19)!;
+          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 19, port: port_);
         },
         codec: SseCodec(decodeSuccessData: sse_decode_bool, decodeErrorData: null),
         constMeta: kCrateSdkBreezSdkRemoveEventListenerConstMeta,
@@ -768,20 +773,20 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
       const TaskConstMeta(debugName: "BreezSdk_send_payment", argNames: ["that", "request"]);
 
   @override
-  SyncWalletResponse crateSdkBreezSdkSyncWallet({
+  Future<SyncWalletResponse> crateSdkBreezSdkSyncWallet({
     required BreezSdk that,
     required SyncWalletRequest request,
   }) {
-    return handler.executeSync(
-      SyncTask(
-        callFfi: () {
+    return handler.executeNormal(
+      NormalTask(
+        callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_Auto_Ref_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerBreezSdk(
             that,
             serializer,
           );
           sse_encode_box_autoadd_sync_wallet_request(request, serializer);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 21)!;
+          pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 21, port: port_);
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_sync_wallet_response,
@@ -1835,8 +1840,8 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
   GetInfoRequest dco_decode_get_info_request(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.isNotEmpty) throw Exception('unexpected arr length: expect 0 but see ${arr.length}');
-    return GetInfoRequest();
+    if (arr.length != 1) throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
+    return GetInfoRequest(ensureSynced: dco_decode_opt_box_autoadd_bool(arr[0]));
   }
 
   @protected
@@ -3660,7 +3665,8 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
   @protected
   GetInfoRequest sse_decode_get_info_request(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    return GetInfoRequest();
+    var var_ensureSynced = sse_decode_opt_box_autoadd_bool(deserializer);
+    return GetInfoRequest(ensureSynced: var_ensureSynced);
   }
 
   @protected
@@ -5647,6 +5653,7 @@ class BreezSdkSparkLibApiImpl extends BreezSdkSparkLibApiImplPlatform implements
   @protected
   void sse_encode_get_info_request(GetInfoRequest self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_opt_box_autoadd_bool(self.ensureSynced, serializer);
   }
 
   @protected
@@ -6735,13 +6742,13 @@ class BreezSdkImpl extends RustOpaque implements BreezSdk {
   Future<LightningAddressInfo> registerLightningAddress({required RegisterLightningAddressRequest request}) =>
       BreezSdkSparkLib.instance.api.crateSdkBreezSdkRegisterLightningAddress(that: this, request: request);
 
-  bool removeEventListener({required String id}) =>
+  Future<bool> removeEventListener({required String id}) =>
       BreezSdkSparkLib.instance.api.crateSdkBreezSdkRemoveEventListener(that: this, id: id);
 
   Future<SendPaymentResponse> sendPayment({required SendPaymentRequest request}) =>
       BreezSdkSparkLib.instance.api.crateSdkBreezSdkSendPayment(that: this, request: request);
 
-  SyncWalletResponse syncWallet({required SyncWalletRequest request}) =>
+  Future<SyncWalletResponse> syncWallet({required SyncWalletRequest request}) =>
       BreezSdkSparkLib.instance.api.crateSdkBreezSdkSyncWallet(that: this, request: request);
 }
 

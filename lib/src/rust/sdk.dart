@@ -65,9 +65,9 @@ abstract class BreezSdk implements RustOpaqueInterface {
 
   Future<LightningAddressInfo> registerLightningAddress({required RegisterLightningAddressRequest request});
 
-  bool removeEventListener({required String id});
+  Future<bool> removeEventListener({required String id});
 
   Future<SendPaymentResponse> sendPayment({required SendPaymentRequest request});
 
-  SyncWalletResponse syncWallet({required SyncWalletRequest request});
+  Future<SyncWalletResponse> syncWallet({required SyncWalletRequest request});
 }

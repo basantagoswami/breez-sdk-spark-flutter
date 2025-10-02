@@ -643,14 +643,17 @@ class FiatCurrency {
 }
 
 class GetInfoRequest {
-  const GetInfoRequest();
+  final bool? ensureSynced;
+
+  const GetInfoRequest({this.ensureSynced});
 
   @override
-  int get hashCode => 0;
+  int get hashCode => ensureSynced.hashCode;
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is GetInfoRequest && runtimeType == other.runtimeType;
+      identical(this, other) ||
+      other is GetInfoRequest && runtimeType == other.runtimeType && ensureSynced == other.ensureSynced;
 }
 
 class GetInfoResponse {
