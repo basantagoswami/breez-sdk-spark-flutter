@@ -1503,7 +1503,7 @@ sealed class SendPaymentOptions with _$SendPaymentOptions {
 
   const factory SendPaymentOptions.bitcoinAddress({required OnchainConfirmationSpeed confirmationSpeed}) =
       SendPaymentOptions_BitcoinAddress;
-  const factory SendPaymentOptions.bolt11Invoice({required bool preferSpark}) =
+  const factory SendPaymentOptions.bolt11Invoice({required bool preferSpark, int? completionTimeoutSecs}) =
       SendPaymentOptions_Bolt11Invoice;
 }
 
@@ -1760,4 +1760,41 @@ class UrlSuccessActionData {
           description == other.description &&
           url == other.url &&
           matchesCallbackDomain == other.matchesCallbackDomain;
+}
+
+@freezed
+sealed class WaitForPaymentIdentifier with _$WaitForPaymentIdentifier {
+  const WaitForPaymentIdentifier._();
+
+  const factory WaitForPaymentIdentifier.paymentId(String field0) = WaitForPaymentIdentifier_PaymentId;
+  const factory WaitForPaymentIdentifier.paymentRequest(String field0) =
+      WaitForPaymentIdentifier_PaymentRequest;
+}
+
+class WaitForPaymentRequest {
+  final WaitForPaymentIdentifier identifier;
+
+  const WaitForPaymentRequest({required this.identifier});
+
+  @override
+  int get hashCode => identifier.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is WaitForPaymentRequest && runtimeType == other.runtimeType && identifier == other.identifier;
+}
+
+class WaitForPaymentResponse {
+  final Payment payment;
+
+  const WaitForPaymentResponse({required this.payment});
+
+  @override
+  int get hashCode => payment.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is WaitForPaymentResponse && runtimeType == other.runtimeType && payment == other.payment;
 }

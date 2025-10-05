@@ -35,7 +35,7 @@ abstract class BreezSdk implements RustOpaqueInterface {
 
   Future<void> deleteLightningAddress();
 
-  void disconnect();
+  Future<void> disconnect();
 
   Future<GetInfoResponse> getInfo({required GetInfoRequest request});
 
@@ -70,4 +70,6 @@ abstract class BreezSdk implements RustOpaqueInterface {
   Future<SendPaymentResponse> sendPayment({required SendPaymentRequest request});
 
   Future<SyncWalletResponse> syncWallet({required SyncWalletRequest request});
+
+  Future<WaitForPaymentResponse> waitForPayment({required WaitForPaymentRequest request});
 }

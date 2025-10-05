@@ -3457,11 +3457,11 @@ return bolt11Invoice(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( OnchainConfirmationSpeed confirmationSpeed)?  bitcoinAddress,TResult Function( bool preferSpark)?  bolt11Invoice,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( OnchainConfirmationSpeed confirmationSpeed)?  bitcoinAddress,TResult Function( bool preferSpark,  int? completionTimeoutSecs)?  bolt11Invoice,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case SendPaymentOptions_BitcoinAddress() when bitcoinAddress != null:
 return bitcoinAddress(_that.confirmationSpeed);case SendPaymentOptions_Bolt11Invoice() when bolt11Invoice != null:
-return bolt11Invoice(_that.preferSpark);case _:
+return bolt11Invoice(_that.preferSpark,_that.completionTimeoutSecs);case _:
   return orElse();
 
 }
@@ -3479,11 +3479,11 @@ return bolt11Invoice(_that.preferSpark);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( OnchainConfirmationSpeed confirmationSpeed)  bitcoinAddress,required TResult Function( bool preferSpark)  bolt11Invoice,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( OnchainConfirmationSpeed confirmationSpeed)  bitcoinAddress,required TResult Function( bool preferSpark,  int? completionTimeoutSecs)  bolt11Invoice,}) {final _that = this;
 switch (_that) {
 case SendPaymentOptions_BitcoinAddress():
 return bitcoinAddress(_that.confirmationSpeed);case SendPaymentOptions_Bolt11Invoice():
-return bolt11Invoice(_that.preferSpark);}
+return bolt11Invoice(_that.preferSpark,_that.completionTimeoutSecs);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -3497,11 +3497,11 @@ return bolt11Invoice(_that.preferSpark);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( OnchainConfirmationSpeed confirmationSpeed)?  bitcoinAddress,TResult? Function( bool preferSpark)?  bolt11Invoice,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( OnchainConfirmationSpeed confirmationSpeed)?  bitcoinAddress,TResult? Function( bool preferSpark,  int? completionTimeoutSecs)?  bolt11Invoice,}) {final _that = this;
 switch (_that) {
 case SendPaymentOptions_BitcoinAddress() when bitcoinAddress != null:
 return bitcoinAddress(_that.confirmationSpeed);case SendPaymentOptions_Bolt11Invoice() when bolt11Invoice != null:
-return bolt11Invoice(_that.preferSpark);case _:
+return bolt11Invoice(_that.preferSpark,_that.completionTimeoutSecs);case _:
   return null;
 
 }
@@ -3579,10 +3579,11 @@ as OnchainConfirmationSpeed,
 
 
 class SendPaymentOptions_Bolt11Invoice extends SendPaymentOptions {
-  const SendPaymentOptions_Bolt11Invoice({required this.preferSpark}): super._();
+  const SendPaymentOptions_Bolt11Invoice({required this.preferSpark, this.completionTimeoutSecs}): super._();
   
 
  final  bool preferSpark;
+ final  int? completionTimeoutSecs;
 
 /// Create a copy of SendPaymentOptions
 /// with the given fields replaced by the non-null parameter values.
@@ -3594,16 +3595,16 @@ $SendPaymentOptions_Bolt11InvoiceCopyWith<SendPaymentOptions_Bolt11Invoice> get 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendPaymentOptions_Bolt11Invoice&&(identical(other.preferSpark, preferSpark) || other.preferSpark == preferSpark));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SendPaymentOptions_Bolt11Invoice&&(identical(other.preferSpark, preferSpark) || other.preferSpark == preferSpark)&&(identical(other.completionTimeoutSecs, completionTimeoutSecs) || other.completionTimeoutSecs == completionTimeoutSecs));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,preferSpark);
+int get hashCode => Object.hash(runtimeType,preferSpark,completionTimeoutSecs);
 
 @override
 String toString() {
-  return 'SendPaymentOptions.bolt11Invoice(preferSpark: $preferSpark)';
+  return 'SendPaymentOptions.bolt11Invoice(preferSpark: $preferSpark, completionTimeoutSecs: $completionTimeoutSecs)';
 }
 
 
@@ -3614,7 +3615,7 @@ abstract mixin class $SendPaymentOptions_Bolt11InvoiceCopyWith<$Res> implements 
   factory $SendPaymentOptions_Bolt11InvoiceCopyWith(SendPaymentOptions_Bolt11Invoice value, $Res Function(SendPaymentOptions_Bolt11Invoice) _then) = _$SendPaymentOptions_Bolt11InvoiceCopyWithImpl;
 @useResult
 $Res call({
- bool preferSpark
+ bool preferSpark, int? completionTimeoutSecs
 });
 
 
@@ -3631,10 +3632,11 @@ class _$SendPaymentOptions_Bolt11InvoiceCopyWithImpl<$Res>
 
 /// Create a copy of SendPaymentOptions
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? preferSpark = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? preferSpark = null,Object? completionTimeoutSecs = freezed,}) {
   return _then(SendPaymentOptions_Bolt11Invoice(
 preferSpark: null == preferSpark ? _self.preferSpark : preferSpark // ignore: cast_nullable_to_non_nullable
-as bool,
+as bool,completionTimeoutSecs: freezed == completionTimeoutSecs ? _self.completionTimeoutSecs : completionTimeoutSecs // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 
@@ -4664,6 +4666,329 @@ class _$SuccessActionProcessed_UrlCopyWithImpl<$Res>
   return _then(SuccessActionProcessed_Url(
 data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
 as UrlSuccessActionData,
+  ));
+}
+
+
+}
+
+/// @nodoc
+mixin _$WaitForPaymentIdentifier {
+
+ String get field0;
+/// Create a copy of WaitForPaymentIdentifier
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$WaitForPaymentIdentifierCopyWith<WaitForPaymentIdentifier> get copyWith => _$WaitForPaymentIdentifierCopyWithImpl<WaitForPaymentIdentifier>(this as WaitForPaymentIdentifier, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WaitForPaymentIdentifier&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,field0);
+
+@override
+String toString() {
+  return 'WaitForPaymentIdentifier(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $WaitForPaymentIdentifierCopyWith<$Res>  {
+  factory $WaitForPaymentIdentifierCopyWith(WaitForPaymentIdentifier value, $Res Function(WaitForPaymentIdentifier) _then) = _$WaitForPaymentIdentifierCopyWithImpl;
+@useResult
+$Res call({
+ String field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$WaitForPaymentIdentifierCopyWithImpl<$Res>
+    implements $WaitForPaymentIdentifierCopyWith<$Res> {
+  _$WaitForPaymentIdentifierCopyWithImpl(this._self, this._then);
+
+  final WaitForPaymentIdentifier _self;
+  final $Res Function(WaitForPaymentIdentifier) _then;
+
+/// Create a copy of WaitForPaymentIdentifier
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? field0 = null,}) {
+  return _then(_self.copyWith(
+field0: null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+}
+
+
+/// Adds pattern-matching-related methods to [WaitForPaymentIdentifier].
+extension WaitForPaymentIdentifierPatterns on WaitForPaymentIdentifier {
+/// A variant of `map` that fallback to returning `orElse`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( WaitForPaymentIdentifier_PaymentId value)?  paymentId,TResult Function( WaitForPaymentIdentifier_PaymentRequest value)?  paymentRequest,required TResult orElse(),}){
+final _that = this;
+switch (_that) {
+case WaitForPaymentIdentifier_PaymentId() when paymentId != null:
+return paymentId(_that);case WaitForPaymentIdentifier_PaymentRequest() when paymentRequest != null:
+return paymentRequest(_that);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// Callbacks receives the raw object, upcasted.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case final Subclass2 value:
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( WaitForPaymentIdentifier_PaymentId value)  paymentId,required TResult Function( WaitForPaymentIdentifier_PaymentRequest value)  paymentRequest,}){
+final _that = this;
+switch (_that) {
+case WaitForPaymentIdentifier_PaymentId():
+return paymentId(_that);case WaitForPaymentIdentifier_PaymentRequest():
+return paymentRequest(_that);}
+}
+/// A variant of `map` that fallback to returning `null`.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case final Subclass value:
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( WaitForPaymentIdentifier_PaymentId value)?  paymentId,TResult? Function( WaitForPaymentIdentifier_PaymentRequest value)?  paymentRequest,}){
+final _that = this;
+switch (_that) {
+case WaitForPaymentIdentifier_PaymentId() when paymentId != null:
+return paymentId(_that);case WaitForPaymentIdentifier_PaymentRequest() when paymentRequest != null:
+return paymentRequest(_that);case _:
+  return null;
+
+}
+}
+/// A variant of `when` that fallback to an `orElse` callback.
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return orElse();
+/// }
+/// ```
+
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function( String field0)?  paymentId,TResult Function( String field0)?  paymentRequest,required TResult orElse(),}) {final _that = this;
+switch (_that) {
+case WaitForPaymentIdentifier_PaymentId() when paymentId != null:
+return paymentId(_that.field0);case WaitForPaymentIdentifier_PaymentRequest() when paymentRequest != null:
+return paymentRequest(_that.field0);case _:
+  return orElse();
+
+}
+}
+/// A `switch`-like method, using callbacks.
+///
+/// As opposed to `map`, this offers destructuring.
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case Subclass2(:final field2):
+///     return ...;
+/// }
+/// ```
+
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function( String field0)  paymentId,required TResult Function( String field0)  paymentRequest,}) {final _that = this;
+switch (_that) {
+case WaitForPaymentIdentifier_PaymentId():
+return paymentId(_that.field0);case WaitForPaymentIdentifier_PaymentRequest():
+return paymentRequest(_that.field0);}
+}
+/// A variant of `when` that fallback to returning `null`
+///
+/// It is equivalent to doing:
+/// ```dart
+/// switch (sealedClass) {
+///   case Subclass(:final field):
+///     return ...;
+///   case _:
+///     return null;
+/// }
+/// ```
+
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function( String field0)?  paymentId,TResult? Function( String field0)?  paymentRequest,}) {final _that = this;
+switch (_that) {
+case WaitForPaymentIdentifier_PaymentId() when paymentId != null:
+return paymentId(_that.field0);case WaitForPaymentIdentifier_PaymentRequest() when paymentRequest != null:
+return paymentRequest(_that.field0);case _:
+  return null;
+
+}
+}
+
+}
+
+/// @nodoc
+
+
+class WaitForPaymentIdentifier_PaymentId extends WaitForPaymentIdentifier {
+  const WaitForPaymentIdentifier_PaymentId(this.field0): super._();
+  
+
+@override final  String field0;
+
+/// Create a copy of WaitForPaymentIdentifier
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$WaitForPaymentIdentifier_PaymentIdCopyWith<WaitForPaymentIdentifier_PaymentId> get copyWith => _$WaitForPaymentIdentifier_PaymentIdCopyWithImpl<WaitForPaymentIdentifier_PaymentId>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WaitForPaymentIdentifier_PaymentId&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,field0);
+
+@override
+String toString() {
+  return 'WaitForPaymentIdentifier.paymentId(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $WaitForPaymentIdentifier_PaymentIdCopyWith<$Res> implements $WaitForPaymentIdentifierCopyWith<$Res> {
+  factory $WaitForPaymentIdentifier_PaymentIdCopyWith(WaitForPaymentIdentifier_PaymentId value, $Res Function(WaitForPaymentIdentifier_PaymentId) _then) = _$WaitForPaymentIdentifier_PaymentIdCopyWithImpl;
+@override @useResult
+$Res call({
+ String field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$WaitForPaymentIdentifier_PaymentIdCopyWithImpl<$Res>
+    implements $WaitForPaymentIdentifier_PaymentIdCopyWith<$Res> {
+  _$WaitForPaymentIdentifier_PaymentIdCopyWithImpl(this._self, this._then);
+
+  final WaitForPaymentIdentifier_PaymentId _self;
+  final $Res Function(WaitForPaymentIdentifier_PaymentId) _then;
+
+/// Create a copy of WaitForPaymentIdentifier
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(WaitForPaymentIdentifier_PaymentId(
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class WaitForPaymentIdentifier_PaymentRequest extends WaitForPaymentIdentifier {
+  const WaitForPaymentIdentifier_PaymentRequest(this.field0): super._();
+  
+
+@override final  String field0;
+
+/// Create a copy of WaitForPaymentIdentifier
+/// with the given fields replaced by the non-null parameter values.
+@override @JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$WaitForPaymentIdentifier_PaymentRequestCopyWith<WaitForPaymentIdentifier_PaymentRequest> get copyWith => _$WaitForPaymentIdentifier_PaymentRequestCopyWithImpl<WaitForPaymentIdentifier_PaymentRequest>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is WaitForPaymentIdentifier_PaymentRequest&&(identical(other.field0, field0) || other.field0 == field0));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,field0);
+
+@override
+String toString() {
+  return 'WaitForPaymentIdentifier.paymentRequest(field0: $field0)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $WaitForPaymentIdentifier_PaymentRequestCopyWith<$Res> implements $WaitForPaymentIdentifierCopyWith<$Res> {
+  factory $WaitForPaymentIdentifier_PaymentRequestCopyWith(WaitForPaymentIdentifier_PaymentRequest value, $Res Function(WaitForPaymentIdentifier_PaymentRequest) _then) = _$WaitForPaymentIdentifier_PaymentRequestCopyWithImpl;
+@override @useResult
+$Res call({
+ String field0
+});
+
+
+
+
+}
+/// @nodoc
+class _$WaitForPaymentIdentifier_PaymentRequestCopyWithImpl<$Res>
+    implements $WaitForPaymentIdentifier_PaymentRequestCopyWith<$Res> {
+  _$WaitForPaymentIdentifier_PaymentRequestCopyWithImpl(this._self, this._then);
+
+  final WaitForPaymentIdentifier_PaymentRequest _self;
+  final $Res Function(WaitForPaymentIdentifier_PaymentRequest) _then;
+
+/// Create a copy of WaitForPaymentIdentifier
+/// with the given fields replaced by the non-null parameter values.
+@override @pragma('vm:prefer-inline') $Res call({Object? field0 = null,}) {
+  return _then(WaitForPaymentIdentifier_PaymentRequest(
+null == field0 ? _self.field0 : field0 // ignore: cast_nullable_to_non_nullable
+as String,
   ));
 }
 
