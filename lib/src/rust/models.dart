@@ -68,6 +68,14 @@ sealed class Amount with _$Amount {
       Amount_Currency;
 }
 
+@freezed
+sealed class AssetFilter with _$AssetFilter {
+  const AssetFilter._();
+
+  const factory AssetFilter.bitcoin() = AssetFilter_Bitcoin;
+  const factory AssetFilter.token({String? tokenIdentifier}) = AssetFilter_Token;
+}
+
 class Bip21Details {
   final BigInt? amountSat;
   final String? assetId;
@@ -658,16 +666,20 @@ class GetInfoRequest {
 
 class GetInfoResponse {
   final BigInt balanceSats;
+  final Map<String, TokenBalance> tokenBalances;
 
-  const GetInfoResponse({required this.balanceSats});
+  const GetInfoResponse({required this.balanceSats, required this.tokenBalances});
 
   @override
-  int get hashCode => balanceSats.hashCode;
+  int get hashCode => balanceSats.hashCode ^ tokenBalances.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is GetInfoResponse && runtimeType == other.runtimeType && balanceSats == other.balanceSats;
+      other is GetInfoResponse &&
+          runtimeType == other.runtimeType &&
+          balanceSats == other.balanceSats &&
+          tokenBalances == other.tokenBalances;
 }
 
 class GetPaymentRequest {
@@ -696,6 +708,38 @@ class GetPaymentResponse {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is GetPaymentResponse && runtimeType == other.runtimeType && payment == other.payment;
+}
+
+class GetTokensMetadataRequest {
+  final List<String> tokenIdentifiers;
+
+  const GetTokensMetadataRequest({required this.tokenIdentifiers});
+
+  @override
+  int get hashCode => tokenIdentifiers.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is GetTokensMetadataRequest &&
+          runtimeType == other.runtimeType &&
+          tokenIdentifiers == other.tokenIdentifiers;
+}
+
+class GetTokensMetadataResponse {
+  final List<TokenMetadata> tokensMetadata;
+
+  const GetTokensMetadataResponse({required this.tokensMetadata});
+
+  @override
+  int get hashCode => tokensMetadata.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is GetTokensMetadataResponse &&
+          runtimeType == other.runtimeType &&
+          tokensMetadata == other.tokensMetadata;
 }
 
 @freezed
@@ -797,21 +841,50 @@ class ListFiatRatesResponse {
 }
 
 class ListPaymentsRequest {
+  final List<PaymentType>? typeFilter;
+  final List<PaymentStatus>? statusFilter;
+  final AssetFilter? assetFilter;
+  final BigInt? fromTimestamp;
+  final BigInt? toTimestamp;
   final int? offset;
   final int? limit;
+  final bool? sortAscending;
 
-  const ListPaymentsRequest({this.offset, this.limit});
+  const ListPaymentsRequest({
+    this.typeFilter,
+    this.statusFilter,
+    this.assetFilter,
+    this.fromTimestamp,
+    this.toTimestamp,
+    this.offset,
+    this.limit,
+    this.sortAscending,
+  });
 
   @override
-  int get hashCode => offset.hashCode ^ limit.hashCode;
+  int get hashCode =>
+      typeFilter.hashCode ^
+      statusFilter.hashCode ^
+      assetFilter.hashCode ^
+      fromTimestamp.hashCode ^
+      toTimestamp.hashCode ^
+      offset.hashCode ^
+      limit.hashCode ^
+      sortAscending.hashCode;
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is ListPaymentsRequest &&
           runtimeType == other.runtimeType &&
+          typeFilter == other.typeFilter &&
+          statusFilter == other.statusFilter &&
+          assetFilter == other.assetFilter &&
+          fromTimestamp == other.fromTimestamp &&
+          toTimestamp == other.toTimestamp &&
           offset == other.offset &&
-          limit == other.limit;
+          limit == other.limit &&
+          sortAscending == other.sortAscending;
 }
 
 class ListPaymentsResponse {
@@ -1148,6 +1221,8 @@ sealed class PaymentDetails with _$PaymentDetails {
   const PaymentDetails._();
 
   const factory PaymentDetails.spark() = PaymentDetails_Spark;
+  const factory PaymentDetails.token({required TokenMetadata metadata, required String txHash}) =
+      PaymentDetails_Token;
   const factory PaymentDetails.lightning({
     String? description,
     String? preimage,
@@ -1160,7 +1235,7 @@ sealed class PaymentDetails with _$PaymentDetails {
   const factory PaymentDetails.deposit({required String txId}) = PaymentDetails_Deposit;
 }
 
-enum PaymentMethod { lightning, spark, deposit, withdraw, unknown }
+enum PaymentMethod { lightning, spark, token, deposit, withdraw, unknown }
 
 class PaymentRequestSource {
   final String? bip21Uri;
@@ -1253,12 +1328,13 @@ class PrepareLnurlPayResponse {
 
 class PrepareSendPaymentRequest {
   final String paymentRequest;
-  final BigInt? amountSats;
+  final BigInt? amount;
+  final String? tokenIdentifier;
 
-  const PrepareSendPaymentRequest({required this.paymentRequest, this.amountSats});
+  const PrepareSendPaymentRequest({required this.paymentRequest, this.amount, this.tokenIdentifier});
 
   @override
-  int get hashCode => paymentRequest.hashCode ^ amountSats.hashCode;
+  int get hashCode => paymentRequest.hashCode ^ amount.hashCode ^ tokenIdentifier.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -1266,17 +1342,19 @@ class PrepareSendPaymentRequest {
       other is PrepareSendPaymentRequest &&
           runtimeType == other.runtimeType &&
           paymentRequest == other.paymentRequest &&
-          amountSats == other.amountSats;
+          amount == other.amount &&
+          tokenIdentifier == other.tokenIdentifier;
 }
 
 class PrepareSendPaymentResponse {
   final SendPaymentMethod paymentMethod;
-  final BigInt amountSats;
+  final BigInt amount;
+  final String? tokenIdentifier;
 
-  const PrepareSendPaymentResponse({required this.paymentMethod, required this.amountSats});
+  const PrepareSendPaymentResponse({required this.paymentMethod, required this.amount, this.tokenIdentifier});
 
   @override
-  int get hashCode => paymentMethod.hashCode ^ amountSats.hashCode;
+  int get hashCode => paymentMethod.hashCode ^ amount.hashCode ^ tokenIdentifier.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -1284,7 +1362,8 @@ class PrepareSendPaymentResponse {
       other is PrepareSendPaymentResponse &&
           runtimeType == other.runtimeType &&
           paymentMethod == other.paymentMethod &&
-          amountSats == other.amountSats;
+          amount == other.amount &&
+          tokenIdentifier == other.tokenIdentifier;
 }
 
 class Rate {
@@ -1493,8 +1572,11 @@ sealed class SendPaymentMethod with _$SendPaymentMethod {
     BigInt? sparkTransferFeeSats,
     required BigInt lightningFeeSats,
   }) = SendPaymentMethod_Bolt11Invoice;
-  const factory SendPaymentMethod.sparkAddress({required String address, required BigInt feeSats}) =
-      SendPaymentMethod_SparkAddress;
+  const factory SendPaymentMethod.sparkAddress({
+    required String address,
+    required BigInt fee,
+    String? tokenIdentifier,
+  }) = SendPaymentMethod_SparkAddress;
 }
 
 @freezed
@@ -1718,6 +1800,67 @@ class SyncWalletResponse {
   @override
   bool operator ==(Object other) =>
       identical(this, other) || other is SyncWalletResponse && runtimeType == other.runtimeType;
+}
+
+class TokenBalance {
+  final BigInt balance;
+  final TokenMetadata tokenMetadata;
+
+  const TokenBalance({required this.balance, required this.tokenMetadata});
+
+  @override
+  int get hashCode => balance.hashCode ^ tokenMetadata.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TokenBalance &&
+          runtimeType == other.runtimeType &&
+          balance == other.balance &&
+          tokenMetadata == other.tokenMetadata;
+}
+
+class TokenMetadata {
+  final String identifier;
+  final String issuerPublicKey;
+  final String name;
+  final String ticker;
+  final int decimals;
+  final BigInt maxSupply;
+  final bool isFreezable;
+
+  const TokenMetadata({
+    required this.identifier,
+    required this.issuerPublicKey,
+    required this.name,
+    required this.ticker,
+    required this.decimals,
+    required this.maxSupply,
+    required this.isFreezable,
+  });
+
+  @override
+  int get hashCode =>
+      identifier.hashCode ^
+      issuerPublicKey.hashCode ^
+      name.hashCode ^
+      ticker.hashCode ^
+      decimals.hashCode ^
+      maxSupply.hashCode ^
+      isFreezable.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TokenMetadata &&
+          runtimeType == other.runtimeType &&
+          identifier == other.identifier &&
+          issuerPublicKey == other.issuerPublicKey &&
+          name == other.name &&
+          ticker == other.ticker &&
+          decimals == other.decimals &&
+          maxSupply == other.maxSupply &&
+          isFreezable == other.isFreezable;
 }
 
 class TokensPaymentDetails {

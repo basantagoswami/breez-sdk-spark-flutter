@@ -62,6 +62,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   );
 
   @protected
+  Map<String, TokenBalance> dco_decode_Map_String_token_balance_None(dynamic raw);
+
+  @protected
   ArcStorage dco_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerArcdynStorage(
     dynamic raw,
   );
@@ -82,6 +85,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   String dco_decode_String(dynamic raw);
 
   @protected
+  BigInt dco_decode_U128(dynamic raw);
+
+  @protected
   AesSuccessActionData dco_decode_aes_success_action_data(dynamic raw);
 
   @protected
@@ -92,6 +98,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   Amount dco_decode_amount(dynamic raw);
+
+  @protected
+  AssetFilter dco_decode_asset_filter(dynamic raw);
 
   @protected
   Bip21Details dco_decode_bip_21_details(dynamic raw);
@@ -151,6 +160,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   Amount dco_decode_box_autoadd_amount(dynamic raw);
 
   @protected
+  AssetFilter dco_decode_box_autoadd_asset_filter(dynamic raw);
+
+  @protected
   Bip21Details dco_decode_box_autoadd_bip_21_details(dynamic raw);
 
   @protected
@@ -197,6 +209,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   GetPaymentRequest dco_decode_box_autoadd_get_payment_request(dynamic raw);
+
+  @protected
+  GetTokensMetadataRequest dco_decode_box_autoadd_get_tokens_metadata_request(dynamic raw);
 
   @protected
   LightningAddressDetails dco_decode_box_autoadd_lightning_address_details(dynamic raw);
@@ -289,6 +304,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   SyncWalletRequest dco_decode_box_autoadd_sync_wallet_request(dynamic raw);
 
   @protected
+  TokenMetadata dco_decode_box_autoadd_token_metadata(dynamic raw);
+
+  @protected
   TokensPaymentDetails dco_decode_box_autoadd_tokens_payment_details(dynamic raw);
 
   @protected
@@ -352,6 +370,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   GetPaymentResponse dco_decode_get_payment_response(dynamic raw);
 
   @protected
+  GetTokensMetadataRequest dco_decode_get_tokens_metadata_request(dynamic raw);
+
+  @protected
+  GetTokensMetadataResponse dco_decode_get_tokens_metadata_response(dynamic raw);
+
+  @protected
   int dco_decode_i_32(dynamic raw);
 
   @protected
@@ -406,6 +430,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   List<Payment> dco_decode_list_payment(dynamic raw);
 
   @protected
+  List<PaymentStatus> dco_decode_list_payment_status(dynamic raw);
+
+  @protected
+  List<PaymentType> dco_decode_list_payment_type(dynamic raw);
+
+  @protected
   ListPaymentsRequest dco_decode_list_payments_request(dynamic raw);
 
   @protected
@@ -416,6 +446,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   List<Rate> dco_decode_list_rate(dynamic raw);
+
+  @protected
+  List<(String, TokenBalance)> dco_decode_list_record_string_token_balance(dynamic raw);
+
+  @protected
+  List<TokenMetadata> dco_decode_list_token_metadata(dynamic raw);
 
   @protected
   ListUnclaimedDepositsRequest dco_decode_list_unclaimed_deposits_request(dynamic raw);
@@ -463,7 +499,13 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   String? dco_decode_opt_String(dynamic raw);
 
   @protected
+  BigInt? dco_decode_opt_U128(dynamic raw);
+
+  @protected
   Amount? dco_decode_opt_box_autoadd_amount(dynamic raw);
+
+  @protected
+  AssetFilter? dco_decode_opt_box_autoadd_asset_filter(dynamic raw);
 
   @protected
   bool? dco_decode_opt_box_autoadd_bool(dynamic raw);
@@ -511,6 +553,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   BigInt? dco_decode_opt_box_autoadd_u_64(dynamic raw);
 
   @protected
+  List<PaymentStatus>? dco_decode_opt_list_payment_status(dynamic raw);
+
+  @protected
+  List<PaymentType>? dco_decode_opt_list_payment_type(dynamic raw);
+
+  @protected
   Payment dco_decode_payment(dynamic raw);
 
   @protected
@@ -551,6 +599,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   ReceivePaymentResponse dco_decode_receive_payment_response(dynamic raw);
+
+  @protected
+  (String, TokenBalance) dco_decode_record_string_token_balance(dynamic raw);
 
   @protected
   RefundDepositRequest dco_decode_refund_deposit_request(dynamic raw);
@@ -622,6 +673,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   SyncWalletResponse dco_decode_sync_wallet_response(dynamic raw);
 
   @protected
+  TokenBalance dco_decode_token_balance(dynamic raw);
+
+  @protected
+  TokenMetadata dco_decode_token_metadata(dynamic raw);
+
+  @protected
   TokensPaymentDetails dco_decode_tokens_payment_details(dynamic raw);
 
   @protected
@@ -684,6 +741,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   );
 
   @protected
+  Map<String, TokenBalance> sse_decode_Map_String_token_balance_None(SseDeserializer deserializer);
+
+  @protected
   ArcStorage sse_decode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerArcdynStorage(
     SseDeserializer deserializer,
   );
@@ -708,6 +768,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   String sse_decode_String(SseDeserializer deserializer);
 
   @protected
+  BigInt sse_decode_U128(SseDeserializer deserializer);
+
+  @protected
   AesSuccessActionData sse_decode_aes_success_action_data(SseDeserializer deserializer);
 
   @protected
@@ -718,6 +781,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   Amount sse_decode_amount(SseDeserializer deserializer);
+
+  @protected
+  AssetFilter sse_decode_asset_filter(SseDeserializer deserializer);
 
   @protected
   Bip21Details sse_decode_bip_21_details(SseDeserializer deserializer);
@@ -781,6 +847,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   Amount sse_decode_box_autoadd_amount(SseDeserializer deserializer);
 
   @protected
+  AssetFilter sse_decode_box_autoadd_asset_filter(SseDeserializer deserializer);
+
+  @protected
   Bip21Details sse_decode_box_autoadd_bip_21_details(SseDeserializer deserializer);
 
   @protected
@@ -831,6 +900,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   GetPaymentRequest sse_decode_box_autoadd_get_payment_request(SseDeserializer deserializer);
+
+  @protected
+  GetTokensMetadataRequest sse_decode_box_autoadd_get_tokens_metadata_request(SseDeserializer deserializer);
 
   @protected
   LightningAddressDetails sse_decode_box_autoadd_lightning_address_details(SseDeserializer deserializer);
@@ -931,6 +1003,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   SyncWalletRequest sse_decode_box_autoadd_sync_wallet_request(SseDeserializer deserializer);
 
   @protected
+  TokenMetadata sse_decode_box_autoadd_token_metadata(SseDeserializer deserializer);
+
+  @protected
   TokensPaymentDetails sse_decode_box_autoadd_tokens_payment_details(SseDeserializer deserializer);
 
   @protected
@@ -994,6 +1069,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   GetPaymentResponse sse_decode_get_payment_response(SseDeserializer deserializer);
 
   @protected
+  GetTokensMetadataRequest sse_decode_get_tokens_metadata_request(SseDeserializer deserializer);
+
+  @protected
+  GetTokensMetadataResponse sse_decode_get_tokens_metadata_response(SseDeserializer deserializer);
+
+  @protected
   int sse_decode_i_32(SseDeserializer deserializer);
 
   @protected
@@ -1048,6 +1129,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   List<Payment> sse_decode_list_payment(SseDeserializer deserializer);
 
   @protected
+  List<PaymentStatus> sse_decode_list_payment_status(SseDeserializer deserializer);
+
+  @protected
+  List<PaymentType> sse_decode_list_payment_type(SseDeserializer deserializer);
+
+  @protected
   ListPaymentsRequest sse_decode_list_payments_request(SseDeserializer deserializer);
 
   @protected
@@ -1058,6 +1145,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   List<Rate> sse_decode_list_rate(SseDeserializer deserializer);
+
+  @protected
+  List<(String, TokenBalance)> sse_decode_list_record_string_token_balance(SseDeserializer deserializer);
+
+  @protected
+  List<TokenMetadata> sse_decode_list_token_metadata(SseDeserializer deserializer);
 
   @protected
   ListUnclaimedDepositsRequest sse_decode_list_unclaimed_deposits_request(SseDeserializer deserializer);
@@ -1105,7 +1198,13 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   String? sse_decode_opt_String(SseDeserializer deserializer);
 
   @protected
+  BigInt? sse_decode_opt_U128(SseDeserializer deserializer);
+
+  @protected
   Amount? sse_decode_opt_box_autoadd_amount(SseDeserializer deserializer);
+
+  @protected
+  AssetFilter? sse_decode_opt_box_autoadd_asset_filter(SseDeserializer deserializer);
 
   @protected
   bool? sse_decode_opt_box_autoadd_bool(SseDeserializer deserializer);
@@ -1155,6 +1254,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   BigInt? sse_decode_opt_box_autoadd_u_64(SseDeserializer deserializer);
 
   @protected
+  List<PaymentStatus>? sse_decode_opt_list_payment_status(SseDeserializer deserializer);
+
+  @protected
+  List<PaymentType>? sse_decode_opt_list_payment_type(SseDeserializer deserializer);
+
+  @protected
   Payment sse_decode_payment(SseDeserializer deserializer);
 
   @protected
@@ -1195,6 +1300,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   ReceivePaymentResponse sse_decode_receive_payment_response(SseDeserializer deserializer);
+
+  @protected
+  (String, TokenBalance) sse_decode_record_string_token_balance(SseDeserializer deserializer);
 
   @protected
   RefundDepositRequest sse_decode_refund_deposit_request(SseDeserializer deserializer);
@@ -1266,6 +1374,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   SyncWalletResponse sse_decode_sync_wallet_response(SseDeserializer deserializer);
 
   @protected
+  TokenBalance sse_decode_token_balance(SseDeserializer deserializer);
+
+  @protected
+  TokenMetadata sse_decode_token_metadata(SseDeserializer deserializer);
+
+  @protected
   TokensPaymentDetails sse_decode_tokens_payment_details(SseDeserializer deserializer);
 
   @protected
@@ -1332,6 +1446,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   );
 
   @protected
+  void sse_encode_Map_String_token_balance_None(Map<String, TokenBalance> self, SseSerializer serializer);
+
+  @protected
   void sse_encode_RustOpaque_flutter_rust_bridgefor_generatedRustAutoOpaqueInnerArcdynStorage(
     ArcStorage self,
     SseSerializer serializer,
@@ -1359,6 +1476,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_String(String self, SseSerializer serializer);
 
   @protected
+  void sse_encode_U128(BigInt self, SseSerializer serializer);
+
+  @protected
   void sse_encode_aes_success_action_data(AesSuccessActionData self, SseSerializer serializer);
 
   @protected
@@ -1372,6 +1492,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_amount(Amount self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_asset_filter(AssetFilter self, SseSerializer serializer);
 
   @protected
   void sse_encode_bip_21_details(Bip21Details self, SseSerializer serializer);
@@ -1437,6 +1560,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_box_autoadd_amount(Amount self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_asset_filter(AssetFilter self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_bip_21_details(Bip21Details self, SseSerializer serializer);
 
   @protected
@@ -1489,6 +1615,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_box_autoadd_get_payment_request(GetPaymentRequest self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_box_autoadd_get_tokens_metadata_request(
+    GetTokensMetadataRequest self,
+    SseSerializer serializer,
+  );
 
   @protected
   void sse_encode_box_autoadd_lightning_address_details(
@@ -1614,6 +1746,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_box_autoadd_sync_wallet_request(SyncWalletRequest self, SseSerializer serializer);
 
   @protected
+  void sse_encode_box_autoadd_token_metadata(TokenMetadata self, SseSerializer serializer);
+
+  @protected
   void sse_encode_box_autoadd_tokens_payment_details(TokensPaymentDetails self, SseSerializer serializer);
 
   @protected
@@ -1680,6 +1815,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_get_payment_response(GetPaymentResponse self, SseSerializer serializer);
 
   @protected
+  void sse_encode_get_tokens_metadata_request(GetTokensMetadataRequest self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_get_tokens_metadata_response(GetTokensMetadataResponse self, SseSerializer serializer);
+
+  @protected
   void sse_encode_i_32(int self, SseSerializer serializer);
 
   @protected
@@ -1737,6 +1878,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_list_payment(List<Payment> self, SseSerializer serializer);
 
   @protected
+  void sse_encode_list_payment_status(List<PaymentStatus> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_payment_type(List<PaymentType> self, SseSerializer serializer);
+
+  @protected
   void sse_encode_list_payments_request(ListPaymentsRequest self, SseSerializer serializer);
 
   @protected
@@ -1747,6 +1894,15 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_list_rate(List<Rate> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_record_string_token_balance(
+    List<(String, TokenBalance)> self,
+    SseSerializer serializer,
+  );
+
+  @protected
+  void sse_encode_list_token_metadata(List<TokenMetadata> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_unclaimed_deposits_request(
@@ -1800,7 +1956,13 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_opt_String(String? self, SseSerializer serializer);
 
   @protected
+  void sse_encode_opt_U128(BigInt? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_opt_box_autoadd_amount(Amount? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_box_autoadd_asset_filter(AssetFilter? self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_box_autoadd_bool(bool? self, SseSerializer serializer);
@@ -1857,6 +2019,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_opt_box_autoadd_u_64(BigInt? self, SseSerializer serializer);
 
   @protected
+  void sse_encode_opt_list_payment_status(List<PaymentStatus>? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_list_payment_type(List<PaymentType>? self, SseSerializer serializer);
+
+  @protected
   void sse_encode_payment(Payment self, SseSerializer serializer);
 
   @protected
@@ -1897,6 +2065,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_receive_payment_response(ReceivePaymentResponse self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_record_string_token_balance((String, TokenBalance) self, SseSerializer serializer);
 
   @protected
   void sse_encode_refund_deposit_request(RefundDepositRequest self, SseSerializer serializer);
@@ -1969,6 +2140,12 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_sync_wallet_response(SyncWalletResponse self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_token_balance(TokenBalance self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_token_metadata(TokenMetadata self, SseSerializer serializer);
 
   @protected
   void sse_encode_tokens_payment_details(TokensPaymentDetails self, SseSerializer serializer);

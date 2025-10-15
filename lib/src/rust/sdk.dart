@@ -43,6 +43,8 @@ abstract class BreezSdk implements RustOpaqueInterface {
 
   Future<GetPaymentResponse> getPayment({required GetPaymentRequest request});
 
+  Future<GetTokensMetadataResponse> getTokensMetadata({required GetTokensMetadataRequest request});
+
   Future<ListFiatCurrenciesResponse> listFiatCurrencies();
 
   Future<ListFiatRatesResponse> listFiatRates();
