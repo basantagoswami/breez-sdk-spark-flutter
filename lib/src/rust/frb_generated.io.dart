@@ -349,6 +349,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   DepositInfo dco_decode_deposit_info(dynamic raw);
 
   @protected
+  ExternalInputParser dco_decode_external_input_parser(dynamic raw);
+
+  @protected
   double dco_decode_f_64(dynamic raw);
 
   @protected
@@ -407,6 +410,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   List<DepositInfo> dco_decode_list_deposit_info(dynamic raw);
+
+  @protected
+  List<ExternalInputParser> dco_decode_list_external_input_parser(dynamic raw);
 
   @protected
   ListFiatCurrenciesResponse dco_decode_list_fiat_currencies_response(dynamic raw);
@@ -551,6 +557,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   BigInt? dco_decode_opt_box_autoadd_u_64(dynamic raw);
+
+  @protected
+  List<ExternalInputParser>? dco_decode_opt_list_external_input_parser(dynamic raw);
 
   @protected
   List<PaymentStatus>? dco_decode_opt_list_payment_status(dynamic raw);
@@ -1048,6 +1057,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   DepositInfo sse_decode_deposit_info(SseDeserializer deserializer);
 
   @protected
+  ExternalInputParser sse_decode_external_input_parser(SseDeserializer deserializer);
+
+  @protected
   double sse_decode_f_64(SseDeserializer deserializer);
 
   @protected
@@ -1106,6 +1118,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   List<DepositInfo> sse_decode_list_deposit_info(SseDeserializer deserializer);
+
+  @protected
+  List<ExternalInputParser> sse_decode_list_external_input_parser(SseDeserializer deserializer);
 
   @protected
   ListFiatCurrenciesResponse sse_decode_list_fiat_currencies_response(SseDeserializer deserializer);
@@ -1252,6 +1267,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   BigInt? sse_decode_opt_box_autoadd_u_64(SseDeserializer deserializer);
+
+  @protected
+  List<ExternalInputParser>? sse_decode_opt_list_external_input_parser(SseDeserializer deserializer);
 
   @protected
   List<PaymentStatus>? sse_decode_opt_list_payment_status(SseDeserializer deserializer);
@@ -1794,6 +1812,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
   void sse_encode_deposit_info(DepositInfo self, SseSerializer serializer);
 
   @protected
+  void sse_encode_external_input_parser(ExternalInputParser self, SseSerializer serializer);
+
+  @protected
   void sse_encode_f_64(double self, SseSerializer serializer);
 
   @protected
@@ -1855,6 +1876,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_list_deposit_info(List<DepositInfo> self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_list_external_input_parser(List<ExternalInputParser> self, SseSerializer serializer);
 
   @protected
   void sse_encode_list_fiat_currencies_response(ListFiatCurrenciesResponse self, SseSerializer serializer);
@@ -2017,6 +2041,9 @@ abstract class BreezSdkSparkLibApiImplPlatform extends BaseApiImpl<BreezSdkSpark
 
   @protected
   void sse_encode_opt_box_autoadd_u_64(BigInt? self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_opt_list_external_input_parser(List<ExternalInputParser>? self, SseSerializer serializer);
 
   @protected
   void sse_encode_opt_list_payment_status(List<PaymentStatus>? self, SseSerializer serializer);

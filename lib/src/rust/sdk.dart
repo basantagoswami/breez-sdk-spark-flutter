@@ -23,8 +23,6 @@ ArcStorage defaultStorage({required String dataDir}) =>
 Stream<LogEntry> initLogging({String? logDir, String? logFilter}) =>
     BreezSdkSparkLib.instance.api.crateSdkInitLogging(logDir: logDir, logFilter: logFilter);
 
-Future<InputType> parse({required String input}) => BreezSdkSparkLib.instance.api.crateSdkParse(input: input);
-
 // Rust type: RustOpaqueMoi<flutter_rust_bridge::for_generated::RustAutoOpaqueInner<BreezSdk>>
 abstract class BreezSdk implements RustOpaqueInterface {
   Stream<SdkEvent> addEventListener();
@@ -56,6 +54,8 @@ abstract class BreezSdk implements RustOpaqueInterface {
   });
 
   Future<LnurlPayResponse> lnurlPay({required LnurlPayRequest request});
+
+  Future<InputType> parse({required String input});
 
   Future<PrepareLnurlPayResponse> prepareLnurlPay({required PrepareLnurlPayRequest request});
 

@@ -11,10 +11,23 @@ crate-type = ["cdylib", "staticlib"]
 [dependencies]
 async-trait = "0.1.88"
 # Replaced with release commit during publishing
-breez-sdk-common = { git = "https://github.com/breez/spark-sdk.git", rev = "343446084061acca293e9030503de4b37bb11365" }
-breez-sdk-spark = { git = "https://github.com/breez/spark-sdk.git", rev = "343446084061acca293e9030503de4b37bb11365", features = ["openssl-vendored"] }
+breez-sdk-common = { git = "https://github.com/breez/spark-sdk.git", rev = "77c6d4e7b3ea900cfd8e24c6b9bbafca8fde53a3" }
+breez-sdk-spark = { git = "https://github.com/breez/spark-sdk.git", rev = "77c6d4e7b3ea900cfd8e24c6b9bbafca8fde53a3", features = ["openssl-vendored"] }
 extend = "1.2.0"
 flutter_rust_bridge = "=2.9.0"
 
 [lints.rust]
 unexpected_cfgs = { level = "warn", check-cfg = ['cfg(frb_expand)'] }
+
+# Support for 16KB page sizes on Android 15+ 64-bit architectures
+[target.aarch64-linux-android]
+rustflags = [
+    "-C", "link-arg=-Wl,--hash-style=both",
+    "-C", "link-arg=-Wl,-z,max-page-size=16384",
+]
+
+[target.x86_64-linux-android]
+rustflags = [
+    "-C", "link-arg=-Wl,--hash-style=both",
+    "-C", "link-arg=-Wl,-z,max-page-size=16384",
+]

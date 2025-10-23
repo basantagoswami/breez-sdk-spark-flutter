@@ -475,6 +475,8 @@ class Config {
   final Fee? maxDepositClaimFee;
   final String? lnurlDomain;
   final bool preferSparkOverLightning;
+  final List<ExternalInputParser>? externalInputParsers;
+  final bool useDefaultExternalInputParsers;
 
   const Config({
     this.apiKey,
@@ -483,6 +485,8 @@ class Config {
     this.maxDepositClaimFee,
     this.lnurlDomain,
     required this.preferSparkOverLightning,
+    this.externalInputParsers,
+    required this.useDefaultExternalInputParsers,
   });
 
   @override
@@ -492,7 +496,9 @@ class Config {
       syncIntervalSecs.hashCode ^
       maxDepositClaimFee.hashCode ^
       lnurlDomain.hashCode ^
-      preferSparkOverLightning.hashCode;
+      preferSparkOverLightning.hashCode ^
+      externalInputParsers.hashCode ^
+      useDefaultExternalInputParsers.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -504,7 +510,9 @@ class Config {
           syncIntervalSecs == other.syncIntervalSecs &&
           maxDepositClaimFee == other.maxDepositClaimFee &&
           lnurlDomain == other.lnurlDomain &&
-          preferSparkOverLightning == other.preferSparkOverLightning;
+          preferSparkOverLightning == other.preferSparkOverLightning &&
+          externalInputParsers == other.externalInputParsers &&
+          useDefaultExternalInputParsers == other.useDefaultExternalInputParsers;
 }
 
 class ConnectRequest {
@@ -625,6 +633,26 @@ class DepositInfo {
           refundTx == other.refundTx &&
           refundTxId == other.refundTxId &&
           claimError == other.claimError;
+}
+
+class ExternalInputParser {
+  final String providerId;
+  final String inputRegex;
+  final String parserUrl;
+
+  const ExternalInputParser({required this.providerId, required this.inputRegex, required this.parserUrl});
+
+  @override
+  int get hashCode => providerId.hashCode ^ inputRegex.hashCode ^ parserUrl.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ExternalInputParser &&
+          runtimeType == other.runtimeType &&
+          providerId == other.providerId &&
+          inputRegex == other.inputRegex &&
+          parserUrl == other.parserUrl;
 }
 
 @freezed
